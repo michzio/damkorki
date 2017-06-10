@@ -1,0 +1,45 @@
+.grid:after {
+    content: '';
+    display: block;
+    clear: left;
+}
+
+grid-card { 
+    padding: 0;
+    margin: 0;
+}
+
+grid-card { 
+   background-color: green; 
+   border: 1px solid #CCCCCC;
+   border-radius:6px;
+   padding: 5px; 
+   margin-left: 10px;
+   margin-top: 10px;
+   margin-bottom: 20px; 
+   min-width: 250px;
+   width: calc(100% - 15px);
+   float: left;
+   height: 50px; 
+}
+
+@media screen and (min-width: 768px) { 
+  grid-card { 
+    width: calc(50% - 15px);
+  }
+}
+
+@media screen and (min-width: 992px) { 
+  grid-card { 
+    width: calc(33.333333% - 15px);
+  }
+}
+
+@media screen and (min-width: 1200px) { 
+   grid-card { 
+      width: calc(25% - 15px);
+  }
+}
+
+
+

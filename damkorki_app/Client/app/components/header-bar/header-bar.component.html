@@ -1,0 +1,59 @@
+	<style type="text/css">
+
+	@media (min-width: 768px) { 
+		.col-sm-3-5 { 
+			width: 29.1666666667%;
+			float: left;
+		}
+	}
+
+	@media (min-width: 992px) {
+		.col-md-2 {
+			width: 21%;
+		}
+		.col-md-7 { 
+			width: 48%; 
+		}
+		.col-md-3 { 
+			width: 31%;
+		}
+	}
+
+	 @media (min-width: 1200px) { 
+		.col-md-2 { 
+			width: 16.66666667%;
+		}
+		.col-md-7 { 
+			width: 58.33333333%;
+		}
+		.col-md-3 { 
+			width: 25%;
+		}
+	 }
+</style>
+
+<header>
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-3 col-md-2 col-sm-3-5 col-xs-5">
+				<a [routerLink]="['home']" alt="Home">
+					<img id="logo" src="./assets/images/logo.png" alt="logo" />
+				</a>
+			</div>
+			
+			<div id="menu-box" class="col-lg-3 col-md-3 col-sm-3-5 col-xs-7 pull-right">
+				<div class="link-group pull-right"> 
+						<a href="http://www.elector.pl">{{ 'SIGN_IN' | translate }}</a>
+						<a href="http://www.elector.pl">{{ 'SIGN_UP' | translate }}</a>
+						<i class="glyphicon glyphicon-user" alt="user"></i>
+						<!-- <img src= "./assets/images/user.png" class="" alt="user" style= "width:35px; height:35px"/> <- replaced by glyphicon-user -->
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-7 col-sm-5 col-xs-12 center-block">
+				<search-box [if-routes]="['**']" [unless-routes]="['/home']"></search-box>
+			</div>
+		</div>
+		<div class="clearfix visible-lg visible-md"></div>
+</div>
+</header>

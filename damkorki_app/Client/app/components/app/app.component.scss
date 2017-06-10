@@ -1,0 +1,27 @@
+// Example usage of SASS
+// $navbar-default-bg: #312312;
+// $light-orange: #ff8c00;
+// $navbar-default-color: $light-orange;
+
+/* Import Bootstrap & Fonts */ 
+
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* Import flag-icon-css */
+$flag-icon-css-path: "~flag-icon-css/flags/";
+@import "~flag-icon-css/sass/_flag-icon.scss";
+
+/* Overall App Styling go here */
+
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+        padding-top: 50px;
+    }
+}
+
+* {
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color:#565a5c;
+}

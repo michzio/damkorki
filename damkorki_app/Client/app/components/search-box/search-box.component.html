@@ -1,0 +1,32 @@
+<div id="search-box">
+	<form>
+        <div class="row">
+            <div [ngClass]="{'col-lg-6' : showLayoutButtons, 'col-md-6': showLayoutButtons}" 
+                     class="col-sm-8 col-xs-12">
+                <!-- <input id="search-input" type="text" placeholder="matematyka Kraków" autocomplete="off" name="subject"> <- replaced by bootstrap-->
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-md" type="submit" disabled>
+                                <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                    <input type="text" class="form-control input-md" placeholder="matematyka Kraków" name="subject" />
+                </div>    
+            </div>
+            <div [ngClass]="{'col-lg-4' : showLayoutButtons, 'col-md-3' : showLayoutButtons}" 
+                    class="col-sm-4 col-xs-12">
+                <!-- <input id="search-button" type="submit" value="SZUKAJ"> <- replaced by bootstrap button -->
+                <button id="search-button" type="button" class="btn btn-primary btn-md btn-block">SZUKAJ</button>
+            </div>
+            <div id="layout-buttons" [ngClass]="{'col-lg-2' : showLayoutButtons, 'col-md-3' : showLayoutButtons, 
+                                                 'hidden-md' : (showLayoutButtons == false), 'hidden-lg' : (showLayoutButtons == false) }" 
+                                         class="hidden-sm hidden-xs text-center">
+                <!-- <img id="tiled-button" src="./assets/images/tiled_button.png" alt="tiles"/> <- replaced by bootsrap glyphicon -->
+                <!-- <img id="list-button" src="./assets/images/list_button.png" alt="list"/> <- replaced by bootstrap glyphicon -->
+                    <i id="tiled-button" class="glyphicon glyphicon-th" style="padding-left:7px" aria-hidden="true" alt="grid view"></i>
+                    <i id="list-button" class="glyphicon glyphicon-align-justify" aria-hidden="true" alt="list view"></i>
+            </div>
+        </div>
+    </form>
+</div>
+

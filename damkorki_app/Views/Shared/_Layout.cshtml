@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/" />
+        <!-- Title will be the one you set in your Angular application -->
+        <title>@ViewData["Title"]</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        @Html.Raw(ViewData["Meta"]) <!-- <meta /> tags goes here --> 
+       
+       <!-- 
+           Changed to use local node_modules/flag-icon-css/sass 
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" /> 
+        -->
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+   crossorigin=""></script>
+        @Html.Raw(ViewData["Links"]) <!-- <link /> tags  goes here --> 
+        
+        @Html.Raw(ViewData["Styles"]) <!-- <styles /> tags goes here -->
+
+    </head>
+    <body>
+        <!-- Our Home view will be rendered here --> 
+        @RenderBody()
+
+        <!-- remove if you're not going to use SignalR -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+                crossorigin="anonymous"></script>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+
+        <!-- Here we're passing down any data to be used by grabbed and parsed by Angular --> 
+        @Html.Raw(ViewData["TransferData"])
+        
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

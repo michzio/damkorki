@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "damkorki_web_api", "damkorki_web_api\damkorki_web_api.csproj", "{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

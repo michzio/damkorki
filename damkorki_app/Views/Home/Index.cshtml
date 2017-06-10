@@ -1,0 +1,14 @@
+<!-- 
+    This SpaHtml was set in our HomeController, and it's just a serialized string 
+    of your Angular application, but only the <app>/* inside is all serialized */</app> part, 
+    not the entire Html, since we split that up, and let .NET build out our Document.
+-->
+@Html.Raw(ViewData["SpaHtml"])  <!-- <- magic goes here -->
+<!-- <app>Loading...</app> <- without server prerendering --> 
+
+<!-- 
+    Here you have your webpack main files as well
+-->
+@section scripts {
+    <script src="~/dist/main-browser.js" asp-append-version="true"></script>
+}

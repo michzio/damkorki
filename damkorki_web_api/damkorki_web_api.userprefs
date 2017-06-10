@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{E014E15D-9EEC-46AA-992E-A0A9FB3A93EB}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="damkorki_web_api/ViewModels/TutorViewModel.cs">
+    <Files>
+      <File FileName="damkorki_web_api/Controllers/TutorsController.cs" Line="51" Column="4" />
+      <File FileName="damkorki_web_api/ViewModels/TutorViewModel.cs" Line="24" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.damkorki__web__api PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/Repository/IRepository.cs" relfile="damkorki_web_api/Repository/IRepository.cs" line="11" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

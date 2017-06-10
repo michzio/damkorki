@@ -1,0 +1,41 @@
+<div class="dropup" [ngClass]="{'open': isOpen}">
+  <button class="btn btn-default dropdown-toggle" type="button" id="language-toggle"
+          data-toggle="dropdown" aria-haspopup="true" [attr.aria-expanded]="isOpen"
+          (click)="isOpen = !isOpen">
+    <span class="flag-icon flag-icon-{{ useLang }}"></span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="language-toggle">
+
+     <template ngFor let-item [ngForOf]="langs" let-i="index">
+        <li [hidden]="useLang == item"> 
+        <button class="btn btn-default" (click)="setLanguage(item)">
+            <span class="flag-icon flag-icon-{{ item }}"></span>
+        </button>  
+    </li>
+    </template>
+
+   <!-- 
+    <li [hidden]="useLang == 'pl'"> 
+        <button class="btn btn-default" (click)="setLanguage('pl')">
+            <span class="flag-icon flag-icon-pl"></span>
+        </button>  
+    </li>
+    <li [hidden]="useLang == 'de'">
+        <button class="btn btn-default" (click)="setLanguage('de')">
+            <span class="flag-icon flag-icon-de"></span>
+        </button>
+    </li>
+    <li [hidden]="useLang == 'fr'">
+        <button class="btn btn-default" (click)="setLanguage('fr')">
+            <span class="flag-icon flag-icon-fr"></span>
+        </button>
+    </li>
+    
+    <li [hidden]="useLang == 'es'">
+        <button class="btn btn-default" (click)="setLanguage('es')">
+            <span class="flag-icon flag-icon-es"></span>
+        </button>
+    </li> -->
+  </ul>
+</div>

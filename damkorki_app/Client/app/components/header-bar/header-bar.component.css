@@ -1,0 +1,70 @@
+header {
+	height: auto;
+}
+
+@media (max-width: 767px ) { 
+	#logo {
+		margin-left: -10px;
+		padding: 0;
+		height: 35px;
+	}
+}
+
+@media (min-width: 768px) { 
+	header { 
+		border-bottom: 1px solid #c4c4c4;
+	}
+	#logo {
+		margin: 0 5px 0 5px;
+		padding: 0 5px 0 5px;
+		height: 40px;
+	}	
+}
+	
+header:after {
+	clear:both;
+	background-color:#fff;
+}
+
+#menu-box .link-group { 
+	margin: 5px 0; 
+	height: 20px;
+  	line-height: 20px;
+  	text-align: center;  
+}
+
+#menu-box .link-group :first-child {
+	border-left: 0px;
+}
+
+#menu-box .link-group a {
+	border-left: 2px solid #8A8A8A;
+	display:inline;
+	padding:5px;
+	font-size:0.9em;
+	cursor:pointer;
+	color:#8A8A8A;
+    font-size:16px;
+	text-decoration:none;
+}
+
+#menu-box .glyphicon-user { 
+	color: #8A8A8A;
+}
+
+@media (max-width: 767px ) { 
+	#menu-box .glyphicon-user { 
+		font-size: 23px;
+	}
+}
+
+@media (min-width: 768px) { 
+	#menu-box .glyphicon-user { 
+		font-size: 30px;
+	}
+}
+
+#menu-box .link-group a,  #menu-box .glyphicon-user {
+	display: inline-block;
+  	vertical-align: middle;
+}

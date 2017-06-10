@@ -1,0 +1,42 @@
+.offers-grid:after {
+    content: '';
+    display: block;
+    clear: left;
+}
+
+offers-grid-card { 
+    padding: 0;
+    margin: 0;
+}
+
+offers-grid-card { 
+   background-color: yellow; 
+   border: 1px solid #CCCCCC;
+   border-radius:6px;
+   padding: 5px; 
+   margin-left: 10px;
+   margin-top: 10px;
+   margin-bottom: 20px; 
+   min-width: 250px;
+   width: calc(100% - 15px);
+   float: left;
+   height: 200px;
+}
+
+@media screen and (min-width: 768px) { 
+  offers-grid-card { 
+    width: calc(50% - 15px);
+  }
+}
+
+@media screen and (min-width: 992px) { 
+  offers-grid-card { 
+    width: calc(33.333333% - 15px);
+  }
+}
+
+@media screen and (min-width: 1200px) { 
+   offers-grid-card { 
+      width: calc(25% - 15px);
+  }
+}

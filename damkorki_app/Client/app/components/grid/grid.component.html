@@ -1,0 +1,6 @@
+<div class="grid" (window:resize)="onResize($event)" #gridElement>
+    <h4 *ngIf="title">{{ title }} {{ gridCols }} X {{ maxRows }}</h4>
+    <template ngFor let-content [ngForOf]="contentObjectsObservable | async" let-i="index" [ngForTrackBy]="trackByFn">
+        <grid-card *ngIf="i < gridCols * maxRows" [content]="content" [style.width.%]="gridCardWidth" [style.minWidth.px]="minCardWidth"></grid-card>
+    </template>           
+</div>

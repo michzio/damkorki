@@ -1,0 +1,39 @@
+<div id="homepage-component" class="container-fluid">
+        <div class="row">
+             <div class="col-md-2 hidden-sm hidden-xs"></div>
+            <div class="col-md-8 col-sm-12 col-xs-12 flexbox" id="main-photo"> 
+
+                    <section id="motto" class="text-center">
+                       {{ 'TEACH_ME_TO_CREATE_MY_FUTURE' | translate }}
+                    </section>
+                    <main>
+                       <search-box [layout-buttons]="false"></search-box>
+                    </main>
+            </div>
+             <div class="col-md-2 hidden-sm hidden-xs"></div>
+        </div>
+       
+        <div class="row">
+               <offers-map></offers-map> 
+               <!-- <offers-map [longitude]="50.00000000" [latitude]="20.00000000" [distance]="2000"></offers-map> -->
+        </div> 
+        <div class="row">
+               <offers-grid title="{{ 'RECOMMANDED_LOCAL_OFFERS' | translate }}" 
+                        [max-cols]="10" [max-rows]="4" [min-card-width]="250"
+                        [type]="offersType.Recommanded + offersType.Local" 
+                        [offerIds]="[1,2,3,4,5]">
+                </offers-grid>
+        </div> 
+
+<!--  General puropse <grid> component       
+      <div class="row">
+                <grid [title]="'My Generic Grid Component'" 
+                      [max-cols]="4" [max-rows]="3" [min-card-width]="250"
+                      [contentObjects]="[{'dummy key 1': 'dummy val 1'}, 
+                                         {'dummy key 2': 'dummy val 2'}, 
+                                         {'dummy key 3': 'dummy val 3'},
+                                         {'dummy key 4': 'dummy val 4'}]">
+                </grid>
+        </div>  
+   -->                   
+</div>

@@ -1,0 +1,6 @@
+@import "~leaflet/dist/leaflet.css";
+
+#leafletMap { 
+    height:400px;
+    background-color: #c4c4c4;
+}

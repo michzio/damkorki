@@ -1,0 +1,101 @@
+#search-box {
+	height:47px;
+	left:20px;
+	/* width:75%; */
+}
+
+#search-box .input-group { 
+	border: solid 1px #c4c4c4;
+	border-radius: 3px;
+	margin: 1px 0;
+}
+
+#search-box .input-group:hover { 
+	border: solid 1px #8A8A8A;
+}
+
+#search-box .input-group input {
+	border: 0;
+    box-shadow: none;
+	background: none;
+	height: 37px;
+    font-size: 15px;
+	color:#8A8A8A;
+	padding-left:10px; 
+	box-sizing: border-box;
+	/* 
+	background: url(./assets/images/loupe_gray.png) no-repeat;
+	background-size: 20px 20px;
+	background-position: 5px; 
+	*/ 
+}
+
+#search-box .input-group button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-right: solid 1px #c4c4c4;
+}
+
+#search-box .input-group button:hover{
+    border: 0;
+    box-shadow: none;
+    border-right: solid 1px #8A8A8A;
+}
+
+#search-box .input-group button .glyphicon-search {
+    font-size: 20px;
+	color: #c4c4c4; 
+}
+
+#search-button {
+	height:37px;
+	background-color:#0364a8;
+	color:white;
+	font-weight:bold;
+	cursor:pointer;
+	border-radius:3px;
+	margin: 2px 0;
+}
+#search-button:hover {
+	background-color:#2d96dd;
+}
+
+/*
+#layout-buttons {
+	margin-right:180px; 
+	float:right;  
+	
+}
+#layout-buttons img {
+	border:1px solid #c4c4c4;
+	border-radius:3px;
+}
+
+#layout-buttons img:hover {
+	cursor:pointer;
+	border:1px solid #8A8A8A;
+}
+*/ 
+
+#layout-buttons i.glyphicon { 
+	border: 1px solid #c4c4c4;
+	border-radius: 3px; 
+	padding: 5px; 
+	font-size: 25px;
+	color: #8A8A8A; 
+}
+
+#layout-buttons i.glyphicon:hover { 
+	cursor: pointer; 
+	border: 1px solid #8A8A8A;
+}
+
+/* decrease padding on bootstrap row's columns inside search-box element */
+#search-box .row > [class^="col-"] {
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+}

@@ -1,0 +1,18 @@
+#scrollable-content {
+    width: 66%;
+    z-index: -1;
+    position: fixed;
+    top: 131px;
+    bottom: 0;
+    overflow-y: scroll;
+}
+
+aside {
+    width: 34%;
+    border-left: 1px solid #CECECE;
+    right: 0;
+    left: auto;
+    position:fixed; 
+    top:165px; 
+    background-color:blue;
+}
