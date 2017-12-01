@@ -1,0 +1,42 @@
+.lesson-offer-label {
+	font-size:14px;
+	margin-left:0px;
+	margin-bottom:20px;
+	color:#a09d9d;
+	
+}
+
+.lesson-offer-price {
+	background-color: #0364a8;
+	color: #fff; 
+	font-weight: bold; 
+	padding: 5px; 
+	width: 100px;
+	float:right;
+	text-align:center;
+	border: 1px solid #0364a8;
+	border-radius:2px;  
+	margin-top:10px;
+	margin-right:10px;
+}
+
+.img-round {
+	width:80px;
+	height:80px;
+	border-radius:50%;
+	border: 2px solid #fff;
+	backface-visibility:hidden;
+	display:inline-block;
+	veritcal-align:bottom;
+	overflow:hidden;
+	background-color:8a8a8a;
+	float:right;
+	padding-bottom:-10px;
+	margin-bottom:-30px;
+	margin-right: 5px;
+}
+
+.img-round img {
+	width:80px;
+	height:80px;
+}

@@ -28,7 +28,7 @@ enableProdMode();
 // from angular 2 universal not compatible with angular 4
 // const platform = platformNodeDynamic();
 
-export default createServerRenderer( (params: BootFuncParams) => {
+export default createServerRenderer( (params) => {
     
     /* from angular 2 universal not compatible with angular 4 
 

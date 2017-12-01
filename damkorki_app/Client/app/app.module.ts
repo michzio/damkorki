@@ -22,10 +22,10 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { IfRoutesDirective } from './directives/if-routes.directive'
 import { HeaderBarComponent } from './components/header-bar/header-bar.component' 
 import { GridComponent } from './components/grid/grid.component'; 
-import { OffersGridComponent } from './components/offers-grid/offers-grid.component';
+import { LessonOffersGridComponent } from './components/lesson-offers-grid/lesson-offers-grid.component';
 import { GridCardComponent } from './components/grid-card/grid-card.component'; 
-import { OffersGridCardComponent } from './components/offers-grid-card/offers-grid-card.component'; 
-import { OffersMapComponent } from './components/offers-map/offers-map.component';
+import { LessonOfferGridCardComponent } from './components/lesson-offer-grid-card/lesson-offer-grid-card.component'; 
+import { LessonOffersMapComponent } from './components/lesson-offers-map/lesson-offers-map.component';
 import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component'
@@ -54,10 +54,10 @@ export function createTranslateLoader(http: Http, baseHref) {
         IfRoutesDirective,
         HeaderBarComponent,
         GridComponent,
-        OffersGridComponent,
+        LessonOffersGridComponent,
         GridCardComponent,
-        OffersGridCardComponent,
-        OffersMapComponent,
+        LessonOfferGridCardComponent,
+        LessonOffersMapComponent,
         LeafletMapComponent,
         FooterBarComponent,
         LanguageSwitcherComponent,

@@ -17,6 +17,9 @@ using Microsoft.Extensions.Configuration;
 using DamkorkiWebApi.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using DamkorkiWebApi.Middleware;
+using Microsoft.IdentityModel.Tokens; 
+using Microsoft.AspNetCore.Authentication.JwtBearer; 
 
 namespace DamkorkiWebApi
 {
@@ -100,8 +103,58 @@ namespace DamkorkiWebApi
                 // configuring Cross Origin Resource Sharing policy 
                 // app.UseCors( "AllowClientOrigin" ); 
 
-	            app.UseIdentity();
+                // configure a rewrite rule to auto-lookup 
+                // for standard default files such as index.html 
+                app.UseDefaultFiles(); 
 
+                // serve static files (html, css, js, images). 
+                // see also the following URL for further reference:
+                // https://docs.asp.net/en/latest/fundamentals/static-files.html 
+                app.UseStaticFiles(new StaticFileOptions() { 
+                    OnPrepareResponse = (context) => { 
+                        // disable caching for all static files 
+                        context.Context.Response.Headers["Cache-Control"] = 
+                            Configuration["StaticFiles:Headers:Cache-Control"];
+                        context.Context.Response.Headers["Pragma"] = 
+                            Configuration["StaticFiles:Headers:Pragma"];
+                        context.Context.Response.Headers["Expires"] = 
+                            Configuration["StaticFiles:Headers:Expires"];
+                    } 
+                });
+
+	            // purposely avoided cookies authentication
+                // app.UseIdentity();
+
+                // add a custom Jwt Provider to generate Tokens
+                app.UseJwtProvider();
+
+                // add the Jwt Bearer Header Authentication to validate Tokens
+                app.UseJwtBearerAuthentication(new JwtBearerOptions() { 
+                    AutomaticAuthenticate = true, 
+                    AutomaticChallenge = true, 
+                    RequireHttpsMetadata = false, 
+                    TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        // the signing key must match
+                        IssuerSigningKey = JwtProvider.SecurityKey,
+                        ValidateIssuerSigningKey = true,
+
+                        // validate the JWT Issuer (iss) claim
+                        ValidIssuer = JwtProvider.Issuer, 
+                        ValidateIssuer = false, 
+                        
+                        // validate the JWT Audience (aud) claim
+                        ValidateAudience = false, 
+
+                        // validate the token expiry 
+                        ValidateLifetime = true, 
+
+                        // if you want to allow a certain amount of clock drift, set that here: 
+                        ClockSkew = TimeSpan.Zero
+                    }
+                });
+
+                // add MVC to the pipeline
                 app.UseMvc(routes =>
                 {
                     routes.MapRoute(
@@ -112,8 +165,11 @@ namespace DamkorkiWebApi
                 // Seed the database if needed
                 try { 
 
-                    new UserRolesSeeder(app.ApplicationServices.GetService<RoleManager<IdentityRole>>()).SeedRolesAsync().Wait();
-                    new SampleDataSeeder(app.ApplicationServices.GetService<IUnitOfWork>()).SeedSampleDataAsync().Wait(); 
+                    new SampleDataSeeder(
+                            app.ApplicationServices.GetService<IUnitOfWork>(),
+                            app.ApplicationServices.GetService<RoleManager<IdentityRole>>(),
+                            app.ApplicationServices.GetService<UserManager<ApplicationUser>>()
+                        ).SeedSampleDataAsync().Wait(); 
                 
                 } catch(AggregateException e) { 
                     throw new Exception(e.ToString()); 

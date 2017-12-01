@@ -14,15 +14,15 @@
         </div>
        
         <div class="row">
-               <offers-map></offers-map> 
-               <!-- <offers-map [longitude]="50.00000000" [latitude]="20.00000000" [distance]="2000"></offers-map> -->
+               <lesson-offers-map></lesson-offers-map> 
+               <!-- <lesson-offers-map [longitude]="50.00000000" [latitude]="20.00000000" [distance]="2000"></lesson-offers-map> -->
         </div> 
         <div class="row">
-               <offers-grid title="{{ 'RECOMMANDED_LOCAL_OFFERS' | translate }}" 
+               <lesson-offers-grid title="{{ 'RECOMMANDED_LOCAL_OFFERS' | translate }}" 
                         [max-cols]="10" [max-rows]="4" [min-card-width]="250"
                         [type]="offersType.Recommanded + offersType.Local" 
-                        [offerIds]="[1,2,3,4,5]">
-                </offers-grid>
+                        [lessonOfferIds]="[1,2,3,4,5]">
+                </lesson-offers-grid>
         </div> 
 
 <!--  General puropse <grid> component       

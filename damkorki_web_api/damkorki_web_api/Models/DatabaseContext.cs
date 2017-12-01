@@ -13,6 +13,7 @@ namespace DamkorkiWebApi.Models
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
 
+        #region Properties 
         public DbSet<Person> People { get; set; }
         public DbSet<Learner> Learners { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
@@ -21,10 +22,10 @@ namespace DamkorkiWebApi.Models
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Term> Terms { get; set; }
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
         }
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)

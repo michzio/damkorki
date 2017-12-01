@@ -13,6 +13,11 @@ aside {
     right: 0;
     left: auto;
     position:fixed; 
-    top:165px; 
+    top:165px;
+    bottom: 0;
     background-color:blue;
+}
+
+#sidebar-map { 
+    height: 100%;
 }

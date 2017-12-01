@@ -1,11 +1,14 @@
 <aside>
-    <div id="googleMap" style="width:460px; height:550px"></div>
+    <div id="sidebar-map">
+        <lesson-offers-map></lesson-offers-map>
+    </div>
 </aside>
 
 <div id="scrollable-content">
     <h2>Here goes lesson offers...</h2>
-    <offers-grid [max-cols]="10" [max-rows]="3" [min-card-width]="250" [type]="offersType.Given" 
-                 [offerIds]="[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5]">
-    </offers-grid>
+    <lesson-offers-grid [max-cols]="10" [max-rows]="3" [min-card-width]="250" [type]="offersType.Given" 
+                 [lessonOfferIds]="[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5]"
+                 [query]="'matematyka, Kraków'">
+    </lesson-offers-grid>
     <footer-bar>Loading footer...</footer-bar>
 </div>

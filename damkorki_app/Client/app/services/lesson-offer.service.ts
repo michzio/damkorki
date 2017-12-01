@@ -15,7 +15,7 @@ export class LessonOfferService {
 
     getLessonOffers() : Observable<ILessonOffer> { 
         return this._http.get(this._lesson_offer_url) // <- here Http object returns Observable!
-                         .map(response => response.json()); 
+                         .map( response => response.json()); 
     }
 
     getLessonOffersEagerly() : Observable<ILessonOffer> { 

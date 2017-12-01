@@ -1,9 +1,0 @@
-<div class="grid offers-grid" (window:resize)="onResize($event)" #gridElement>
-    <div><button type="button" (click)="addItem()">Add Item</button></div>
-    <h4 *ngIf="title">{{ title }}  {{ gridCols }} X {{ maxRows }}</h4>
-    <template ngFor let-content [ngForOf]="contentObjectsObservable | async | slice:0:gridCols*maxRows" let-i="index" [ngForTrackBy]="trackByFn">  
-        <offers-grid-card  [content]="content" [style.width.%]="gridCardWidth" [style.minWidth.px]="minCardWidth"></offers-grid-card>
-    </template>
-</div>
-
-<!-- we can also hide offers grid cards using => [hidden]="i >= gridCols*maxRows" <= -->

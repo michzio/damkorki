@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
 using DamkorkiWebApi.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DamkorkiWebApi.Configuration 
 {
@@ -11,15 +13,28 @@ namespace DamkorkiWebApi.Configuration
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public SampleDataSeeder(IUnitOfWork unitOfWork)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager; 
+        
+
+        public SampleDataSeeder(IUnitOfWork unitOfWork,
+                                RoleManager<IdentityRole> roleManager,
+                                UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
+
+            _roleManager = roleManager;
+            _userManager = userManager; 
         }
 
         public async Task SeedSampleDataAsync()
         {
+            // create sample Roles 
+            if(_roleManager.Roles.Count() == 0 ) await CreateSampleRolesAsync();
+
             // create sample Users
-            if((await _unitOfWork.Users.CountAsync()) == 0) CreateSampleUsers(); 
+            if(_userManager.Users.Count() == 0) await CreateSampleUsers();
+            //if((await _unitOfWork.Users.CountAsync()) == 0) CreateSampleUsers(); 
 
             // create sample Persons
             if((await _unitOfWork.People.CountAsync()) == 0) CreateSamplePersons();
@@ -47,58 +62,98 @@ namespace DamkorkiWebApi.Configuration
             
         }
 
-        public void CreateSampleUsers() { 
+         public async Task CreateSampleRolesAsync()
+        {
+            await CreateRoleAsync("Admin"); 
+            await CreateRoleAsync("Moderator");
+            await CreateRoleAsync("User");
+        }
+         private async Task CreateRoleAsync(string name) { 
+
+            if( !(await _roleManager.RoleExistsAsync(name)) )
+                await _roleManager.CreateAsync(new IdentityRole { Name = name});
+
+        }
+
+        public async Task CreateSampleUsers() { 
+
+            // UserManager used instead of DbContext
+            // to auto hash password and to auto generate Id
 
             // create admin user 
-            var admin = new ApplicationUser() {
-                Id = Guid.NewGuid().ToString(), 
+            var adminUser = new ApplicationUser() {
+                // Id = Guid.NewGuid().ToString(), 
                 UserName = "iwona.wojciechowska",
                 Email = "iwona.wojeciechowska@live.com",
                 RegistrationDate = DateTime.Now  
             };
 
-            _unitOfWork.Users.Add(admin);
+            await _userManager.CreateAsync(adminUser, "Pass4Admin!");
+            await _userManager.AddToRoleAsync(adminUser, "Admin");
+            adminUser.EmailConfirmed = true;
+            adminUser.LockoutEnabled = false; 
 
             // create moderator user
-            var moderator = new ApplicationUser() { 
-                Id = Guid.NewGuid().ToString(), 
+            var moderatorUser = new ApplicationUser() { 
+                // Id = Guid.NewGuid().ToString(), 
                 UserName = "agnieszka.wojciechowska",
                 Email = "agnieszka.wojciechowska@live.com", 
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now, 
+                EmailConfirmed = true, 
+                LockoutEnabled = false
             };
 
-            _unitOfWork.Users.Add(moderator);
+            await _userManager.CreateAsync(moderatorUser, "PaSSword12!"); 
+            await _userManager.AddToRoleAsync(moderatorUser, "Moderator"); 
 
             // create other users  
             var user1 = new ApplicationUser() { 
-                Id = Guid.NewGuid().ToString(), 
+                //Id = Guid.NewGuid().ToString(), 
                 UserName = "michzio", 
                 Email = "michzio@hotmail.com", 
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now, 
+                EmailConfirmed = true, 
+                LockoutEnabled = false
             };
+
+            await _userManager.CreateAsync(user1, "Pass4user1!");
+            await _userManager.AddToRoleAsync(user1, "User");
 
             var user2 = new ApplicationUser() {
-                Id = Guid.NewGuid().ToString(),
+                // Id = Guid.NewGuid().ToString(),
                 UserName = "anowak",
                 Email = "anna.nowak@gmail.com",
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now, 
+                EmailConfirmed = true, 
+                LockoutEnabled = false
             };
+
+            await _userManager.CreateAsync(user2, "Pass4user2!");
+            await _userManager.AddToRoleAsync(user2, "User");
 
             var user3 = new ApplicationUser() {
-                Id = Guid.NewGuid().ToString(),
+                // Id = Guid.NewGuid().ToString(),
                 UserName = "tkobus",
                 Email = "tomasz.kobus@gmail.com",
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now,
+                EmailConfirmed = true, 
+                LockoutEnabled = false
             };
+
+            await _userManager.CreateAsync(user3, "Pass4user3!");
+            await _userManager.AddToRoleAsync(user3, "User"); 
 
             var user4 = new ApplicationUser() {
-                Id = Guid.NewGuid().ToString(),
+                // Id = Guid.NewGuid().ToString(),
                 UserName = "fmarlewicz",
                 Email = "filip.marlewicz@gmailcom",
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now,
+                EmailConfirmed = true,
+                LockoutEnabled = false
             };
 
-            _unitOfWork.Users.AddRange(new [] { user1, user2, user3, user4 });
+            await _userManager.CreateAsync(user4, "Pass4user4!");             
+            await _userManager.AddToRoleAsync(user4, "User");
 
             _unitOfWork.Complete();
         }

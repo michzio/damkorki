@@ -22,7 +22,7 @@ export class GridComponent implements OnInit, AfterViewChecked {
     @Input('min-card-width') minCardWidth : number; 
     @Input() contentObjects : any[] = []; // <- get array of any json object 
 
-    public contentObjectsObservable : Observable<any[]>; 
+    public contentObjectsObservable : Observable<any>; 
 ; 
 
     public gridCardWidth = 0;
@@ -38,8 +38,7 @@ export class GridComponent implements OnInit, AfterViewChecked {
         // console.log(this._elementRef.nativeElement);
         // console.log("Grid Element width:", this.gridElement.nativeElement.offsetWidth); 
         this.adjustCardWidthToAvailableEstate();
-        this.contentObjectsObservable = Observable.of(this.contentObjects);
-        
+        this.contentObjectsObservable = Observable.from(this.contentObjects); 
     }
 
 
@@ -64,7 +63,7 @@ export class GridComponent implements OnInit, AfterViewChecked {
         this.gridCols = Math.floor(gridWidth/newGridCardWidth);
 
         // refresh list of cards based on content objects
-        this.contentObjectsObservable = Observable.of(this.contentObjects);
+        this.contentObjectsObservable = Observable.from(this.contentObjects);
     }
 
     calculateCardWidth(gridWidth : number) : number { 
