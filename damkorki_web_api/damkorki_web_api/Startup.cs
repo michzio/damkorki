@@ -19,7 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using DamkorkiWebApi.Middleware;
 using Microsoft.IdentityModel.Tokens; 
-using Microsoft.AspNetCore.Authentication.JwtBearer; 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 namespace DamkorkiWebApi
 {
@@ -48,6 +49,10 @@ namespace DamkorkiWebApi
                 {
                     config.User.RequireUniqueEmail = true;
                     config.Password.RequireNonAlphanumeric = true;
+                    config.Password.RequireDigit = true;
+                    config.Password.RequireLowercase = true;
+                    config.Password.RequireUppercase = true; 
+                    config.Password.RequiredLength = 7;
                     config.Cookies.ApplicationCookie.AutomaticChallenge = false;
                 })
                 .AddEntityFrameworkStores<DatabaseContext>()
@@ -126,7 +131,15 @@ namespace DamkorkiWebApi
                 // app.UseIdentity();
 
                 // add a custom Jwt Provider to generate Tokens
-                app.UseJwtProvider();
+                app.UseJwtProvider(new JwtProviderOptions() { 
+                    Path = Configuration["Auth:Jwt:TokenEndPoint"], 
+                    Issuer = Configuration["Auth:Jwt:Issuer"], 
+                    Audience = Configuration["Auth:Jwt:Audience"], 
+                    TokenExpiration = TimeSpan.FromMinutes(int.Parse(Configuration["Auth:Jwt:TokenExpiration"])),
+                    SigningCredentials = new SigningCredentials(
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:SecretKey"])), 
+                            SecurityAlgorithms.HmacSha256)
+                });
 
                 // add the Jwt Bearer Header Authentication to validate Tokens
                 app.UseJwtBearerAuthentication(new JwtBearerOptions() { 
@@ -136,18 +149,21 @@ namespace DamkorkiWebApi
                     TokenValidationParameters = new TokenValidationParameters()
                     {
                         // the signing key must match
-                        IssuerSigningKey = JwtProvider.SecurityKey,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:SecretKey"])),
                         ValidateIssuerSigningKey = true,
 
                         // validate the JWT Issuer (iss) claim
-                        ValidIssuer = JwtProvider.Issuer, 
-                        ValidateIssuer = false, 
+                        ValidIssuer = Configuration["Auth:Jwt:Issuer"], 
+                        ValidateIssuer = true, 
                         
                         // validate the JWT Audience (aud) claim
-                        ValidateAudience = false, 
+                        ValidAudience = Configuration["Auth:Jwt:Audience"],
+                        ValidateAudience = true, 
 
                         // validate the token expiry 
-                        ValidateLifetime = true, 
+                        ValidateLifetime = true,
+                        RequireExpirationTime = true,  
 
                         // if you want to allow a certain amount of clock drift, set that here: 
                         ClockSkew = TimeSpan.Zero

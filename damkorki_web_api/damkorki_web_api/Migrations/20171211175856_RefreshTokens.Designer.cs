@@ -8,9 +8,10 @@ using DamkorkiWebApi.Models;
 namespace DamkorkiWebApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20171211175856_RefreshTokens")]
+    partial class RefreshTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -68,8 +69,6 @@ namespace DamkorkiWebApi.Migrations
                     b.Property<DateTime?>("FailedLoginDate");
 
                     b.Property<DateTime?>("LastLoginDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
 
                     b.Property<bool>("LockoutEnabled");
 

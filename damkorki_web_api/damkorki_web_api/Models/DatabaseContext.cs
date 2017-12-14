@@ -14,6 +14,7 @@ namespace DamkorkiWebApi.Models
         { }
 
         #region Properties 
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Learner> Learners { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
@@ -34,6 +35,13 @@ namespace DamkorkiWebApi.Models
 
             // modelBuilder.Entity<Person>().HasKey(p => p.UserId).HasName(PK_UserId); Fluent API primary key definition
             // modelBuilder.Entity<Person>(e => e.Property(person => person.LastName).HasColumnName("last_name") ); Fluent Api custom column name
+
+            modelBuilder.Entity<RefreshToken>().Property(rt => rt.RefreshTokenId).ValueGeneratedOnAdd(); 
+            modelBuilder.Entity<RefreshToken>()
+                .HasOne(rt => rt.User)
+                .WithMany(au => au.RefreshTokens)
+                .HasForeignKey(rt => rt.UserId)
+                .HasPrincipalKey(au => au.Id); 
 
             modelBuilder.Entity<Person>()
                 .HasOne(p => p.ApplicationUser)

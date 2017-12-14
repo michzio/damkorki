@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using DamkorkiWebApi.Models;
 using System.Linq;
+using DamkorkiWebApi.Models;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DamkorkiWebApi.Repositories
 {
@@ -26,6 +28,13 @@ namespace DamkorkiWebApi.Repositories
 		public IEnumerable<Person> GetMales(Expression<Func<Person, bool>> predicate)
 		{
 			return DatabaseContext.People.Where(p => p.Gender == Person.GenderType.Male);
+		}
+
+		public async Task<IEnumerable<Person>> GetAllEagerlyAsync() { 
+
+			return await DatabaseContext.Set<Person>()
+										.Include(p => p.ApplicationUser)
+										.ToListAsync(); 
 		}
 	}
 }

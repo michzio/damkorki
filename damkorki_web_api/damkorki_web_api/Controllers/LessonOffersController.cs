@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
 using DamkorkiWebApi.Repositories;
 using DamkorkiWebApi.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DamkorkiWebApi.Controllers { 
 
+    [Authorize]
     [Route("lesson-offers")]
     public class LessonOffersController : Controller { 
 
@@ -46,13 +49,13 @@ namespace DamkorkiWebApi.Controllers {
         public async Task<IActionResult> CreateLessonOffer([FromBody] LessonOfferViewModel vmLessonOffer) { 
 
            if(vmLessonOffer == null)
-                return BadRequest(new { error = " No Lesson Offer object in request body."});
+                return BadRequest(new { error = "No Lesson Offer object in request body."});
            if(!ModelState.IsValid) 
                 return BadRequest(ModelState); 
                 
             try { 
 
-                // create new Lesson Offer entity with given data in view model
+                // create new Lesson Offer entity with data given in view model
                 var newLessonOffer = new LessonOffer { 
                     Title = vmLessonOffer.Title, 
                     Description = vmLessonOffer.Description, 
@@ -64,7 +67,7 @@ namespace DamkorkiWebApi.Controllers {
                     TutorId = vmLessonOffer.TutorId
                 };
 
-                // Add new Lesson Offer to DBContext and save changes
+                // add new Lesson Offer to DbContext and save changes
                 await _unitOfWork.LessonOffers.AddAsync(newLessonOffer); 
                 _unitOfWork.Complete(); 
 
@@ -116,6 +119,7 @@ namespace DamkorkiWebApi.Controllers {
         } 
 
     }
+
 
 }
 
