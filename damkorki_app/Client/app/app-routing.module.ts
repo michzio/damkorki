@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
 
-const APP_ROUTES : Routes = [
+const appRoutes : Routes = [
      { 
         path: '', 
         redirectTo: 'home', 
@@ -29,17 +32,40 @@ const APP_ROUTES : Routes = [
         }
     },
     {
+        path: 'login', 
+        component: LoginPageComponent,
+        data: { title: 'Log in'}
+    },
+    {
+        path: 'signin', 
+        redirectTo: 'login', 
+        pathMatch: 'full'
+    },
+    {
+        path: 'register', 
+        component: RegisterPageComponent, 
+        data: { title: 'Sign up' }
+    },
+    { 
+        path: 'signup', 
+        redirectTo: 'register', 
+        pathMatch: 'full'
+    }, 
+    {
         path: 'lesson-offers', 
         component: LessonOffersComponent,
         data: { title: 'Przeglądaj Oferty Lekcji' }
     },
-    // Otherwise - go home!
-    { path: '**', redirectTo: 'home' }
+    // Otherwise - page not found!
+    { 
+        path: '**', 
+        component: PageNotFoundComponent 
+    }
 ]
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(APP_ROUTES, /* { preloadingStrategy: SelectivePreloadingStrategy } */ )
+        RouterModule.forRoot(appRoutes, /* { preloadingStrategy: SelectivePreloadingStrategy } */ )
     ],
     exports: [
         RouterModule

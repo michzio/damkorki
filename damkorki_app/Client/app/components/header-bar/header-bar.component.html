@@ -42,11 +42,18 @@
 			</div>
 			
 			<div id="menu-box" class="col-lg-3 col-md-3 col-sm-3-5 col-xs-7 pull-right">
-				<div class="link-group pull-right"> 
-						<a href="http://www.elector.pl">{{ 'SIGN_IN' | translate }}</a>
-						<a href="http://www.elector.pl">{{ 'SIGN_UP' | translate }}</a>
+				<div class="link-group pull-right">
+					<ng-template [ngIf]="authService.isLoggedIn()" [ngIfElse]="loggedOut">
+						<a id="profile-link" routerLink="profile">{{ authService.decodedAccessToken() ? authService.decodedAccessToken().email : '' }}</a>	
+						<i class="glyphicon glyphicon-user clickable" alt="user" (click)="toggleProfileDropdown()"></i>
+						<profile-dropdown *ngIf="isProfileDropdownOn"></profile-dropdown>
+					</ng-template>
+					<ng-template #loggedOut>
+						<a routerLink="login">{{ 'SIGN_IN' | translate }}</a>
+						<a routerLink="register">{{ 'SIGN_UP' | translate }}</a>
 						<i class="glyphicon glyphicon-user" alt="user"></i>
-						<!-- <img src= "./assets/images/user.png" class="" alt="user" style= "width:35px; height:35px"/> <- replaced by glyphicon-user -->
+					</ng-template>
+					<!-- <img src= "./assets/images/user.png" class="" alt="user" style= "width:35px; height:35px"/> <- replaced by glyphicon-user -->
 				</div>
 			</div>
 

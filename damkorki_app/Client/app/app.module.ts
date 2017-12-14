@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { HttpModule, Http } from '@angular/http'; 
-import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'; 
 
 // Bootstrap support 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 // My custom app routing module 
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
 
 // from angular 2 universal not compatible with angular 4
 // import { UniversalModule } from 'angular2-universal';
@@ -15,12 +15,27 @@ import { AppRoutingModule } from './app-routing.module'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'; 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { AppComponent } from './components/app/app.component'
+// HTTP interceptors 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { AuthRefreshInterceptor } from './shared/auth-refresh.interceptor'; 
+
+import { LinkService } from './shared/link.service'; 
+import { ConnectionResolver } from './shared/route.resolver';
+import { ORIGIN_URL } from './shared/constants/baseurl.constants';
+import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module'; 
+
+// components 
+import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
-import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.component'
-import { SearchBoxComponent } from './components/search-box/search-box.component'
-import { IfRoutesDirective } from './directives/if-routes.directive'
-import { HeaderBarComponent } from './components/header-bar/header-bar.component' 
+import { LoginComponent } from './components/login/login.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterComponent } from './components/register/register.component'; 
+import { RegisterPageComponent } from './components/register-page/register-page.component'; 
+import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { IfRoutesDirective } from './directives/if-routes.directive';
+import { HeaderBarComponent } from './components/header-bar/header-bar.component'; 
 import { GridComponent } from './components/grid/grid.component'; 
 import { LessonOffersGridComponent } from './components/lesson-offers-grid/lesson-offers-grid.component';
 import { GridCardComponent } from './components/grid-card/grid-card.component'; 
@@ -28,13 +43,19 @@ import { LessonOfferGridCardComponent } from './components/lesson-offer-grid-car
 import { LessonOffersMapComponent } from './components/lesson-offers-map/lesson-offers-map.component';
 import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
-import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component'
+import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
-import { LinkService } from './shared/link.service'; 
-import { ConnectionResolver } from './shared/route.resolver';
-import { ORIGIN_URL } from './shared/constants/baseurl.constants';
-import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module'; 
+// services 
+import { AuthService } from "./services/auth.service";
+import { HttpClientModule } from '@angular/common/http';
 
+// feature modules 
+import { ProfileModule } from "./modules/profile/profile.module";
+import { AdminModule } from "./modules/admin/admin.module";
+import { AuthGuard } from './services/auth-guard.service';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
 export function createTranslateLoader(http: Http, baseHref) { 
     // Temporary Azure hack 
@@ -49,6 +70,10 @@ export function createTranslateLoader(http: Http, baseHref) {
     declarations: [
         AppComponent,
         HomeComponent,
+        LoginComponent,
+        LoginPageComponent,
+        RegisterComponent, 
+        RegisterPageComponent, 
         LessonOffersComponent,
         SearchBoxComponent,
         IfRoutesDirective,
@@ -61,11 +86,15 @@ export function createTranslateLoader(http: Http, baseHref) {
         LeafletMapComponent,
         FooterBarComponent,
         LanguageSwitcherComponent,
+        ProfileDropdownComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         CommonModule,
         HttpModule,
+        HttpClientModule, 
         FormsModule, 
+        ReactiveFormsModule,
         Ng2BootstrapModule.forRoot(), // You could also split this up if you don't want the Entire Module imported
 
         TransferHttpModule, // our Http TransferData method 
@@ -79,12 +108,29 @@ export function createTranslateLoader(http: Http, baseHref) {
             }
         }),
 
+        // feature modules 
+        ProfileModule,
+        AdminModule, 
+
         // Application Routing 
         AppRoutingModule,
     ],
     providers: [
         LinkService,
-        TranslateModule
+        TranslateModule, 
+        AuthService, 
+        { 
+            provide: HTTP_INTERCEPTORS, 
+            useClass: AuthInterceptor, 
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS, 
+            useClass: AuthRefreshInterceptor, 
+            multi: true 
+        },
+        AuthGuard,
+        CanDeactivateGuard,
     ]
 })
 export class AppModule {

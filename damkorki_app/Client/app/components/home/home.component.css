@@ -6,6 +6,7 @@
     /* background-size: contain; */
     height: 95vh;
     overflow-y: auto;
+    margin-top: 5px;
 }
 
 #motto{

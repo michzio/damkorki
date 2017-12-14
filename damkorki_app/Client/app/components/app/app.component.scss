@@ -12,6 +12,10 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 $flag-icon-css-path: "~flag-icon-css/flags/";
 @import "~flag-icon-css/sass/_flag-icon.scss";
 
+/* Import font awesome */ 
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+
 /* Overall App Styling go here */
 
 @media (max-width: 767px) {

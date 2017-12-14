@@ -9,7 +9,7 @@ import { OffersType } from '../lesson-offers-grid/offers-type.enumeration';
 })
 export class HomeComponent {
 
-     // enumeratin type needs to be defined 
+     // enumeration type needs to be defined 
      // as property on parent component in order 
      // to use it in child components property bindings! 
      public offersType = OffersType; 

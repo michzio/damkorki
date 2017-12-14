@@ -1,0 +1,78 @@
+<div class="register-container">
+    <h3 class="form-register-heading">Sign Up with
+        <form action="/oauth_connect?from=facebook_email_signup&service=facebook" method="POST" class="inline-form">
+            <button class="button-as-link" name="button" type="submit">Facebook</button>
+            <input type="hidden" name="authenticity_token" value="token_value" />
+        </form>
+        or 
+        <form action="/oauth_connect?from=google_email_signup&service=google" method="POST" class="inline-form">
+            <button class="button-as-link" name="button" type="submit">Google</button>
+            <input type="hidden" name="authenticity_token" value="token_value" />
+        </form>
+    </h3>
+
+    <div class="or-separator">
+        <span class="h6 or-separator-text">or</span>
+        <hr />
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="registerFailed && registerForm.errors?.register">
+            <strong>Warning:</strong> {{ registerForm.errors?.register }}
+        </div>
+    <form class="form-register" [formGroup]="registerForm" 
+          (ngSubmit)="onSubmit($event)">
+        <div class="form-group">
+            <input id="email" formControlName="email" name="email" class="form-control" 
+                   type="text" placeholder="Email Address" required 
+                   [ngClass]="{'invalid': registerFailed && email.invalid}" />
+            <label for="email" *ngIf="registerFailed || email.dirty || email.touched">
+                <div *ngIf="registerFailed && email.errors?.required">Email address is required.</div>
+                <div *ngIf="email.errors?.email">Email format is incorrect.</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <input id="firstName" formControlName="firstName" name="firstName" class="form-control"
+                    type="text" placeholder="First Name" required
+                    [ngClass]="{'invalid': registerFailed && firstName.invalid}" />
+            <label for="firstName" *ngIf="registerFailed || firstName.dirty || firstName.touched">
+                <div *ngIf="registerFailed && firstName.errors?.required">First name is required.</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <input id="lastName" formControlName="lastName" name="lastName" class="form-control"
+                    type="text" placeholder="Last Name" required
+                    [ngClass]="{'invalid': registerFailed && lastName.invalid}" />
+            <label for="lastName" *ngIf="registerFailed || lastName.dirty || lastName.touched">
+                <div *ngIf="registerFailed && lastName.errors?.required">Last name is required.</div>
+            </label>
+        </div>
+        <div class="form-group">
+            <input id="password" formControlName="password" name="password" class="form-control"
+                    type="password" placeholder="Password" required
+                    [ngClass]="{'invalid': registerFailed && password.invalid}"  />
+            <label for="password" *ngIf="registerFailed || password.dirty || password.touched">
+                <div *ngIf="registerFailed && password.errors?.required">Password is required.</div>
+                <div *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</div>
+                <div *ngIf="password.errors?.containsDigit">Password must contain digit.</div>
+                <div *ngIf="password.errors?.containsLowercaseLetter">Password must contain lowercase letter.</div>
+                <div *ngIf="password.errors?.containsUppercaseLetter">Password must contain upercase letter.</div>
+                <div *ngIf="password.errors?.containsSpecialCharacter">Password must contain special character.</div>
+                <div *ngIf="registerForm.errors?.notContainsValuesOfInputs">Password cannot contain name or email address.</div>
+            </label>
+        </div>
+        <div class="checkbox">
+            <label for="termsOfService">
+                <input id="termsOfService" formControlName="termsOfService" name="termsOfService" type="checkbox" value="checked" required
+                       [ngClass]="{'invalid': registerFailed && termsOfService.invalid}" />
+                I agree to <a routerLink="/about/terms-of-service">Terms of Service</a> 
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+
+    <div class="signin-row">
+            <div class="signin-description">Already have an account?</div>
+            <a routerLink="/signin" class="btn btn-default signin-button">Sign in</a>
+    </div>
+
+</div>

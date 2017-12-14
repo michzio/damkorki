@@ -1,3 +1,12 @@
+:host { 
+	display: block;
+    position: relative;
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 100%;
+    z-index: 5;
+}
+
 header {
 	height: auto;
 }
@@ -8,11 +17,16 @@ header {
 		padding: 0;
 		height: 35px;
 	}
+	search-box { 
+		z-index: -2; 
+		position: relative;
+	}
 }
 
 @media (min-width: 768px) { 
 	header { 
-		border-bottom: 1px solid #c4c4c4;
+		background-color: white;
+		box-shadow: 0 1px 0 #DBDBDB !important;
 	}
 	#logo {
 		margin: 0 5px 0 5px;
@@ -50,6 +64,7 @@ header:after {
 
 #menu-box .glyphicon-user { 
 	color: #8A8A8A;
+	margin-bottom: 7px;
 }
 
 @media (max-width: 767px ) { 
@@ -67,4 +82,14 @@ header:after {
 #menu-box .link-group a,  #menu-box .glyphicon-user {
 	display: inline-block;
   	vertical-align: middle;
+}
+
+@media (max-width: 897px) { 
+	#profile-link { 
+		display: none !important;
+	}
+}
+
+.clickable { 
+	cursor: pointer;
 }

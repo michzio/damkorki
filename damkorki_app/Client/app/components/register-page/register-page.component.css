@@ -1,0 +1,28 @@
+register { 
+    display: block; 
+    margin: 10% 10%;
+}
+
+@media (min-width:480px) { 
+    register { 
+        margin: 10% 10%;
+    }
+}
+
+@media (min-width:640px) { 
+    register { 
+        margin: 8% 15%;
+    }
+}
+
+@media (min-width:768px) { 
+    register { 
+        margin: 5% 25%;
+    }
+}
+
+@media (min-width:1024px) { 
+    register { 
+        margin: 5% 33%;
+    }
+}

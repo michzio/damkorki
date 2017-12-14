@@ -1,0 +1,28 @@
+login { 
+    display: block; 
+    margin: 10% 10%;
+}
+
+@media (min-width:480px) { 
+    login { 
+        margin: 10% 10%;
+    }
+}
+
+@media (min-width:640px) { 
+    login { 
+        margin: 8% 15%;
+    }
+}
+
+@media (min-width:768px) { 
+    login { 
+        margin: 5% 25%;
+    }
+}
+
+@media (min-width:1024px) { 
+    login { 
+        margin: 5% 33%;
+    }
+}
