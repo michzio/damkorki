@@ -30,24 +30,23 @@ namespace DamkorkiWebApi.Middleware
 
        #region constructor 
        public JwtProvider(RequestDelegate next,
-                          IOptions<JwtProviderOptions> options,
-                          DatabaseContext dbContext,
-                          UserManager<ApplicationUser> userManager, 
-                          SignInManager<ApplicationUser> signInManager) 
+                          IOptions<JwtProviderOptions> options) 
        {
            _next = next;
            _options = options.Value; 
-
-           // Instantiate through Dependency Injection 
-           _dbContext = dbContext; 
-           _userManager = userManager; 
-           _signInManager = signInManager; 
        }
        #endregion
 
        #region public methods  
-       public Task Invoke(HttpContext context)
+       public Task Invoke(HttpContext context, DatabaseContext dbContext, 
+                          UserManager<ApplicationUser> userManager, 
+                          SignInManager<ApplicationUser> signInManager)
        {
+            // Instantiate through Dependency Injection (scoped)
+            _dbContext = dbContext;
+            _userManager = userManager; 
+            _signInManager = signInManager;  
+
             // Check if the request path matches our options path
             if(!context.Request.Path.Equals(_options.Path, StringComparison.Ordinal))
                 // Call the next delegate/middleware in the pipeline 
@@ -107,11 +106,11 @@ namespace DamkorkiWebApi.Middleware
             string clientId = context.Request.Form["client_id"]; 
             string clientSecret = context.Request.Form["client_secret"]; 
 
-            var identity = await GetIdentityAsync(username, password); 
+            var identity = await GetIdentityAsync(username, password);
             if(identity == null)
             {
                 context.Response.StatusCode = 401; 
-                await context.Response.WriteAsync("Invalid username and password.");
+                await context.Response.WriteAsync("Invalid username or password or email not confirmed.");
                 return; 
             }
 
@@ -178,10 +177,11 @@ namespace DamkorkiWebApi.Middleware
             // fallback to support email address instead of username 
             if(user == null && username.Contains("@")) 
             { 
-                   user = await _userManager.FindByEmailAsync(username);
+                user = await _userManager.FindByEmailAsync(username);
             }
 
-            var success = user != null && await _userManager.CheckPasswordAsync(user, password);
+            var success = user != null && await _userManager.CheckPasswordAsync(user, password)
+                                       && await _userManager.IsEmailConfirmedAsync(user);
             if(success) { 
                 return await GetIdentityAsync(user); 
             }

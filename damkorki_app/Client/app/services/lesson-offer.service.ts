@@ -9,21 +9,21 @@ import {ILessonOffer} from "../models/lesson-offer.model";
 @Injectable()
 export class LessonOfferService { 
 
-    private lessonOfferUrl = "http://localhost:5050/lesson-offers";
+    private static lessonOfferUrl = "http://localhost:5050/lesson-offers";
 
-    constructor(private http: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
     getLessonOffers() : Observable<ILessonOffer> { 
-        return this.http.get<ILessonOffer>(this.lessonOfferUrl); 
+        return this.httpClient.get<ILessonOffer>(LessonOfferService.lessonOfferUrl); 
     }
 
     getLessonOffersEagerly() : Observable<ILessonOffer> { 
-        return this.http.get<ILessonOffer>(this.lessonOfferUrl + "/eagerly"); 
+        return this.httpClient.get<ILessonOffer>(LessonOfferService.lessonOfferUrl + "/eagerly"); 
     }
 
     createLessonOffer(lessonOffer: ILessonOffer) : Observable<any> {
 
-        return this.http.post(this.lessonOfferUrl, lessonOffer, {
+        return this.httpClient.post(LessonOfferService.lessonOfferUrl, lessonOffer, {
             headers: new HttpHeaders()
                     .set('Content-Type', 'application/json')
         }).catch(this.handleError);

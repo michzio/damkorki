@@ -12,9 +12,13 @@ export class ProfileDropdownComponent {
     constructor(private authService: AuthService, 
                 private router: Router) { }
 
-    logout() { 
-        if(this.authService.logout()) { 
-            this.router.navigate(['/']);
-        }
+    logout() : boolean  { 
+
+        this.authService.logout().subscribe(result => { 
+            if(result) { 
+                this.router.navigate(['/']);
+            }
+        });
+        return false; 
     }
 }

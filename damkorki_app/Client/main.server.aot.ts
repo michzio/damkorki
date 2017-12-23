@@ -9,8 +9,7 @@ import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 
 // server-specific NgModule
 import { ServerAppModuleNgFactory } from './ngfactory/app/server-app.module.ngfactory';
-// temporary * the engine will be on npm soon (`@universal/ng-aspnetcore-engine`)
-import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from './polyfills/temporary-aspnetcore-engine';
+import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from '@nguniversal/aspnetcore-engine';
 
 enableProdMode();
 

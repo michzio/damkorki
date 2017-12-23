@@ -49,7 +49,7 @@
         <div class="form-group">
             <input id="password" formControlName="password" name="password" class="form-control"
                     type="password" placeholder="Password" required
-                    [ngClass]="{'invalid': registerFailed && password.invalid}"  />
+                    [ngClass]="{'invalid': registerFailed && password.invalid}" />
             <label for="password" *ngIf="registerFailed || password.dirty || password.touched">
                 <div *ngIf="registerFailed && password.errors?.required">Password is required.</div>
                 <div *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</div>

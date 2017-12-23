@@ -10,11 +10,14 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 /* Import flag-icon-css */
 $flag-icon-css-path: "~flag-icon-css/flags/";
-@import "~flag-icon-css/sass/_flag-icon.scss";
+@import "~flag-icon-css/sass/flag-icon.scss";
 
-/* Import font awesome */ 
+/* Import font-awesome */ 
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
+
+/* Import @angular/material theme */
+
 
 /* Overall App Styling go here */
 
@@ -28,4 +31,8 @@ $fa-font-path: "~font-awesome/fonts";
 * {
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color:#565a5c;
+}
+
+.checkbox label { 
+    padding-left: 0; 
 }

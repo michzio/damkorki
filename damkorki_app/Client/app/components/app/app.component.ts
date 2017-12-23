@@ -7,12 +7,12 @@ import { LinkService } from '../../shared/link.service';
 
 // i18n support (Internacionalisation)
 import { TranslateService } from '@ngx-translate/core'
-import { REQUEST } from '../../shared/constants/request'
+import { ORIGIN_URL, REQUEST } from '@nguniversal/aspnetcore-engine';
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'], 
+    styleUrls: ['./theme.material.scss', './app.component.scss'], 
     //disable this [_ngcontent-c0] on CSS styles and elements of Root App Component
     encapsulation: ViewEncapsulation.None 
 })
@@ -31,8 +31,9 @@ export class AppComponent implements OnInit, OnDestroy {
                 private _meta: Meta, 
                 private _linkService: LinkService, 
                 public translate : TranslateService,
-                @Inject(REQUEST) private _request
-                )
+                @Inject(REQUEST) private _request, 
+                @Inject(ORIGIN_URL) private _originUrl: string
+            )
     {
         // this language will be used as a fallback when a translation isn't found in the current language 
         translate.setDefaultLang('pl'); 
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log("What's our REQUEST object looks like?");
         console.log("The REQUEST object only exists on the Server side, on the Browser side we can at least see Cookies");
         console.log(this._request); 
+        console.log("ORIGIN_URL " + this._originUrl); 
     }
 
     ngOnInit() 

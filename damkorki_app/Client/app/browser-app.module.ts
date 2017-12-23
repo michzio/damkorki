@@ -5,10 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 
-import { ORIGIN_URL } from './shared/constants/baseurl.constants';
+import { ORIGIN_URL, REQUEST } from '@nguniversal/aspnetcore-engine';
 import { AppModule } from './app.module';
 import { AppComponent } from './components/app/app.component';
-import { REQUEST } from './shared/constants/request';
 import { BrowserTransferStateModule } from '../modules/transfer-state/browser-transfer-state.module';
 
 export function createConfig(): SignalRConfiguration {

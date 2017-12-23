@@ -1,0 +1,35 @@
+@import '~@angular/material/theming'; 
+
+
+// include the common styles for Angular Material 
+@include mat-core(); 
+
+// DEFINE A DEFAULT LIGHT THEME
+
+// define the palettes for theme using the Material Design palettes available in palette.scss
+// for each palette, you can optionally specify a default, lighter, and darker hue.
+$damkorki-app-primary: mat-palette($mat-indigo); 
+$damkorki-app-accent: mat-palette($mat-blue, A200, A100, A400);
+$damkorki-app-warn: mat-palette($mat-red); // the warn palette is optional (defaults to red)
+
+// create the theme object (a Sass map containing all of the palettes). 
+$damkorki-app-theme: mat-light-theme($damkorki-app-primary, $damkorki-app-accent, $damkorki-app-warn);
+
+// include theme styles for core and each component used in app. 
+@include angular-material-theme($damkorki-app-theme); 
+
+// DEFINE AN ALTERNATE DARK THEME 
+
+// define the palettes for theme 
+$damkorki-app-dark-primary: mat-palette($mat-blue-grey);
+$damkorki-app-dark-accent: mat-palette($mat-amber, A200, A100, A400); 
+$damkorki-app-dark-warn: mat-palette($mat-deep-orange); 
+
+// create the theme object 
+$damkorki-app-dark-theme: mat-dark-theme($damkorki-app-dark-primary, $damkorki-app-dark-accent, $damkorki-app-dark-warn); 
+
+// include the alternative theme styles inside of a block with a CSS class. 
+// any component inside of an element with '.app-dark-theme' will be affected by this alternate dark theme instead of the default theme. 
+.app-dark-theme { 
+    @include angular-material-theme($damkorki-app-dark-theme); 
+}

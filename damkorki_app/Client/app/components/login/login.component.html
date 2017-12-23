@@ -1,21 +1,19 @@
 <div class="login-container">
     <h3 class="form-login-heading">Welcome Back!</h3>
-    <form accept-charset="UTF-8" action="/oauth_connect?from=facebook_login&service=facebook" method="POST">
-        <input name="utf8" type="hidden" value="✓" />
-        <input name="authenticity_token" type="hidden" value="token_value" />
-        <button class="btn btn-block btn-large btn-facebook" name="button" type="submit">
-            <span class="icon-container">
-                <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
-            </span>
-            <span class="text-container">
-                Log in with Facebook
-            </span>
+    
+    <external-login #externalLoginComponentRef>
+        <button class="btn btn-block btn-large btn-facebook" name="button" type="submit" (click)="externalLoginComponentRef.login('facebook')">
+                <span class="icon-container">
+                    <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+                </span>
+                <span class="text-container">
+                    Log in with Facebook
+                </span>
         </button>
-    </form>
-    <form accept-charset="UTF-8" action="/oauth_connect?from=google_login&service=google" method="POST">
-        <input name="utf8" type="hidden" value="✓">
-        <input name="authenticity_token" type="hidden" value="token_value" />
-        <button class="btn btn-block btn-large btn-google" name="button" type="submit">
+    </external-login>
+    
+    <external-login #externalLoginComponentRef>
+    <button class="btn btn-block btn-large btn-google" name="button" type="submit" (click)="externalLoginComponentRef.login('google')">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon-google">
                     <defs></defs>
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -31,8 +29,8 @@
                 <span class="text-container">
                     Log in with Google
                 </span>
-        </button>
-    </form>
+    </button>
+    </external-login>
 
     <div class="or-separator">
         <span class="h6 or-separator-text">or</span>
@@ -58,10 +56,9 @@
         </div>
         <div class="checkbox">
             <label for="rememberMe">
-                <input id="rememberMe" formControlName="rememberMe" name="rememberMe" type="checkbox" value="remember-me" />
-                Remember me
+                <mat-checkbox id="rememberMe" formControlName="rememberMe" name="rememberMe" value="remember-me">Remember me</mat-checkbox>
             </label>
-            <a routerLink="forgot-password" class="forgot-password pull-right">Forgot password?</a>
+            <a (click)="onForgotPassword()" class="forgot-password pull-right">Forgot password?</a>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>

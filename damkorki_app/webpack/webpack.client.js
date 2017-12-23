@@ -16,5 +16,8 @@ module.exports = {
     target: 'web',
     plugins: [
 
-    ]
+    ],
+    node: {
+        fs: "empty"
+    }
 };

@@ -7,13 +7,13 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="language-toggle">
 
-     <template ngFor let-item [ngForOf]="langs" let-i="index">
+     <ng-template ngFor let-item [ngForOf]="langs" let-i="index">
         <li [hidden]="useLang == item"> 
         <button class="btn btn-default" (click)="setLanguage(item)">
             <span class="flag-icon flag-icon-{{ item }}"></span>
         </button>  
     </li>
-    </template>
+    </ng-template>
 
    <!-- 
     <li [hidden]="useLang == 'pl'"> 

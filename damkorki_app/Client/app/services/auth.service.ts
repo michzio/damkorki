@@ -4,9 +4,10 @@ import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http"; 
 import { Observable } from "rxjs/Observable";
 import { retry } from "rxjs/operators/retry";
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt'
+import { JwtHelperService } from '@auth0/angular-jwt'
 import { IAuthObject } from "../models/auth-object.model";
 import { IAccessToken } from "../models/access-token.model";
+import { CookieHelper } from "../shared/cookie";
 
 @Injectable() 
 export class AuthService { 
@@ -15,9 +16,10 @@ export class AuthService {
     clientId: string = "DamkorkiApp"; 
 
     // JwtProvider's path
-    private static authTokenUrl = "http://localhost:5050/auth/token";
-    
-    private jwtHelper: JwtHelper = new JwtHelper();
+    private authTokenUrl = "http://localhost:5050/auth/token";
+    private authLogoutUrl = "http://localhost:5050/auth/logout"; 
+
+    private jwtHelper =  new JwtHelperService({}); 
     
     // store the URL so we can redirect after logging in
     public redirectUrl: string; 
@@ -39,9 +41,19 @@ export class AuthService {
         return this.authTokenRequest(data);
     }
 
-    logout() : boolean { 
-        this.setAuth(null)
-        return true; 
+    logout() : Observable<boolean> { 
+
+        return this.http.post(this.authLogoutUrl, null)
+                .map(response => {
+                    // delete token from local storage 
+                    this.setAuth(null)
+                    // delete cookie 
+                    new CookieHelper().deleteCookie("Identity.External"); 
+                    return true; 
+                })
+                .catch(error => { 
+                    return Observable.throw(error);
+                });
     }
 
     toUrlEncodedString(data: any) : string { 
@@ -86,8 +98,8 @@ export class AuthService {
     // return true if the user is logged in and false otherwise 
     isLoggedIn() : boolean {  
         var authObject = this.getAuth();
-        if(authObject && authObject.access_token) { 
-            const isAccessTokenValid : boolean = tokenNotExpired(null, authObject.access_token);
+        if(authObject && authObject.access_token) {
+            const isAccessTokenValid : boolean = !this.jwtHelper.isTokenExpired(authObject.access_token);
             return isAccessTokenValid;
         }
         return false; 
@@ -119,7 +131,7 @@ export class AuthService {
 
         // make authorization request 
         return this.http.post<IAuthObject>(
-                AuthService.authTokenUrl,       // URL  
+                this.authTokenUrl,       // URL  
                 this.toUrlEncodedString(data),  // body 
                 {   
                     headers: new HttpHeaders()  // headers 

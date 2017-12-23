@@ -17,42 +17,13 @@ import { ORIGIN_URL } from './app/shared/constants/baseurl.constants'
 // import { AppModule } from './app/app.module';
 // Note: instead we have ./app/browser-app.module && ./app/server-app.module
 import { ServerAppModule } from './app/server-app.module';
-// ASP.NET Core Angular Engine - soon available on npm!
-// import { ngAspnetCoreEngine } from '@universal/ng-aspnetore-engine';
-// temporary workaround 
-import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from './polyfills/temporary-aspnetcore-engine'; 
+// ASP.NET Core Angular Engine - available on npm!
+import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from '@nguniversal/aspnetcore-engine';
 
 // for faster server rendered builds
 enableProdMode(); 
 
-// from angular 2 universal not compatible with angular 4
-// const platform = platformNodeDynamic();
-
 export default createServerRenderer( (params) => {
-    
-    /* from angular 2 universal not compatible with angular 4 
-
-    return new Promise<RenderResult>((resolve, reject) => {
-        const requestZone = Zone.current.fork({
-            name: 'angular-universal request',
-            properties: {
-                baseUrl: '/',
-                requestUrl: params.url,
-                originUrl: params.origin,
-                preboot: false,
-                document: '<app></app>'
-            },
-            onHandleError: (parentZone, currentZone, targetZone, error) => {
-                // If any error occurs while rendering the module, reject the whole operation
-                reject(error);
-                return true;
-            }
-        });
-
-        return requestZone.run<Promise<string>>(() => platform.serializeModule(AppModule)).then(html => {
-            resolve({ html: html });
-        }, reject);
-    });*/
 
     /*
      * How can we access data we passed from .NET?
@@ -81,6 +52,7 @@ export default createServerRenderer( (params) => {
     return ngAspnetCoreEngine(setupOptions).then(response => {
 
       // Want to transfer data from Server -> Client?
+      
       // Add transferData to the "response.globals"" object, 
       // and call createTransferScript({}) passing in the Object key/values of data
       // createTransferScript() will JSON Stringify it and return it as a <script>window.TRANSFER_CACHE={}</script>

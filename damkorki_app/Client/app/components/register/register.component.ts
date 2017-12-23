@@ -3,8 +3,11 @@ import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"
 import { Router } from "@angular/router"; 
 import { HttpClient } from "@angular/common/http"; 
 import { IUser } from "../../models/user.model";
-import { HttpErrorResponse } from "@angular/common/http/src/response";
+import { HttpErrorResponse } from "@angular/common/http";
 import { IPerson } from "../../models/person.model";
+import { AuthService } from "../../services/auth.service";
+import { UserService } from "../../services/user.service";
+import { PasswordValidators } from "../../shared/validators/password.validators"
 
 @Component({
     selector: "register", 
@@ -13,8 +16,6 @@ import { IPerson } from "../../models/person.model";
 })
 export class RegisterComponent { 
 
-    // Web Api register path 
-    private registerUrl = "http://localhost:5050/users"; 
     // Web Api person profile path 
     private personUrl = "http://localhost:5050/persons"; 
 
@@ -23,7 +24,13 @@ export class RegisterComponent {
 
     constructor(private fb: FormBuilder, 
                 private router: Router, 
-                private httpClient: HttpClient) { 
+                private httpClient: HttpClient, 
+                private authService: AuthService, 
+                private userService: UserService) { 
+
+                if(this.authService.isLoggedIn()) { 
+                    this.router.navigate(["/"]); 
+                }
 
                 this.createForm(); 
     }
@@ -60,7 +67,7 @@ export class RegisterComponent {
             }; 
 
             // post user
-            this.httpClient.post<IUser>(this.registerUrl, user)
+            this.userService.createUser(user)
                            .subscribe((user) => {
                                 if(user && user.userId) { 
                                     console.log("User " + user.userName + " has been created with id: " + user.userId + ".");
@@ -131,55 +138,4 @@ export class RegisterComponent {
    get lastName() { return this.registerForm.get('lastName'); }
    get password() { return this.registerForm.get('password'); }
    get termsOfService() { return this.registerForm.get('termsOfService'); }
-}
-
-class PasswordValidators { 
-
-    public static containsDigit(control: FormControl) : any { 
-        
-        let containsDigit = /(?=.*\d)/; 
-
-        return containsDigit.test(control.value) ? null : { containsDigit: true }; 
-    }
-
-    public static containsUppercaseLetter(control: FormControl) : any { 
-
-        let containsUppercaseLetter = /(?=.*[A-Z])/;
-
-        return containsUppercaseLetter.test(control.value) ? null : { containsUppercaseLetter: true }; 
-    }
-
-    public static containsLowercaseLetter(control: FormControl) : any { 
-
-        let containsLowercaseLetter = /(?=.*[a-z])/;
-
-        return containsLowercaseLetter.test(control.value) ? null : { containsLowercaseLetter: true }; 
-    }
-
-    public static containsSpecialCharacter(control: FormControl) : any {
-        
-        let containsSpecialCharacter = /(?=.*[$@$!%*#?&])/;
-
-        return containsSpecialCharacter.test(control.value) ? null : { containsSpecialCharacter: true }; 
-    }
-
-    public static notContainsValuesOfInputs(inputs : [string]) { 
-        
-        return (control: FormControl) => { 
-
-                var contains : boolean = false; 
-        
-                let form = control.root; 
-                let password : string = form.get('password').value; 
-        
-                inputs.forEach((input) => { 
-                    var inputValue : string = form.get(input).value;
-                    if(inputValue.length > 2) {
-                        contains = contains || password.toLowerCase().includes(inputValue.toLowerCase()); 
-                    }
-                }); 
-
-                return contains ? { notContainsValuesOfInputs: true } : null; 
-        }; 
-    }
 }

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router"; 
 
 import { ProfileComponent } from './components/profile/profile.component'; 
-import { ProfileEditComponent } from "./components/profile-edit/profile-edit.component";
+import { ProfileBasicEditComponent } from "./components/profile-basic-edit/profile-basic-edit.component";
 import { PublicProfileComponent } from "./components/public-profile/public-profile.component"; 
 import { AuthGuard } from "../../services/auth-guard.service";
 import { CanDeactivateGuard } from "../../services/can-deactivate-guard.service";
@@ -15,12 +15,17 @@ const profileRoutes: Routes = [
         children: [
             {
                 path: '', 
-                redirectTo: 'edit',
+                redirectTo: 'basic/edit',
+                pathMatch: 'full'
+            },
+            {
+                path: 'edit', 
+                redirectTo: 'basic/edit',
                 pathMatch: 'full'
             },
             { 
-                path: 'edit',
-                component: ProfileEditComponent,
+                path: 'basic/edit',
+                component: ProfileBasicEditComponent,
                 canDeactivate: [CanDeactivateGuard]
             }, 
         ]

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'; 
 import { Router } from '@angular/router'; 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from "../../services/auth.service"; 
+import { MatDialog } from '@angular/material/dialog';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
     selector: 'login', 
@@ -10,11 +12,14 @@ import { AuthService } from "../../services/auth.service";
 })
 export class LoginComponent implements OnInit { 
 
+    @Output('onLoginEvent') loginEventEmitter : EventEmitter<any> = new EventEmitter(); 
+
     loginForm : FormGroup = null;
     loginFailed : boolean = false; 
    
     constructor(private fb: FormBuilder,
                 private router: Router, 
+                private dialog: MatDialog,
                 private authService: AuthService) {
 
             this.createForm();
@@ -59,7 +64,30 @@ export class LoginComponent implements OnInit {
                     });
             
     }
+
+    onForgotPassword() { 
+        this.dialog.open(ResetPasswordComponent, { 
+                data: { 
+                    email: this.email.value
+                }
+            })
+            .afterClosed().subscribe( (result) => {
+                console.log(result); 
+                if(result.status === 'yes') { 
+                    this.loginEventEmitter.emit({
+                        name: 'Password Reset Token',
+                        type: LoginEventType.PasswordResetTokenCreated, 
+                        success: true, 
+                        message: result.message
+                    });
+                }
+            });
+    }
     
     get email() { return this.loginForm.get('email'); }
     get password() { return this.loginForm.get('password'); }
+}
+
+export enum LoginEventType { 
+    PasswordResetTokenCreated, 
 }

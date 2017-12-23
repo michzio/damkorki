@@ -6,6 +6,7 @@ import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { ResetPasswordPageComponent } from './components/reset-password-page/reset-password-page.component';
 
 const appRoutes : Routes = [
      { 
@@ -35,6 +36,16 @@ const appRoutes : Routes = [
         path: 'login', 
         component: LoginPageComponent,
         data: { title: 'Log in'}
+    },
+    {
+        path: 'confirm-email', 
+        component: LoginPageComponent, 
+        data: { title: 'Confirm email'}
+    },
+    {
+        path: 'reset-password', 
+        component: ResetPasswordPageComponent, 
+        data: { title: 'Reset Password' }
     },
     {
         path: 'signin', 

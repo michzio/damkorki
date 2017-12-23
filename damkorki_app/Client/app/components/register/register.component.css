@@ -99,3 +99,7 @@ label div {
     margin: -25px auto 10px;
     width: 100%;
 }
+
+.checkbox label { 
+    padding-left: 20px; 
+}

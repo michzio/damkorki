@@ -1,1 +1,4 @@
-<login></login>
+<div class="alert alert-info" *ngIf="isEmailConfirmed">Email address {{ confirmedEmail }} for user account has been confirmed.</div>
+<div class="alert alert-warning" *ngIf="confirmationError != null">{{ confirmationError }}</div>
+<div class="alert alert-info" *ngIf="isInfoAlert">{{ infoAlert }}</div>
+<login (onLoginEvent)="onLoginEvent($event)"></login>

@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp1.1/damkorki_web_api.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/damkorki_web_api.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

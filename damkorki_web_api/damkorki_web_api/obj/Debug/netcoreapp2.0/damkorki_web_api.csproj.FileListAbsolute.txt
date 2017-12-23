@@ -1,0 +1,10 @@
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/obj/Debug/netcoreapp2.0/damkorki_web_api.csproj.CoreCompileInputs.cache
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/obj/Debug/netcoreapp2.0/damkorki_web_api.AssemblyInfoInputs.cache
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/obj/Debug/netcoreapp2.0/damkorki_web_api.AssemblyInfo.cs
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/bin/Debug/netcoreapp2.0/damkorki_web_api.deps.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/bin/Debug/netcoreapp2.0/damkorki_web_api.runtimeconfig.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/bin/Debug/netcoreapp2.0/damkorki_web_api.runtimeconfig.dev.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/bin/Debug/netcoreapp2.0/damkorki_web_api.dll
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/bin/Debug/netcoreapp2.0/damkorki_web_api.pdb
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/obj/Debug/netcoreapp2.0/damkorki_web_api.dll
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/obj/Debug/netcoreapp2.0/damkorki_web_api.pdb

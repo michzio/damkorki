@@ -4,12 +4,11 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 @Component({ 
-    selector: 'profile-edit', 
-    templateUrl: './profile-edit.component.html'
+    selector: 'profile-basic-edit', 
+    templateUrl: 'profile-basic-edit.component.html',
+    styleUrls: ['./profile-basic-edit.component.css']
 })
-export class ProfileEditComponent implements CanDeactivateComponent { 
-
-
+export class ProfileBasicEditComponent implements CanDeactivateComponent { 
 
     canDeactivate(currentRoute: ActivatedRouteSnapshot, 
                   currentState: RouterStateSnapshot, 

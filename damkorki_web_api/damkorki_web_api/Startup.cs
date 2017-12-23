@@ -28,39 +28,90 @@ namespace DamkorkiWebApi
     {
         public IConfiguration Configuration { get; private set; } 
 
-        public Startup(IHostingEnvironment env) { 
+        public Startup(IConfiguration configuration) { 
 
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            Configuration = builder.Build();     
+            Configuration = configuration;     
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFramework();
+            // Add EntityFramework support for SqlServer
+            services.AddEntityFrameworkSqlServer();
 
             // Add Identity Services & Stores
-            services.AddIdentity<ApplicationUser, IdentityRole>(
-                config =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
-                    config.User.RequireUniqueEmail = true;
-                    config.Password.RequireNonAlphanumeric = true;
-                    config.Password.RequireDigit = true;
-                    config.Password.RequireLowercase = true;
-                    config.Password.RequireUppercase = true; 
-                    config.Password.RequiredLength = 7;
-                    config.Cookies.ApplicationCookie.AutomaticChallenge = false;
+                    options.SignIn.RequireConfirmedEmail = true; 
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true; 
+                    options.Password.RequiredLength = 7;
                 })
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
+            // Add Authentication
+            services.AddAuthentication(options => 
+                {  
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+                })
+                .AddJwtBearer(options => 
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true; 
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        // the signing key must match
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:SecretKey"])),
+                        ValidateIssuerSigningKey = true,
+
+                        // validate the JWT Issuer (iss) claim
+                        ValidIssuer = Configuration["Auth:Jwt:Issuer"], 
+                        ValidateIssuer = true, 
+                        
+                        // validate the JWT Audience (aud) claim
+                        ValidAudience = Configuration["Auth:Jwt:Audience"],
+                        ValidateAudience = true, 
+
+                        // validate the token expiration time  
+                        ValidateLifetime = true,
+                        RequireExpirationTime = true, 
+
+                         // if you want to allow a certain amount of clock drift, set that here: 
+                        ClockSkew = TimeSpan.Zero
+                    };
+                    options.IncludeErrorDetails = true;     
+                })
+                .AddFacebook(options => 
+                {
+                    options.AppId = Configuration["Auth:Facebook:AppId"];
+                    options.AppSecret = Configuration["Auth:Facebook:AppSecret"];
+                    options.Scope.Add("public_profile");
+                    options.Scope.Add("email");
+                    options.Fields.Add("email");
+                    options.Fields.Add("id");
+                    options.Fields.Add("name");
+                    options.Fields.Add("first_name"); 
+                    options.Fields.Add("last_name");  
+                    options.Fields.Add("gender"); 
+                })
+                .AddGoogle(options => 
+                {
+                    options.ClientId = Configuration["Auth:Google:Clientid"]; 
+                    options.ClientSecret = Configuration["Auth:Google:ClientSecret"]; 
+                    options.CallbackPath = "/signin-google";
+                    options.Scope.Add("profile"); 
+                });
 
             // Add Database Context 
-            services.AddDbContext<DatabaseContext>( options => 
+            services.AddDbContext<DatabaseContext>(options => 
                     options.UseSqlServer(Configuration.GetConnectionString("MacOsSQLServerDatabase")) );
 
             services.AddMvc()
@@ -89,8 +140,8 @@ namespace DamkorkiWebApi
                                     }
             ));       
 		
-            // registration custom objects for dependency injection
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            // registration of custom objects for dependency injection
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,8 +153,12 @@ namespace DamkorkiWebApi
 
 		        if (env.IsDevelopment())
 		        {
-		          app.UseDeveloperExceptionPage();
-		        }
+		            app.UseDeveloperExceptionPage();
+		        } 
+                else 
+                { 
+                    app.UseExceptionHandler("/Home/Error"); 
+                }
 
                 // configuring Cross Origin Resource Sharing policy 
                 // app.UseCors( "AllowClientOrigin" ); 
@@ -127,9 +182,6 @@ namespace DamkorkiWebApi
                     } 
                 });
 
-	            // purposely avoided cookies authentication
-                // app.UseIdentity();
-
                 // add a custom Jwt Provider to generate Tokens
                 app.UseJwtProvider(new JwtProviderOptions() { 
                     Path = Configuration["Auth:Jwt:TokenEndPoint"], 
@@ -141,34 +193,8 @@ namespace DamkorkiWebApi
                             SecurityAlgorithms.HmacSha256)
                 });
 
-                // add the Jwt Bearer Header Authentication to validate Tokens
-                app.UseJwtBearerAuthentication(new JwtBearerOptions() { 
-                    AutomaticAuthenticate = true, 
-                    AutomaticChallenge = true, 
-                    RequireHttpsMetadata = false, 
-                    TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        // the signing key must match
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:SecretKey"])),
-                        ValidateIssuerSigningKey = true,
-
-                        // validate the JWT Issuer (iss) claim
-                        ValidIssuer = Configuration["Auth:Jwt:Issuer"], 
-                        ValidateIssuer = true, 
-                        
-                        // validate the JWT Audience (aud) claim
-                        ValidAudience = Configuration["Auth:Jwt:Audience"],
-                        ValidateAudience = true, 
-
-                        // validate the token expiry 
-                        ValidateLifetime = true,
-                        RequireExpirationTime = true,  
-
-                        // if you want to allow a certain amount of clock drift, set that here: 
-                        ClockSkew = TimeSpan.Zero
-                    }
-                });
+                // add the Jwt Bearer Authentication to validate Tokens
+                app.UseAuthentication(); 
 
                 // add MVC to the pipeline
                 app.UseMvc(routes =>
@@ -177,19 +203,6 @@ namespace DamkorkiWebApi
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
-            
-                // Seed the database if needed
-                try { 
-
-                    new SampleDataSeeder(
-                            app.ApplicationServices.GetService<IUnitOfWork>(),
-                            app.ApplicationServices.GetService<RoleManager<IdentityRole>>(),
-                            app.ApplicationServices.GetService<UserManager<ApplicationUser>>()
-                        ).SeedSampleDataAsync().Wait(); 
-                
-                } catch(AggregateException e) { 
-                    throw new Exception(e.ToString()); 
-                }
         }
     }
 }

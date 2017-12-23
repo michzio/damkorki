@@ -1,0 +1,21 @@
+.page-container { 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 25px;
+}
+
+.page-container { 
+    width: auto; 
+}
+
+@media (min-width: 744px) { 
+    .page-container { 
+        width: 696px;
+    }
+}
+
+@media (min-width: 1128px) { 
+    .page-container { 
+        width: 1080px
+    }
+}
