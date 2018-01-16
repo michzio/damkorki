@@ -1,0 +1,28 @@
+<div class="tutor-skills-content">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    Tutor Skills
+                </div>
+                <div class="col-xs-2 text-right">
+                    <i class="plus-icon fa fa-plus-square" aria-hidden="true"
+                        (click)="onAddSkill($event)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" *ngIf="areSkillsAdded; else NoSkills">
+            <ul class="skills-list">
+                <li class="skill-item" *ngFor="let skill of skills">{{ skill.name }}</li>
+            </ul>
+        </div>
+        <ng-template #NoSkills>
+        <div class="panel-body">
+            <div class="no-skills-warning">
+                No skills added to tutor's profile. Click <i class="fa fa-plus-square" aria-hidden="true"
+                (click)="onAddSkill($event)"></i> sign to add some skills. 
+            </div>
+        </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="skill-edit-container">
+    <h3>Add Skill</h3>
+    <div class="alert alert-danger" role="alert" *ngIf="updateFailed && skillForm.errors?.update">
+        {{ skillForm.errors.update }}
+    </div>
+    
+    <form class="form-skill" [formGroup]="skillForm"
+         (submit)="onSubmit($event)">
+        <div class="form-group">
+            <input id="skillName" formControlName="skillName" name="skillName" class="form-control" 
+                [ngClass]="{'invalid' : updateFailed && skillName.invalid}" 
+                type="text" placeholde="type your skill..."  required />
+            <label for="skillName" *ngIf="updateFailed || skillName.dirty || skillName.touched">
+                <div *ngIf="updateFailed && skillName.errors?.required">Skill name is required.</div>
+            </label>
+        </div>
+        <div class="autocomplete">
+
+        </div>
+        <div class="dialog-controls">
+            <button class="button-as-link cancel-dialog" mat-dialog-close="{ status: 'no'}">Cancel</button>
+            <button class="btn btn-md btn-primary pull-right" type="submit">Add</button>
+        </div>
+    </form>
+</div>

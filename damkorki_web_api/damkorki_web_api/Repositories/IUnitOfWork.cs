@@ -5,6 +5,7 @@ namespace DamkorkiWebApi.Repositories
 	{
 		IPeopleRepository People { get; }
 		IAddressesRepository Addresses { get; }
+		IProfilePhotosRepository ProfilePhotos { get; }
 		IUsersRepository Users { get; }
 		IFeedbacksRepository Feedbacks { get; }
 		ILearnersRepository Learners { get; }

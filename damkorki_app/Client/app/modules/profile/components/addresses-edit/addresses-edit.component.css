@@ -1,0 +1,18 @@
+.no-profile-warning { 
+    text-align: center;
+    padding: 30px;
+}
+
+button[type="submit"] { 
+    padding: 10px 25px; 
+    margin-bottom: 25px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+button[type="submit"]:hover { 
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}

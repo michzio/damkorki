@@ -1,0 +1,74 @@
+.photo-background { 
+    opacity: 0.3; 
+    position: absolute; 
+    top: 0; 
+    left: auto; 
+    display:inline-block;
+    background-color: #bbb; 
+}
+
+.photo-round { 
+    border-radius: 50%; 
+    display: inline-block; 
+    overflow: hidden; 
+}
+
+.photo-delete { 
+    background-color: #000; 
+    border: 0; 
+    border-radius: 2px; 
+    display: none; 
+    padding: 0px;
+}
+
+.photo-delete i { 
+    color: #fff;
+}
+
+.overlay-button { 
+   position: absolute; 
+   top: 2px; 
+   right: 2px; 
+   width: 32px;
+   height: 32px;
+   cursor: pointer;
+   opacity: 0.6; 
+}
+
+.overlay-button:hover { 
+    opacity: 0.9; 
+}
+
+.photo-container { 
+    position: relative; 
+    display: inline-block; 
+}
+
+.photo-container, .photo-list { 
+    margin-top: 10px; 
+} 
+
+.photo-upload-desc, .photo-upload { 
+    margin-top: 20px; 
+}
+
+.photo-list ul { 
+    padding-left: 0; 
+    list-style: none; 
+}
+
+.photo-item { 
+    margin-right: 15px;
+    position: relative; 
+    cursor: move; 
+}
+
+.photo-item .photo-delete { 
+    width: 24px;
+    height: 24px; 
+}
+
+.no-profile-warning { 
+    text-align: center;
+    padding: 30px;
+}

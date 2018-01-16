@@ -7,7 +7,7 @@ namespace DamkorkiWebApi.ViewModels {
 
         public LessonOfferViewModel() { }
 
-        public LessonOfferViewModel(LessonOffer lessonOffer) { 
+        public LessonOfferViewModel(LessonOffer lessonOffer, bool includeReferences = true) { 
 
                 // wrap LessonOffer repository object into LessonOfferViewModel object 
                 LessonOfferId = lessonOffer.LessonOfferId;
@@ -19,8 +19,12 @@ namespace DamkorkiWebApi.ViewModels {
                 Level = lessonOffer.Level;
                 SubjectId = lessonOffer.SubjectId;
                 TutorId = lessonOffer.TutorId;
-                Subject = lessonOffer.Subject; 
-                Tutor = lessonOffer.Tutor; 
+                if(includeReferences && lessonOffer.Subject != null) {
+                    Subject = new SubjectViewModel(lessonOffer.Subject, false); 
+                }
+                if(includeReferences && lessonOffer.Tutor != null) { 
+                    Tutor = new TutorViewModel(lessonOffer.Tutor, false); 
+                }
         }
         
         public int LessonOfferId { get; set; }
@@ -41,7 +45,7 @@ namespace DamkorkiWebApi.ViewModels {
         [Required]
         public int TutorId { get; set; }
 
-        public Subject Subject { get; set; }
-        public Tutor Tutor { get; set; }
+        public SubjectViewModel Subject { get; set; }
+        public TutorViewModel Tutor { get; set; }
     }
 }

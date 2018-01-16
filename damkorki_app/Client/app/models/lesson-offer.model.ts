@@ -1,3 +1,5 @@
+import { ITutor } from "./tutor.model";
+
 export interface ILessonOffer { 
     
     lessonOfferId?: number;
@@ -11,5 +13,5 @@ export interface ILessonOffer {
     tutorId: number; 
 
     subject?: Object;   //ISubject 
-    tutor?: Object;     //ITutor     
+    tutor?: ITutor;     //ITutor     
 }

@@ -1,15 +1,105 @@
 <div class="profile-content">
-    <form class="form-profile-basic" (ngSubmit)="onSubmit($event)">
+        <div class="alert alert-info" role="alert" *ngIf="updateMessage != null && !updateFailed">{{ updateMessage }}</div>
+        <div class="alert alert-danger" role="alert" *ngIf="updateFailed && basicProfileForm.errors?.update">
+                <strong>Warning:</strong> {{ basicProfileForm.errors?.update }}
+        </div>
+    <form class="form-profile-basic" [formGroup]="basicProfileForm" (ngSubmit)="onSubmit($event)">
         <div class="panel panel-default">
-            <div class="panel-heading">Basic Profile</div>
+            <div class="panel-heading">Personal Data</div>
             <div class="panel-body">
-            <div class="row">
-                <label class="col-sm-3 text-right" for="firstName">First Name</label>
-                <div class="col-sm-9">
-                        <input id="firstName" type="text" />
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="firstName">First Name</label>
+                    <div class="col-sm-9">
+                        <input id="firstName" formControlName="firstName" name="firstName" class="form-control" 
+                            type="text" [ngClass]="{'invalid': updateFailed && firstName.invalid}" required />
+                        <div class="input-errors" *ngIf="updateFailed || firstName.dirty || firstName.touched">
+                            <div *ngIf="updateFailed && firstName.errors?.required">First name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="lastName">Last Name</label>
+                    <div class="col-sm-9">
+                        <input id="lastName" formControlName="lastName" name="lastName" class="form-control"
+                            type="text" [ngClass]="{'invalid': updateFailed && lastName.invalid}" required />
+                        <div class="input-errors" *ngIf="updateFailed || lastName.dirty || lastName.touched">
+                            <div *ngIf="updateFailed && lastName.errors?.required">Last name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="gender">Gender</label>
+                    <div class="col-sm-9">
+                        <mat-radio-group id="gender" formControlName="gender" name="gender" class="radio-group" 
+                            [ngClass]="{'invalid': updateFailed && gender.invalid}" required>
+                            <mat-radio-button class="radio-button" *ngFor="let gender of genders | members" [value]="gender.value">
+                                {{ gender.value }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <div class="input-errors" *ngIf="updateFailed || gender.dirty || gender.touched">
+                            <div *ngIf="updateFailed && gender.errors?.required">Gender selection is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <label class="col-sm-3 text-right" for="birthDate">Birth Date</label>
+                    <div class="col-sm-9">
+                        <div id="birthDate" formGroupName="birthDate" name="birthDate" class="form-group">
+                            <mat-select id="monthOfBirth" formControlName="monthOfBirth" name="monthOfBirth" class="form-control"
+                                [ngClass]="{'invalid': updateFailed && monthOfBirth.invalid}">
+                                <mat-option value="" disabled selected>Month</mat-option>
+                                <mat-option *ngFor="let month of months | members" [value]="month.key">{{ month.value }}</mat-option>
+                            </mat-select>
+                            <input id="dayOfBirth" formControlName="dayOfBirth" name="dayOfBirth" class="form-control"
+                                type="text" placeholder="Day" [ngClass]="{'invalid': updateFailed && dayOfBirth.invalid}" />
+                            <input id="yearOfBirth" formControlName="yearOfBirth" name="yearOfBirth" class="form-control"
+                                type="text" placeholder="Year" [ngClass]="{'invalid': updateFailed && yearOfBirth.invalid}" />
+                        </div>
+                        <div class="input-errors" *ngIf="updateFailed || birthDate.dirty || birthDate.touched">
+                            <div *ngIf="(updateFailed || dayOfBirth.dirty || dayOfBirth.touched) && birthDate.errors?.validDay">Day must match given month and year.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Contact Data</div>
+            <div class="panel-body">
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="phoneNumber">Phone Number</label>
+                    <div class="col-sm-9">
+                        <div id="phoneNumber" formGroupName="phoneNumber" name="phoneNumber" class="form-group">
+                            <mat-select id="countryDialingCode" formControlName="countryDialingCode" name="countryDialingCode" class="form-control"
+                                [ngClass]="{'invalid': updateFailed && countryDialingCode.invalid}">
+                                <mat-select-trigger *ngIf="countryDialingCode.value">
+                                    <span class="flag-icon flag-icon-{{ countryDialingCode.value }}"></span> 
+                                    {{ countryDialingCodes[countryDialingCode.value] }}
+                                </mat-select-trigger>
+                                <mat-option value="" disabled selected>Country</mat-option>
+                                <mat-option *ngFor="let countryCode of countryDialingCodes | keys" [value]="countryCode">
+                                    <span class="flag-icon flag-icon-{{ countryCode }}"></span> {{ countryDialingCodes[countryCode] }}
+                                </mat-option>
+                            </mat-select>
+                            <input id="number" formControlName="number" name="number" class="form-control" 
+                                type="tel" placeholder="000 000 000" [ngClass]="{'invalid': updateFailed && number.invalid}" />
+                        </div>
+                        <div class="input-errors" *ngIf="updateFailed || phoneNumber.dirty || phoneNumber.touched">
+                            <div *ngIf="(updateFailed || number.dirty || number.touched) && number.errors?.pattern">Phone number must contain only digits.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="skype">Skype</label>
+                    <div class="col-sm-9">
+                        <input id="skype" formControlName="skype" name="skype" class="form-control"
+                            type="text" [ngClass]="{'invalid': updateFailed && skype.invalid}" />
+                        <div class="input-errors" *ngIf="updateFailed || skype.dirty || skype.touched">
+                            <!-- error messages -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <button type="submit" class="btn btn-primary btn-large">Save</button>
     </form>
 </div>

@@ -48,7 +48,16 @@ namespace DamkorkiWebApi.Models
                 .WithOne(au => au.Person)
                 .HasForeignKey<Person>(p => p.UserId)
                 .HasPrincipalKey<ApplicationUser>(au => au.Id);
-                
+
+            modelBuilder.Entity<ProfilePhoto>()
+				.HasOne(pp => pp.Person)
+				.WithMany(p => p.ProfilePhotos)
+				.HasForeignKey(pp => pp.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<ProfilePhoto>() 
+                .Property(pp => pp.IsProfilePhoto)
+                .HasDefaultValue(false);
 
             modelBuilder.Entity<Address>().ToTable("Address");
 

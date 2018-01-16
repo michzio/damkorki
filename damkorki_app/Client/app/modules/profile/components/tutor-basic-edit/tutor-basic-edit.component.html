@@ -1,0 +1,36 @@
+<div class="tutor-basic-content">
+    <div class="alert alert-info" role="alert" *ngIf="!updateFailed && isUpdateMessage">{{ updateMessage }}</div>
+    <div class="alert alert-danger" role="alert" *ngIf="updateFailed && tutorForm.errors?.update"> {{ tutorForm.errors?.update }}</div>
+
+    <form class="form-tutor" [formGroup]="tutorForm" novalidate
+        (ngSubmit)="onSubmit($event)">
+        <div class="panel panel-default">
+            <div class="panel-heading">Tutor Data</div>
+            <div class="panel-body">
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="description">Description</label>
+                    <div class="col-sm-9">
+                        <textarea id="description" formControlName="description" name="description" rows="5"
+                            class="form-control" [ngClass]="{'invalid': updateFailed && description.invalid}"
+                            placeholder="Write something about your profession and commercial expirience..."></textarea>
+                        <div class="input-errors" *ngIf="updateFailed || description.dirty || description.touched">
+                           <!-- validation errors goes here --> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 text-right" for="qualifications">Qualifications</label>
+                    <div class="col-sm-9">
+                        <textarea id="qualifications" formControlName="qualifications" name="qualifications" rows="5"
+                            class="form-control" [ngClass]="{'invalid': updateFailed && qualifications.invalid}"
+                        placeholder="List any courses, certificates, formal and non-formal education you have taken."></textarea>
+                        <div class="input-errors" *ngIf="updateFailed || qualifications.dirty || qualifications.touched">
+                            <!-- validation errors goes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large">Save</button>
+    </form>
+</div>

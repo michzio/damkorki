@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
 
 namespace DamkorkiWebApi.Repositories
 {
 	public interface IAddressesRepository : IRepository<Address>
 	{
-		// TODO: Custom repository methods
+		Task<Address> GetEagerlyAsync(int addressId);
 	}
 }

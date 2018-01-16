@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DamkorkiWebApi.Repositories
 {
@@ -15,6 +20,28 @@ namespace DamkorkiWebApi.Repositories
 			get { return Context as DatabaseContext; }
 		}
 
-		// TODO: Implementation of custom repository methods
+		public async Task<Tutor> GetEagerlyAsync(int tutorId) { 
+
+			return await DatabaseContext.Set<Tutor>()
+										.Include(t => t.Person)
+										.Include(t => t.LessonOffers)
+										.Include(t => t.Reservations)
+										.Include(t => t.Experiences)
+										.Include(t => t.TutorSkills)
+											.ThenInclude(ts => ts.Skill)
+										.SingleOrDefaultAsync(t => t.TutorId == tutorId); 
+		}
+
+		public IEnumerable<Tutor> FindEagerly(Expression<Func<Tutor, bool>> predicate) { 
+
+			return DatabaseContext.Set<Tutor>()
+								  .Where(predicate)
+								  .Include(t => t.Person)
+								  .Include(t => t.LessonOffers)
+						     	  .Include(t => t.Reservations)
+								  .Include(t => t.Experiences)
+								  .Include(t => t.TutorSkills)
+								  	.ThenInclude(ts => ts.Skill);
+		}
 	}
 }

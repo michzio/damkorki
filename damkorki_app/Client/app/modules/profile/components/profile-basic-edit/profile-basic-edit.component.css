@@ -7,7 +7,66 @@
 
 .profile-content input[type="text"] { 
     width: 100%;
+    height: 32px;
     display: block; 
     font-size: 16px;
-    height: 32px;
+}
+
+.radio-button { 
+    margin: 5px; 
+}
+
+div#birthDate, div#phoneNumber {
+    text-align: justify; 
+}
+
+div#birthDate:after, div#phoneNumber:after {
+    width: 100%;
+    display: inline-block;
+    content: "";
+}
+
+div#birthDate.form-group, div#phoneNumber.form-group { 
+    margin-bottom: 0; 
+    height: 40px;
+}
+
+#monthOfBirth, #dayOfBirth, #yearOfBirth, #countryDialingCode { 
+    width: 32%; 
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+#number { 
+    width: 64%; 
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.input-errors div { 
+    color: #ff5a5f;
+    margin: 10px 0px;
+}
+
+.flag-icon { 
+    margin-right: 10px; 
+}
+
+button[type="submit"] { 
+    padding: 10px 25px; 
+    margin-bottom: 25px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+button[type="submit"]:hover { 
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.invalid {
+    border-color: #ffb400;
+    background-color: #fff8e5;
 }

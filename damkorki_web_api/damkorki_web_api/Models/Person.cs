@@ -13,7 +13,8 @@ namespace DamkorkiWebApi.Models
         public enum GenderType
         {
             Male,
-            Female
+            Female, 
+            Other
         };
 
         // Properties
@@ -30,7 +31,6 @@ namespace DamkorkiWebApi.Models
         [Required]
         public GenderType Gender { get; set; }
         public DateTime Birthdate { get; set; }
-        public string Image { get; set; }
 		public string Skype { get; set; }
 		public string PhoneNumber { get; set; }
         
@@ -45,6 +45,8 @@ namespace DamkorkiWebApi.Models
         public Learner Learner { get; set; }
         public Tutor Tutor { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        public List<ProfilePhoto> ProfilePhotos { get; set; }
 
     }
 }

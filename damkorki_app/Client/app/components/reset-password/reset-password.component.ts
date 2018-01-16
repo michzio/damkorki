@@ -44,7 +44,7 @@ export class ResetPasswordComponent {
         this.createForm(); 
     }
 
-    createForm() { 
+    private createForm() { 
 
         if(this.resetToken) {
             this.resetPasswordForm = this.fb.group({

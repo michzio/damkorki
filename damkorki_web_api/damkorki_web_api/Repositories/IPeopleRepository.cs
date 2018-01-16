@@ -11,5 +11,7 @@ namespace DamkorkiWebApi.Repositories
 		IEnumerable<Person> GetFemales(Expression<Func<Person, bool>> predicate);
 		IEnumerable<Person> GetMales(Expression<Func<Person, bool>> predicate);
 		Task<IEnumerable<Person>> GetAllEagerlyAsync(); 
+
+		Task<Person> GetEagerlyAsync(int personId); 
 	}
 }

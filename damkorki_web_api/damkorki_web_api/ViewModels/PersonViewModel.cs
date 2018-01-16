@@ -9,22 +9,23 @@ namespace DamkorkiWebApi.ViewModels {
 
         public PersonViewModel() { }
 
-        public PersonViewModel(Person person) { 
+        public PersonViewModel(Person person, bool includeReferences = true) { 
 
             // wrap Person repository object into PersonViewModel object
             PersonId = person.PersonId; 
             FirstName = person.FirstName; 
             LastName = person.LastName; 
             Gender = person.Gender;
-            Birthdate = person.Birthdate; 
-            Image = person.Image; 
+            Birthdate = person.Birthdate;  
             Skype = person.Skype; 
             PhoneNumber = person.PhoneNumber;  
             AddressId = person.AddressId; 
             UserId = person.UserId; 
-            Address = person.Address; 
-            if(person.ApplicationUser != null) {
-                ApplicationUser = new ApplicationUserViewModel(person.ApplicationUser); 
+            if(includeReferences && person.Address != null) {
+                Address = new AddressViewModel(person.Address, false); 
+            }
+            if(includeReferences && person.ApplicationUser != null) {
+                ApplicationUser = new ApplicationUserViewModel(person.ApplicationUser, false); 
             }
         }
 
@@ -35,13 +36,12 @@ namespace DamkorkiWebApi.ViewModels {
         public string LastName { get; set; }
         public GenderType Gender { get; set; }
         public DateTime Birthdate { get; set; }
-        public string Image { get; set; }
         public string Skype { get; set; }
         public string PhoneNumber { get; set; }
         public int? AddressId { get; set; }
         [Required]
         public string UserId { get; set; }
-        public Address Address { get; set; }
+        public AddressViewModel Address { get; set; }
         public ApplicationUserViewModel ApplicationUser { get; set; }
     }
 }

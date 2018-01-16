@@ -2,15 +2,26 @@
     margin-left: auto; 
     margin-right: auto;
     margin-top: 25px;
-}
-
-.page-container { 
-    width: auto; 
+    width: auto;
+    padding-left: 12px;
+    padding-right: 12px; 
 }
 
 @media (min-width: 744px) { 
     .page-container { 
         width: 696px;
+    }
+}
+
+@media (min-width: 840px) { 
+    .page-container { 
+        width: 796px;
+    }
+}
+
+@media (min-width: 936px) { 
+    .page-container { 
+        width: 888px;
     }
 }
 

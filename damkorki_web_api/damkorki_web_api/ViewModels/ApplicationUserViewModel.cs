@@ -7,7 +7,7 @@ namespace DamkorkiWebApi.ViewModels {
 
         public ApplicationUserViewModel() { }
 
-        public ApplicationUserViewModel(ApplicationUser applicationUser) { 
+        public ApplicationUserViewModel(ApplicationUser applicationUser, bool includeReferences = true) { 
             
             // wrap ApplicationUser repository object into ApplicationUserViewModel object
             UserId = applicationUser.Id; 
@@ -18,7 +18,9 @@ namespace DamkorkiWebApi.ViewModels {
             LastModifiedDate = applicationUser.LastModifiedDate; 
             LastLoginDate = applicationUser.LastLoginDate; 
             FailedLoginDate = applicationUser.FailedLoginDate; 
-
+            if(includeReferences && applicationUser.Person != null) { 
+                Person = new PersonViewModel(applicationUser.Person, false);
+            }
         }
         
         public string UserId { get; set; }
@@ -34,5 +36,7 @@ namespace DamkorkiWebApi.ViewModels {
         public DateTime? LastLoginDate { get; set; }
 
         public DateTime? FailedLoginDate { get; set; }
+
+        public PersonViewModel Person { get; set; }
     }
 }

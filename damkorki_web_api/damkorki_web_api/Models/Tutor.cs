@@ -15,6 +15,7 @@ namespace DamkorkiWebApi.Models
 	        public bool IsSuperTutor { get; set; }
 
 	        // FK properties
+			[Required]
 	        public int PersonId { get; set; }
 
 	        // Navigation properties
@@ -25,7 +26,6 @@ namespace DamkorkiWebApi.Models
 			public List<Experience> Experiences { get; set; }
 
 			public List<TutorSkill> TutorSkills { get; set; }
-
 
     }
 }

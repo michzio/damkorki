@@ -1,0 +1,23 @@
+<div class="profile-addresses">
+    <div class="alert alert-info" role="alert" *ngIf="!updateFailed && isUpdateMessage">{{ updateMessage }}</div>
+    <div class="alert alert-danger" role="alert" *ngIf="updateFailed && form.errors?.update">
+        {{ form.errors?.update }}
+    </div>
+
+    <form class="form-addresses" [formGroup]="form" novalidate
+         (ngSubmit)="onSubmit($event)">
+        <div class="panel panel-default">
+            <div class="panel-heading">Address Data</div>
+            <div class="panel-body" *ngIf="!isProfileCreated">
+                <div class="no-profile-warning">
+                    To add address, at first fill basic profile information.
+                </div>
+            </div>
+            <div class="panel-body" *ngIf="isProfileCreated">
+                <address-area id="address" formControlName="address" name="address" class="form-group" [form-failed]="updateFailed" [control-errors]="true"></address-area>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large">Save</button>
+    </form>
+   <!-- {{ address.errors | json }} --> 
+</div>

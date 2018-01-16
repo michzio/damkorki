@@ -1,12 +1,12 @@
 import { Component } from "@angular/core"; 
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms"; 
-import { Router } from "@angular/router"; 
-import { HttpClient } from "@angular/common/http"; 
+import { Router } from "@angular/router";
 import { IUser } from "../../models/user.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { IPerson } from "../../models/person.model";
 import { AuthService } from "../../services/auth.service";
 import { UserService } from "../../services/user.service";
+import { PersonService } from "../../services/person.service"; 
 import { PasswordValidators } from "../../shared/validators/password.validators"
 
 @Component({
@@ -16,17 +16,14 @@ import { PasswordValidators } from "../../shared/validators/password.validators"
 })
 export class RegisterComponent { 
 
-    // Web Api person profile path 
-    private personUrl = "http://localhost:5050/persons"; 
-
     registerForm : FormGroup = null; 
     registerFailed = false;
 
     constructor(private fb: FormBuilder, 
-                private router: Router, 
-                private httpClient: HttpClient, 
+                private router: Router,  
                 private authService: AuthService, 
-                private userService: UserService) { 
+                private userService: UserService, 
+                private personService: PersonService) { 
 
                 if(this.authService.isLoggedIn()) { 
                     this.router.navigate(["/"]); 
@@ -80,7 +77,7 @@ export class RegisterComponent {
                                         userId: user.userId
                                     }
 
-                                    this.httpClient.post<IPerson>(this.personUrl, person)
+                                    this.personService.createPerson(person)
                                                    .subscribe((person) => { 
                                                        if(person && person.personId) { 
                                                            console.log("Person " + person.firstName + " " + person.lastName + 

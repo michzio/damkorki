@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DamkorkiWebApi.Repositories
 {
@@ -15,6 +17,11 @@ namespace DamkorkiWebApi.Repositories
 			get { return Context as DatabaseContext; }
 		}
 
-		// TODO: Implementation of custom repository methods
+		public async Task<Address> GetEagerlyAsync(int addressId) { 
+
+			return await DatabaseContext.Set<Address>()
+										.Include(a => a.People)
+										.SingleOrDefaultAsync(a => a.AddressId == addressId);
+		}
 	}
 }

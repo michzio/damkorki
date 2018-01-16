@@ -1,0 +1,70 @@
+<div class="address-area" [formGroup]="addressForm">
+    <div class="row">
+        <label class="col-sm-3 text-right" for="addressLine1">Address Line 1</label>
+        <div class="col-sm-9">
+            <input id="addressLine1" formControlName="addressLine1" name="addressLine1" 
+                class="form-control" type="text" required (blur)="onTouched()" 
+                [ngClass]="{'invalid': formFailed && addressLine1.invalid}" 
+                placeholder="Street address, P.O. box, company name, c/o"/>
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || addressLine1.dirty || addressLine1.touched)">
+                <div *ngIf="formFailed && addressLine1.errors?.required">Address line 1 is required.</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-3 text-right" for="addressLine2">Address Line 2</label>
+        <div class="col-sm-9">
+            <input id="addressLine2" formControlName="addressLine2" name="addressLine2"
+                class="form-control" type="text" required (blur)="onTouched()"
+                [ngClass]="{'invalid': formFailed && addressLine2.invalid}"
+                placeholder="Apartment, suite, unit, building, floor, etc." />
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || addressLine2.dirty || addressLine2.touched)">
+                <div *ngIf="formFailed && addressLine2.errors?.required">Address line 2 is required.</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-3 text-right" for="city">City</label>
+        <div class="col-sm-9">
+            <input id="city" formControlName="city" name="city"
+                class="form-control" type="text" required (blur)="onTouched()"
+                [ngClass]="{'invalid': formFailed && city.invalid}" />
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || city.dirty || city.touched)">
+                <div *ngIf="formFailed && city.errors?.required">City is required.</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-3 text-right" for="zipCode">Zip Code</label>
+        <div class="col-sm-9">
+            <input id="zipCode" formControlName="zipCode" name="zipCode"
+                class="form-control" type="text" required (blur)="onTouched()"
+                [ngClass]="{'invalid': formFailed && zipCode.invalid}" />
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || zipCode.dirty || zipCode.touched)">
+                <div *ngIf="formFailed && zipCode.errors?.required">Zip code is required.</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-3 text-right" for="region">Region</label>
+        <div class="col-sm-9">
+            <input id="region" formControlName="region" name="region"
+                class="form-control" type="text" required (blur)="onTouched()"
+                [ngClass]="{'invalid': formFailed && region.invalid}" />
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || region.dirty || region.touched)">
+                <div *ngIf="formFailed && region.errors?.required">Region is required.</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-3 text-right" for="country">Country</label>
+        <div class="col-sm-9">
+            <input id="country" formControlName="country" name="country"
+                class="form-control" type="text" required (blur)="onTouched()"
+                [ngClass]="{'invalid': formFailed && country.invalid}" />
+            <div class="input-errors" *ngIf="controlErrors && (formFailed || country.dirty || country.touched)">
+                <div *ngIf="formFailed && country.errors?.required">Country is required.</div>
+            </div>
+        </div>
+    </div>
+</div>

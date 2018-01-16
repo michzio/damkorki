@@ -1,0 +1,17 @@
+<div class="tutor-content">
+    <div *ngIf="isProfileCreated;else NoProfileWarning">
+        <tutor-basic-edit [(tutor)]="tutor" [person]="person"></tutor-basic-edit>
+        <tutor-experiences-edit [(tutor)]="tutor" [person]="person"></tutor-experiences-edit>
+        <tutor-skills-edit [(tutor)]="tutor" [person]="person"></tutor-skills-edit>
+    </div>
+    <ng-template #NoProfileWarning>
+        <div class="panel panel-default">
+                <div class="panel-heading">Tutor Data</div>
+                <div class="panel-body">
+                    <div class="no-profile-warning">
+                        To add tutor data, at first fill basic profile information.
+                    </div>
+                </div>
+        </div>
+    </ng-template>
+</div>

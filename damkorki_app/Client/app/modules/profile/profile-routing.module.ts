@@ -4,8 +4,12 @@ import { RouterModule, Routes } from "@angular/router";
 import { ProfileComponent } from './components/profile/profile.component'; 
 import { ProfileBasicEditComponent } from "./components/profile-basic-edit/profile-basic-edit.component";
 import { PublicProfileComponent } from "./components/public-profile/public-profile.component"; 
+import { PhotosEditComponent } from "./components/photos-edit/photos-edit.component";
+import { AddressesEditComponent } from "./components/addresses-edit/addresses-edit.component";
+
 import { AuthGuard } from "../../services/auth-guard.service";
 import { CanDeactivateGuard } from "../../services/can-deactivate-guard.service";
+import { TutorEditComponent } from "./components/tutor-edit/tutor-edit.component";
 
 const profileRoutes: Routes = [ 
     { 
@@ -28,6 +32,20 @@ const profileRoutes: Routes = [
                 component: ProfileBasicEditComponent,
                 canDeactivate: [CanDeactivateGuard]
             }, 
+            {
+                path: 'photos/edit', 
+                component: PhotosEditComponent
+            }, 
+            {
+                path: 'addresses/edit', 
+                component: AddressesEditComponent, 
+                canDeactivate: [CanDeactivateGuard]
+            }, 
+            {
+                path: 'tutor/edit', 
+                component: TutorEditComponent, 
+                canDeactivate: [CanDeactivateGuard]
+            }
         ]
     }, 
     {

@@ -5,21 +5,26 @@ using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
 using DamkorkiWebApi.Repositories;
 using DamkorkiWebApi.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DamkorkiWebApi.Controllers
 {
 	[EnableCors("AllowClientOrigin")]
 	[Route("[controller]")]
-	public class TutorsController : Controller
+	public class TutorsController : BaseController
 	{
 		#region Private Fields
 		private IUnitOfWork _unitOfWork;
 		#endregion
 
 		#region Constructor
-		public TutorsController(IUnitOfWork unitOfWork)
+		public TutorsController(DatabaseContext databaseContext, 
+							    UserManager<ApplicationUser> userManager, 
+								IUnitOfWork unitOfWork) 
+								: base(databaseContext, userManager) 
 		{
 			_unitOfWork = unitOfWork;
 		}
@@ -27,16 +32,18 @@ namespace DamkorkiWebApi.Controllers
 
 		// GET: /tutors 
 		[EnableCors("AllowClientOrigin")]
+		[Authorize]
 		[HttpGet]
 		// [Produces("application/json")]
 		public async Task<IActionResult> GetAllTutors()
 		{
-			List<TutorViewModel> vmTutors = (await _unitOfWork.Tutors.GetAllAsync()).Select(t => new TutorViewModel(t)).ToList();
+			List<TutorViewModel> vmTutors = (await _unitOfWork.Tutors.GetAllAsync()).Select(t => new TutorViewModel(t, false)).ToList();
 
 			return Ok(vmTutors); 
 		}
 
 		// GET: tutors/{tutorId}
+		[Authorize]
 		[HttpGet("{tutorId}")]
 		public async Task<IActionResult> GetTutor(int tutorId) { 
 
@@ -45,11 +52,12 @@ namespace DamkorkiWebApi.Controllers
 				return NotFound(new { error = String.Format("Tutor with id {0} has not been found.", tutorId) }); 
 			}
 
-			TutorViewModel vmTutor = new TutorViewModel(tutor);
+			TutorViewModel vmTutor = new TutorViewModel(tutor, false);
 			return Ok(vmTutor); 
 		}
 
 		// POST: /tutors 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> CreateTutor([FromBody] TutorViewModel vmTutor) {
 
@@ -61,8 +69,8 @@ namespace DamkorkiWebApi.Controllers
 			try
 			{
 				// check if the Person with given personId exists 
-				Person person = await _unitOfWork.People.GetAsync(vmTutor.PersonId);
-				if (person == null) throw new Exception("Given Person doesn't exists.");
+				// Person person = await _unitOfWork.People.GetAsync(vmTutor.PersonId);
+				// if (person == null) throw new Exception("Given Person doesn't exists.");
 
 				// create new Tutor entity for given Person entity 
 				var newTutor = new Tutor
@@ -70,8 +78,8 @@ namespace DamkorkiWebApi.Controllers
 					Description = vmTutor.Description,
 					Qualifications = vmTutor.Qualifications,
 					IsSuperTutor = vmTutor.IsSuperTutor,
-					//PersonId = vmTutor.PersonId
-					Person = person
+					PersonId = vmTutor.PersonId // if Person doesn't exists it throws error
+					//Person = person
 				};
 
 				// Add new Tutor to DBContext and save changes 
@@ -82,12 +90,14 @@ namespace DamkorkiWebApi.Controllers
 
 				return CreatedAtAction(nameof(GetTutor), new { tutorId = vmTutor.TutorId }, vmTutor);
 
-			} catch(Exception e) {
+			} catch(Exception e) 
+			{
 				return new ObjectResult(new { error = e.Message }); 
 			}
 		}
 
 		// PUT: /tutors/{tutorId}
+		[Authorize]
 		[HttpPut("{tutorId}")]
 		public async Task<IActionResult> UpdateTutor(int tutorId, [FromBody] TutorViewModel vmTutor)
 		{
@@ -99,30 +109,33 @@ namespace DamkorkiWebApi.Controllers
 				return BadRequest(ModelState);	
 
 			try { 
-
 				// check if Tutor entity exists for given Tutor Id or create new one
-				Tutor oldTutor = await _unitOfWork.Tutors.GetAsync(tutorId);	
-				if(oldTutor == null) 
+				Tutor tutor = await _unitOfWork.Tutors.GetAsync(tutorId);	
+				if(tutor == null) {
 					return NotFound(new { error = "Could not find Tutor entity for given tutor id to update."}); 
+				}
 				
 				// update Tutor object with new values 
-				oldTutor.Description = vmTutor.Description; 
-				oldTutor.Qualifications = vmTutor.Qualifications; 
-				oldTutor.IsSuperTutor = vmTutor.IsSuperTutor; 
-				oldTutor.PersonId = vmTutor.PersonId; 
+				tutor.Description = vmTutor.Description; 
+				tutor.Qualifications = vmTutor.Qualifications; 
+				tutor.IsSuperTutor = vmTutor.IsSuperTutor; 
+				tutor.PersonId = vmTutor.PersonId; 
 
 				// and save changes with DBContext
 				_unitOfWork.Complete(); 
 
+				vmTutor = new TutorViewModel(tutor);
 				return Ok(vmTutor);
 
-			} catch(Exception e) { 
+			} catch(Exception e) 
+			{ 
 				return new ObjectResult(new { error = e.Message }); 
 			}
 		}
 
 		// DELETE: /tutors/{tutorId}
 		[DisableCors]
+		[Authorize]
 		[HttpDelete("{tutorId}")]
 		public async Task<IActionResult> DeleteTutor(int tutorId) { 
 	
@@ -140,12 +153,111 @@ namespace DamkorkiWebApi.Controllers
 		}
 
 		// GET: /tutors/count
+		[Authorize]
 		[HttpGet("count")]
 		public async Task<IActionResult> CountAllTutors() { 
 
 			int tutorCount = await _unitOfWork.Tutors.CountAsync(); 
 
 			return Ok(new {count = tutorCount }); 
+		}
+
+		// GET: /persons/me/tutor
+		[Authorize]
+		[Route("~/persons/me/tutor")]
+		[HttpGet]
+		public async Task<IActionResult> GetTutorByCurrentPerson() { 
+
+			string userId = GetCurrentUserId(); 
+
+			ApplicationUser user = await _unitOfWork.Users.GetWithTutorProfileAsync(userId);
+			if(user == null) { 
+				return NotFound(new { error = "Application user has not been found."});
+			}
+			if(user.Person == null) { 
+				return NotFound(new { error = String.Format("Person has not been found for user with id {0}.", user.Id) });
+			}
+			if(user.Person.Tutor == null) { 
+				return NotFound(new { error = String.Format("Tutor has not been found for person with id {0}.", user.Person.PersonId) }); 
+			}
+
+			// map repository entity into view model object 
+			TutorViewModel vmTutor = new TutorViewModel(user.Person.Tutor);
+
+			return Ok(vmTutor);  
+		}
+
+		// GET: /persons/me/tutor/eagerly
+		[Authorize]
+		[Route("~/persons/me/tutor/eagerly")]
+		[HttpGet]
+			public async Task<IActionResult> GetTutorEagerlyByCurrentPerson() { 
+
+			string userId = GetCurrentUserId(); 
+
+			ApplicationUser user = await _unitOfWork.Users.GetWithTutorProfileAsync(userId);
+			if(user == null) { 
+				return NotFound(new { error = "Application user has not been found."});
+			}
+			if(user.Person == null) { 
+				return NotFound(new { error = String.Format("Person has not been found for user with id {0}.", user.Id) });
+			}
+			if(user.Person.Tutor == null) { 
+				return NotFound(new { error = String.Format("Tutor has not been found for person with id {0}.", user.Person.PersonId) }); 
+			}
+
+			Tutor tutor = await _unitOfWork.Tutors.GetEagerlyAsync(user.Person.Tutor.TutorId); 
+
+			// map repository entity into view model object 
+			TutorViewModel vmTutor = new TutorViewModel(tutor);
+
+			return Ok(vmTutor);  
+		}
+
+		// GET: /persons/{personId}/tutor
+		[Authorize]
+		[Route("~/persons/{personId}/tutor")]
+		[HttpGet]
+		public IActionResult GetTutorByPerson(int personId) { 
+
+			if(personId < 1) { 
+				return BadRequest(new { error = "Incorrect person id." }); 
+			}
+			
+			try { 
+				Tutor tutor = _unitOfWork.Tutors.Find(t => t.PersonId == personId).SingleOrDefault();
+				if(tutor == null) { 
+					return NotFound(new { error = String.Format("Tutor has not been found for person with id {0}", personId) }); 
+				}
+
+				TutorViewModel vmTutor = new TutorViewModel(tutor); 
+				return Ok(vmTutor); 
+			} catch(Exception e) { 
+				return new ObjectResult(new { error = e.Message });
+			}
+		}
+
+		// GET: /persons/{personId}/tutor/eagerly
+		[Authorize]
+		[Route("~/persons/{personId}/tutor/eagerly")]
+		[HttpGet]
+		public IActionResult GetTutorEagerlyByPerson(int personId) { 
+
+			if(personId < 1) { 
+				return BadRequest(new { error = "Incorrect person id."});
+			}
+
+			try {
+				Tutor tutor = _unitOfWork.Tutors.FindEagerly(t => t.PersonId == personId).SingleOrDefault();
+				if(tutor == null) { 
+					return NotFound(new { error = String.Format("Tutor has not been found for person with id {0}.", personId) }); 
+				}
+
+				TutorViewModel vmTutor = new TutorViewModel(tutor); 
+				return Ok(vmTutor); 
+			} catch(Exception e) { 
+				return new ObjectResult(new { error = e.Message }); 
+			}
 		}
 	}
 }

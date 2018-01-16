@@ -1,12 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { IUser } from "../models/user.model";
 import { Observable } from "rxjs/Observable";
+import { IUser } from "../models/user.model";
+import { WEB_API_URL } from "../shared/constants/webapi.constants";
+
+export const USER_WEB_API_URL = WEB_API_URL + "/users"; 
 
 @Injectable() 
 export class UserService { 
 
-    private userUrl = "http://localhost:5050/users"
+    private userUrl = USER_WEB_API_URL;
 
     constructor(private httpClient: HttpClient) { }
 

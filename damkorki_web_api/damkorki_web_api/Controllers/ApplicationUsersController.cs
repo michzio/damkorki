@@ -8,17 +8,21 @@ using DamkorkiWebApi.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using DamkorkiWebApi.Repositories;
 
 namespace DamkorkiWebApi.Controllers { 
 
     [Route("users")]
     public class ApplicationUsersController : BaseController {  
 
+        private IUnitOfWork _unitOfWork;
+
         public ApplicationUsersController(DatabaseContext databaseContext,
-                                          UserManager<ApplicationUser> userManager) 
+                                          UserManager<ApplicationUser> userManager, 
+                                          IUnitOfWork unitOfWork) 
                                           : base(databaseContext, userManager) 
         {
-
+            _unitOfWork = unitOfWork; 
         }
 
         // GET: /users 
@@ -273,6 +277,22 @@ namespace DamkorkiWebApi.Controllers {
                  return new ObjectResult(new { error = e.Message });
             }
         }
-    }
 
+         // GET: /users/{userId}/eagerly
+        [Authorize]
+        [HttpGet("{userId}/eagerly")]
+        public async Task<IActionResult> GetApplicationUserEagerly(string userId) { 
+
+            if(userId.Equals("me")) { 
+                userId = GetCurrentUserId(); 
+            }
+            ApplicationUser user = await _unitOfWork.Users.GetEagerlyAsync(userId);
+            if(user == null) { 
+                return NotFound(new { error = String.Format("Application user with id {0} has not been found.") }); 
+            } 
+
+            ApplicationUserViewModel vmApplicationUser = new ApplicationUserViewModel(user); 
+            return Ok(vmApplicationUser); 
+        }
+    }
 }

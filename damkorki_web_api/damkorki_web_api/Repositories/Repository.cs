@@ -26,6 +26,11 @@ namespace DamkorkiWebApi.Repositories
 		}
 
 		public TEntity Get(int id)
+		{   
+			return Context.Set<TEntity>().Find(id);
+		}
+
+		public TEntity Get(string id) 
 		{
 			return Context.Set<TEntity>().Find(id);
 		}
@@ -33,6 +38,11 @@ namespace DamkorkiWebApi.Repositories
 		public async Task<TEntity> GetAsync(int id) 
 		{ 
 			return await Context.Set<TEntity>().FindAsync(id);
+		}
+
+		public async Task<TEntity> GetAsync(string id) 
+		{
+			return await Context.Set<TEntity>().FindAsync(id); 
 		}
 
 		public IEnumerable<TEntity> GetAll()
@@ -79,5 +89,19 @@ namespace DamkorkiWebApi.Repositories
 		{
 			Context.Set<TEntity>().RemoveRange(entities);
 		}
+
+		/** 
+		 * Repository should not have Update(), Save() methods 
+		 * just Collection like methods Add(), Remove(), Find()
+		public void Update(TEntity entity) { 
+
+			var entry = Context.Entry(entity); 
+			if(entry.State == EntityState.Detached)
+			{
+				Context.Set<TEntity>().Attach(entity); 
+			}
+			entry.State = EntityState.Modified; 
+		}
+		*/
 	}
 }

@@ -1,0 +1,11 @@
+<div draggable="true" class="text-center" ngClass="{{uploadAreaClass}}">
+    
+    <input #file type="file" [multiple]="maxFiles > 1"
+        (change)="onFileChange($event)" style="display:none" />
+
+    <a href="javascript:void(0)" (click)="file.click()">
+        <ng-content select="span.choose-text"></ng-content>
+    </a>
+    <ng-content select="span.drag-drop-text"></ng-content>
+
+</div>

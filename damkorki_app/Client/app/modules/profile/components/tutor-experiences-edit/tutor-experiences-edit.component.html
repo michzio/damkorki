@@ -1,0 +1,30 @@
+<div class="tutor-experiences-content">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    Tutor Experience
+                </div>
+                <div class="col-xs-2 text-right">
+                    <i class="plus-icon fa fa-plus-square" aria-hidden="true"
+                        (click)="onAddExperience($event)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" *ngIf="areExperiencesAdded; else NoExperiences">
+            <ul class="experiences-list">
+                <li class="experience-item" *ngFor="let experience of experiences">
+                    {{ experience.description }}
+                </li>
+            </ul>
+        </div>
+        <ng-template #NoExperiences>
+            <div class="panel-body">
+                <div class="no-experiences-warning">
+                    No experience added to tutor's profile. Click <i class="fa fa-plus-square" aria-hidden="true"
+                    (click)="onAddExperience($event)"></i> sign to add some experiences.
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

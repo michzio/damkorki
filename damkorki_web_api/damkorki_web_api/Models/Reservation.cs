@@ -12,9 +12,13 @@ namespace DamkorkiWebApi.Models
         public DateTime EndDate { get; set; }
 
         // FK Properties
+        [Required]
         public int LearnerId { get; set; }
+        [Required]
         public int TutorId { get; set; }
+        [Required]
         public int LessonOfferId { get; set; }
+        [Required]
         public int TermId { get; set; }
 
         // Navigation Properties

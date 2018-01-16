@@ -8,20 +8,20 @@ namespace DamkorkiWebApi.Models
 {
     public class Address
     {
-        private string _street; // _Street, m_street, m_Street
+        private string _addressLine1; // _AddressLine1, m_addressLine1, m_AddressLine1
         private string _validatedZipCode;
 
         [Key]
         public int AddressId { get; set; }
         [Required]
         [MaxLength(150)]
-        public string Street {
-            get { return _street; }
-            set { _street = value; }
+        public string AddressLine1 { // Street
+            get { return _addressLine1; }
+            set { _addressLine1 = value; }
         }
         [Required]
-        [MaxLength(10)]
-        public string HomeNumber { get; set; }
+        [MaxLength(150)]
+        public string AddressLine2 { get; set; } // House Number
         [Required]
         [MaxLength(6)]
         [MinLength(6)]
@@ -35,7 +35,7 @@ namespace DamkorkiWebApi.Models
         public string City { get; set; }
         [Required]
         [MaxLength(150)]
-        public string Voivodeship { get; set; }
+        public string Region { get; set; } // State, Province, Voivodeship
         [Required]
         [MaxLength(150)]
         public string Country { get; set; }

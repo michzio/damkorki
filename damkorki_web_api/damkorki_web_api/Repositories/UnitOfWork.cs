@@ -12,6 +12,7 @@ namespace DamkorkiWebApi.Repositories
 			_context = context;
 			People = new PeopleRepository(_context);
 			Addresses = new AddressesRepository(_context);
+			ProfilePhotos = new ProfilePhotosRepository(_context); 
 			Users = new UsersRepository(_context);
 			Feedbacks = new FeedbacksRepository(_context);
 			Learners = new LearnersRepository(_context);
@@ -22,11 +23,11 @@ namespace DamkorkiWebApi.Repositories
 			Tutors = new TutorsRepository(_context);
 			Experiences = new ExperiencesRepository(_context);
 			Skills = new SkillsRepository(_context); 
-
 		}
 
 		public IPeopleRepository People { get; private set; }
 		public IAddressesRepository Addresses { get; private set; }
+		public IProfilePhotosRepository ProfilePhotos { get; private set; }
 		public IUsersRepository Users { get; private set; }
 		public IFeedbacksRepository Feedbacks { get; private set; }
 		public ILearnersRepository Learners { get; private set; }

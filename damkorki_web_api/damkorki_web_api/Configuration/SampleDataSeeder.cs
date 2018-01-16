@@ -245,11 +245,11 @@ namespace DamkorkiWebApi.Configuration
                              .FirstOrDefault().Person;
 
             Address address0 = new Address { 
-                Street = "Grodzka", 
-                HomeNumber = "12/20",
+                AddressLine1 = "Grodzka", 
+                AddressLine2 = "12/20",
                 ZipCode = "30-100",
                 City = "Kraków", 
-                Voivodeship = "małopolska", 
+                Region = "małopolska", 
                 Country = "Poland"
             }; 
 
@@ -270,11 +270,11 @@ namespace DamkorkiWebApi.Configuration
                             .FirstOrDefault().Person;
 
             Address address1 = new Address { 
-                Street = "Kobierzynska", 
-                HomeNumber = "54/20",
+                AddressLine1 = "Kobierzynska", 
+                AddressLine2 = "54/20",
                 ZipCode = "30-150",
                 City = "Kraków", 
-                Voivodeship = "małopolska", 
+                Region = "małopolska", 
                 Country = "Poland"
             }; 
 
@@ -287,11 +287,11 @@ namespace DamkorkiWebApi.Configuration
                             .FirstOrDefault().Person; 
 
              Address address2 = new Address { 
-                Street = "Bobrzyńskiego", 
-                HomeNumber = "154/25",
+                AddressLine1 = "Bobrzyńskiego", 
+                AddressLine2 = "154/25",
                 ZipCode = "35-150",
                 City = "Kraków", 
-                Voivodeship = "małopolska", 
+                Region = "małopolska", 
                 Country = "Poland"
             }; 
 
@@ -304,11 +304,11 @@ namespace DamkorkiWebApi.Configuration
                             .FirstOrDefault().Person;
 
             Address address3 = new Address { 
-                Street = "Krakowska", 
-                HomeNumber = "18",
+                AddressLine1 = "Krakowska", 
+                AddressLine2 = "18",
                 ZipCode = "35-100",
                 City = "Kraków", 
-                Voivodeship = "małopolska", 
+                Region = "małopolska", 
                 Country = "Poland"
             };  
 
@@ -321,11 +321,11 @@ namespace DamkorkiWebApi.Configuration
                             .FirstOrDefault().Person;
 
             Address address4 = new Address { 
-                Street = "Urzędnicza", 
-                HomeNumber = "100",
+                AddressLine1 = "Urzędnicza", 
+                AddressLine2 = "100",
                 ZipCode = "35-250",
                 City = "Kraków", 
-                Voivodeship = "małopolska", 
+                Region = "małopolska", 
                 Country = "Poland"
             }; 
 

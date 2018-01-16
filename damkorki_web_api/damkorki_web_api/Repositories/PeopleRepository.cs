@@ -33,8 +33,23 @@ namespace DamkorkiWebApi.Repositories
 		public async Task<IEnumerable<Person>> GetAllEagerlyAsync() { 
 
 			return await DatabaseContext.Set<Person>()
+										.Include(p => p.Address)
+										.Include(p => p.ProfilePhotos)
 										.Include(p => p.ApplicationUser)
+										.Include(p => p.Tutor)
+										.Include(p => p.Learner)
 										.ToListAsync(); 
+		}
+
+		public async Task<Person> GetEagerlyAsync(int personId) { 
+
+			return await DatabaseContext.Set<Person>()
+										.Include(p => p.Address)
+										.Include(p => p.ProfilePhotos)
+										.Include(p => p.ApplicationUser)
+										.Include(p => p.Tutor)
+										.Include(p => p.Learner)
+										.SingleOrDefaultAsync(p => p.PersonId == personId); 
 		}
 	}
 }
