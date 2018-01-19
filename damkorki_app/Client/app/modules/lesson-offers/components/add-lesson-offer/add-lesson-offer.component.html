@@ -1,0 +1,134 @@
+<div class="add-lesson-offer-content">
+    <div class="alert alert-info" role="alert" *ngIf="!updateFailed && isUpdateMessage">{{ updateMessage }}</div>
+    <div class="alert alert-danger" role="alert" *ngIf="updateFailed && lessonOfferForm.errors?.update">
+        {{ lessonOfferForm.errors?.update }}
+    </div> 
+    <div *ngIf="isTutor; else NoTutor">
+    <form class="form-lesson-offer" [formGroup]="lessonOfferForm" (ngSubmit)="onSubmit($event)">
+        <div class="panel panel-default">
+            <div class="panel-heading">Add Lesson Offer</div>
+            <div class="panel-body">
+                   <div class="form-group">
+                       <label for="subject">Subject*</label>
+                       <mat-select id="subject" formControlName="subject" name="subject" class="form-control"
+                        [ngClass]="{'invalid': updateFailed && subject.invalid}">
+                            <mat-option value="" diabled selected>Choose subject...</mat-option>
+                            <ng-container *ngFor="let subjectView of subjectViews">
+                                <mat-option [value]="subjectView.subjectId">{{ subjectView.displayName }}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <div class="input-errors" *ngIf="updateFailed || subject.dirty || subject.touched">
+                            <div *ngIf="updateFailed && subject.errors?.required">Subject is required.</div>
+                        </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="title">Title*</label>
+                        <input id="title" formControlName="title" name="title" class="form-control"
+                            type="text" [ngClass]="{'invalid': updateFailed && title.invalid}" required />
+                        <div class="input-errors" *ngIf="updateFailed || title.dirty || title.touched">
+                            <div *ngIf="updateFailed && title.errors?.required">Title is required.</div>
+                        </div>
+                   </div>
+                   <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" formControlName="description" name="description" class="form-control" 
+                                rows="5" placeholder="type some details about yout offer..."></textarea>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="cost">Cost*</label>
+                            <input id="cost" formControlName="cost" name="cost" class="form-control" 
+                                    type="text" [ngClass]="{'invalid': updateFailed && cost.invalid}" required />
+                                <div class="input-errors" *ngIf="updateFailed || cost.dirty || cost.touched">
+                                    <div *ngIf="updateFailed && cost.errors?.required">Price is required.</div>
+                                    <div *ngIf="updateFailed && cost.errors?.min">Price must be positive.</div>
+                                    <div *ngIf="updateFailed && cost.errors?.max">Price cannot exceed 1000.</div>
+                                </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                                <label for="lessonType">Lesson type*</label>
+                                <div class="row lesson-type-control">
+                                    <i class="fa fa-building" aria-hidden="true" (click)="selectLessonType('AtTutor')"
+                                        [ngClass]="{'selected' : lessonType.value == 'AtTutor'}">
+                                        <input type="radio" id="lessonType" formControlName="lessonType" name="lessonType" value="AtTutor"  />
+                                    </i>
+                                    <i class="fa fa-car" aria-hidden="true" (click)="selectLessonType('AtLearner')"
+                                        [ngClass]="{'selected' : lessonType.value == 'AtLearner'}">
+                                        <input type="radio" id="lessonType" formControlName="lessonType" name="lessonType" value="AtLearner" />
+                                    </i>
+                                    <i class="fa fa-globe" aria-hidden="true" (click)="selectLessonType('Online')"
+                                    [ngClass]="{'selected' : lessonType.value == 'Online'}">
+                                        <input type="radio" id="lessonType" formControlName="lessonType" name="lessonType" value="Online" />
+                                    </i>
+                                    <i class="fa fa-ban" aria-hidden="true" (click)="selectLessonType('None')"
+                                        [ngClass]="{'selected' : lessonType.value == 'None'}">
+                                        <input type="radio" id="lessonType" formControlName="lessonType" name="lessonType" value="None" />
+                                    </i>
+                                </div>
+                            </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="location">Location*</label>
+                                <input id="location" formControlName="location" name="location" class="form-control"
+                                    type="text" [ngClass]="{'invalid': updateFailed && location.invalid}" required />
+                            </div>
+                        </div>
+                        <div class="input-errors" *ngIf="updateFailed || location.dirty || location.touched">
+                                <div *ngIf="updateFailed && location.errors?.required">Location is required.</div>
+                            </div>
+                        <leaflet-map></leaflet-map>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="level">Level*</label>
+                        <div style="margin-left: 5%; margin-right: 5%;">
+                            <mat-slider
+                                id="level"
+                                formControlName="level"
+                                name="level"
+                                max="6"
+                                min="1"
+                                step="1"
+                                thumb-label="true"
+                                tick-interval="1"
+                                vertical="false">
+                            </mat-slider>
+                            <div class="row slider-labels">
+                                <div class="label-container">
+                                    <div class="slider-label label-left">None</div>
+                                </div>
+                                <div class="label-container">
+                                    <div class="slider-label label-left">Beginner</div>
+                                </div>
+                                <div class="label-container">
+                                    <div class="slider-label label-left">PreItermediate</div>
+                                </div>
+                                <div class="label-container">
+                                    <div class="slider-label label-left">Intermediate</div>
+                                </div>
+                                <div class="label-container">
+                                    <div class="slider-label label-left">UpperIntermediate</div>
+                                    <div class="slider-label label-right">Advanced</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-md">Submit Offer</button>
+    </form>
+    </div>
+    <ng-template #NoTutor> 
+        <div class="panel panel-default">
+            <div class="panel-heading">Add Lesson Offer</div>
+            <div class="panel-body">
+                <div class="no-tutor-warning">
+                    Fill your tutor profile in order to add lesson offers.
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

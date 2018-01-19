@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DamkorkiWebApi.Models;
 
 namespace DamkorkiWebApi.Repositories
 {
 	public interface ISkillsRepository : IRepository<Skill>
 	{
-		// TODO: Custom repository methods
+		Task<Skill> GetEagerlyAsync(int skillId); 
 	}
 }

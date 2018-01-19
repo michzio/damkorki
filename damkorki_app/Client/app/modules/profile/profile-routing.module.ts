@@ -6,10 +6,10 @@ import { ProfileBasicEditComponent } from "./components/profile-basic-edit/profi
 import { PublicProfileComponent } from "./components/public-profile/public-profile.component"; 
 import { PhotosEditComponent } from "./components/photos-edit/photos-edit.component";
 import { AddressesEditComponent } from "./components/addresses-edit/addresses-edit.component";
+import { TutorEditComponent } from "./components/tutor-edit/tutor-edit.component";
 
 import { AuthGuard } from "../../services/auth-guard.service";
 import { CanDeactivateGuard } from "../../services/can-deactivate-guard.service";
-import { TutorEditComponent } from "./components/tutor-edit/tutor-edit.component";
 
 const profileRoutes: Routes = [ 
     { 

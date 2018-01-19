@@ -7,6 +7,7 @@ import { ISkill } from "../../../../models/skill.model";
 import { AuthService } from "../../../../services/auth.service";
 import { TutorService } from "../../../../services/tutor.service";
 import { SkillEditComponent } from "../skill-edit/skill-edit.component";
+import { SkillService } from "../../../../services/skill.service";
 
 @Component({
     selector: 'tutor-skills-edit',
@@ -44,9 +45,12 @@ export class TutorSkillsEditComponent {
         this.updateSkillsList(); 
     }
 
+    @Output() statusChange : EventEmitter<any> = new EventEmitter(); 
+
     constructor(private fb : FormBuilder, 
                 private dialog : MatDialog, 
                 private tutorService : TutorService, 
+                private skillService : SkillService, 
                 private authService : AuthService) { 
 
     }
@@ -66,13 +70,36 @@ export class TutorSkillsEditComponent {
             width: '60%', 
             height: '50%',
             minWidth: '320px',
-            minHeight: '120px'
+            minHeight: '200px'
         })
         .afterClosed().subscribe( (result) => { 
             console.log(result);
-
+            if(result.status == 'yes') { 
+                this.tutorChange.emit(result.tutor); 
+                this.skills = this.skills ? [...this.skills, result.skill] : [result.skill];
+            }
         });
+    }
 
+    onDeleteSkill(event, skill) { 
+        event.preventDefault(); 
+        //console.log(skill); 
+
+        this.skillService.deleteSkillByTutor(skill.skillId, this.tutor.tutorId)
+                    .subscribe((success) => { 
+                        this.skills = this.skills && this.skills.filter((s) => s.skillId != skill.skillId);
+                        this.statusChange.emit({
+                            name: "Skill Deletion",
+                            success: true, 
+                            message: `Skill ${skill.name} has been deleted successfully`
+                        })
+                    }, (error) => { 
+                        this.statusChange.emit({
+                            name: "Skill Deletion", 
+                            success: false,
+                            message: `Could not delete Skill.`
+                        })
+                    });
     }
 
     get areSkillsAdded() { return this.skills != null && this.skills.length > 0; }

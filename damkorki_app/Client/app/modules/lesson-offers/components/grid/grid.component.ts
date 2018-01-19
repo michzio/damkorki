@@ -38,7 +38,7 @@ export class GridComponent implements OnInit, AfterViewChecked {
         // console.log(this._elementRef.nativeElement);
         // console.log("Grid Element width:", this.gridElement.nativeElement.offsetWidth); 
         this.adjustCardWidthToAvailableEstate();
-        this.contentObjectsObservable = Observable.from(this.contentObjects); 
+        this.contentObjectsObservable = Observable.from(this.contentObjects).toArray(); 
     }
 
 
@@ -63,7 +63,7 @@ export class GridComponent implements OnInit, AfterViewChecked {
         this.gridCols = Math.floor(gridWidth/newGridCardWidth);
 
         // refresh list of cards based on content objects
-        this.contentObjectsObservable = Observable.from(this.contentObjects);
+        this.contentObjectsObservable = Observable.from(this.contentObjects).toArray();
     }
 
     calculateCardWidth(gridWidth : number) : number { 

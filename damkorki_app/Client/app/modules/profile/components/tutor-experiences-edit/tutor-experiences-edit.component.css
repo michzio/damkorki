@@ -6,3 +6,34 @@ i.plus-icon {
     text-align: center;
     padding: 30px;
 }
+i.move-item-icon { 
+    cursor: move; 
+    font-size: 24px;
+    padding: 3px;
+}
+ul.experiences-list { 
+    list-style-type: none;
+    padding-left: 4px; 
+}
+
+
+@media (min-width:480px){
+    ul.experiences-list { 
+        padding-left: 24px; 
+    }  
+}
+.experience-item div.row  { 
+    margin-top: 5px; 
+    margin-bottom: 5px; 
+    line-height: 32px;
+}
+
+.experience-item div.row div { 
+    display: inline-block;
+    vertical-align: middle; 
+}
+
+.btn-warning { 
+    width: 60px; 
+}
+

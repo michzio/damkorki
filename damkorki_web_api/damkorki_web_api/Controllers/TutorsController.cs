@@ -92,7 +92,7 @@ namespace DamkorkiWebApi.Controllers
 
 			} catch(Exception e) 
 			{
-				return new ObjectResult(new { error = e.Message }); 
+				return BadRequest(new { error = e.Message });
 			}
 		}
 
@@ -109,7 +109,7 @@ namespace DamkorkiWebApi.Controllers
 				return BadRequest(ModelState);	
 
 			try { 
-				// check if Tutor entity exists for given Tutor Id or create new one
+				// check if Tutor entity exists for given Tutor Id
 				Tutor tutor = await _unitOfWork.Tutors.GetAsync(tutorId);	
 				if(tutor == null) {
 					return NotFound(new { error = "Could not find Tutor entity for given tutor id to update."}); 
@@ -129,7 +129,7 @@ namespace DamkorkiWebApi.Controllers
 
 			} catch(Exception e) 
 			{ 
-				return new ObjectResult(new { error = e.Message }); 
+				return BadRequest(new { error = e.Message }); 
 			}
 		}
 
@@ -233,7 +233,7 @@ namespace DamkorkiWebApi.Controllers
 				TutorViewModel vmTutor = new TutorViewModel(tutor); 
 				return Ok(vmTutor); 
 			} catch(Exception e) { 
-				return new ObjectResult(new { error = e.Message });
+				return BadRequest(new { error = e.Message });
 			}
 		}
 
@@ -256,7 +256,7 @@ namespace DamkorkiWebApi.Controllers
 				TutorViewModel vmTutor = new TutorViewModel(tutor); 
 				return Ok(vmTutor); 
 			} catch(Exception e) { 
-				return new ObjectResult(new { error = e.Message }); 
+				return BadRequest(new { error = e.Message }); 
 			}
 		}
 	}

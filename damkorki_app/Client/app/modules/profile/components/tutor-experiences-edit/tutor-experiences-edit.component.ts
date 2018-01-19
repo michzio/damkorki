@@ -6,7 +6,8 @@ import { ITutor } from '../../../../models/tutor.model';
 import { TutorService } from '../../../../services/tutor.service';
 import { AuthService } from '../../../../services/auth.service';
 import { IExperience } from '../../../../models/experience.model';
-import { ExperienceEditComponent } from '../experience-edit/experience-edit.component';
+import { ExperienceEditComponent, ExperiencEditType } from '../experience-edit/experience-edit.component';
+import { ExperienceService } from '../../../../services/experience.service';
 
 
 @Component({
@@ -28,6 +29,11 @@ export class TutorExperiencesEditComponent {
 
         if(!this.experiences) { 
             this.experiences = tutor && tutor.experiences;
+            this.experiences = this.experiences.sort( (a, b) => {
+                if(a.startYear < b.startYear) return 1; 
+                if(a.startYear > b.startYear) return -1; 
+                return b.endYear - a.endYear;
+            });
         }
     }
 
@@ -45,16 +51,18 @@ export class TutorExperiencesEditComponent {
         this.updateExperiencesList();
     }
 
+    @Output() statusChange : EventEmitter<any> = new EventEmitter(); 
+
     constructor(private fb : FormBuilder, 
                 private dialog: MatDialog,
                 private tutorService : TutorService, 
+                private experienceService : ExperienceService, 
                 private authService : AuthService) {
 
-            
     }
 
     private updateExperiencesList() { 
-
+        
     }
 
     onAddExperience(event) { 
@@ -64,15 +72,57 @@ export class TutorExperiencesEditComponent {
             data: { 
                 tutor: this.tutor,
                 person: this.person
-            }
+            }, 
+            width: '60%', 
+            minWidth: '320px',
+            minHeight: '50%'
         })
         .afterClosed().subscribe( (result) => {
             console.log(result); 
-            /*
-            if(result.status === 'yes') { 
-
-            } */
+            if(result.status == 'yes') { 
+                this.tutorChange.emit(result.tutor); 
+                this.experiences = this.experiences ? [...this.experiences, result.experience] : [result.experience];
+                
+                this.experiences = this.experiences.sort( (a, b) => {
+                    if(a.startYear < b.startYear) return 1; 
+                    if(a.startYear > b.startYear) return -1; 
+                    return b.endYear - a.endYear;
+                });
+            }
         });
+    }
+
+    onEditExperience(event, experience) { 
+        event.preventDefault(); 
+        
+        this.dialog.open(ExperienceEditComponent, { 
+            data: {
+                tutor: this.tutor, 
+                person: this.person,
+                experience: experience
+            },
+            width: '60%', 
+            minWidth: '320px',
+            minHeight: '50%'
+        })
+        .afterClosed().subscribe( (result) => { 
+            console.log(result); 
+            if(result.status == 'yes') { 
+                this.tutorChange.emit(result.tutor); 
+                this.experiences = this.experiences && this.experiences.filter(e => e.experienceId != result.experience.experienceId); 
+
+                if(result.type == ExperiencEditType.UPDATE) {
+                    this.experiences = this.experiences ? [...this.experiences, result.experience] : [result.experience];
+                }
+
+                this.experiences = this.experiences && this.experiences.sort( (a, b) => {
+                    if(a.startYear < b.startYear) return 1; 
+                    if(a.startYear > b.startYear) return -1; 
+                    return b.endYear - a.endYear;
+                });
+            }
+        });
+
     }
 
     get areExperiencesAdded() { return this.experiences != null && this.experiences.length > 0; }

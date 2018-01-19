@@ -1,6 +1,4 @@
 <div class="grid lesson-offers-grid" (window:resize)="onResize($event)" #gridElement>
-    <div><button type="button" (click)="addItem()">Add Item</button></div>
-    {{ contentObjects.length }}
     <h4 *ngIf="title">{{ title }}  {{ gridCols }} X {{ maxRows }}</h4>
     <ng-template ngFor let-content [ngForOf]="contentObjectsObservable | async | slice:0:gridCols*maxRows" let-i="index" [ngForTrackBy]="trackByFn">  
         <lesson-offer-grid-card  [content]="content" [style.width.%]="gridCardWidth" [style.minWidth.px]="minCardWidth"></lesson-offer-grid-card>

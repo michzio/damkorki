@@ -28,3 +28,9 @@
 .dropdown-item a:hover { 
     border-bottom: 1px solid #8a8a8a;
 }
+
+.dropdown-separator { 
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    border-bottom: 2px solid #ccc;
+}

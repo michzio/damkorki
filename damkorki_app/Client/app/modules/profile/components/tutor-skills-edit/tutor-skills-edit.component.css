@@ -6,3 +6,33 @@ i.plus-icon {
     text-align: center;
     padding: 30px;
 }
+i.move-item-icon { 
+    cursor: move; 
+    font-size: 24px;
+    padding: 3px;
+}
+div.tag-box { 
+    border: 1px solid #ccc;
+    padding: 5px 20px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: max-content;
+}
+
+ul.skills-list { 
+    list-style-type: none;
+    padding-left: 4px; 
+}
+
+@media (min-width:480px){
+    ul.skills-list { 
+        padding-left: 24px; 
+    }  
+}
+
+.skill-item div.row  { 
+    margin-top: 5px; 
+    margin-bottom: 5px; 
+}

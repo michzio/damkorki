@@ -1,4 +1,7 @@
+using System; 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DamkorkiWebApi.Models;
 
 namespace DamkorkiWebApi.ViewModels { 
@@ -25,6 +28,12 @@ namespace DamkorkiWebApi.ViewModels {
                 if(includeReferences && lessonOffer.Tutor != null) { 
                     Tutor = new TutorViewModel(lessonOffer.Tutor, false); 
                 }
+                if(includeReferences && lessonOffer.LessonOfferTerms != null) { 
+                    Terms = lessonOffer.LessonOfferTerms.Select( lot => new TermViewModel(lot.Term, false) ).ToList(); 
+                }
+                if(includeReferences && lessonOffer.Reservations != null) { 
+                    Reservations = lessonOffer.Reservations.Select(r => new ReservationViewModel(r, false) ).ToList(); 
+                }
         }
         
         public int LessonOfferId { get; set; }
@@ -47,5 +56,8 @@ namespace DamkorkiWebApi.ViewModels {
 
         public SubjectViewModel Subject { get; set; }
         public TutorViewModel Tutor { get; set; }
+
+        public List<TermViewModel> Terms { get; set; }
+        public List<ReservationViewModel> Reservations { get; set; }
     }
 }

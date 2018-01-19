@@ -14,7 +14,23 @@
         <div class="panel-body" *ngIf="areExperiencesAdded; else NoExperiences">
             <ul class="experiences-list">
                 <li class="experience-item" *ngFor="let experience of experiences">
-                    {{ experience.description }}
+                    <div class="row">
+                        <div class="col-sm-1 col-xs-1">
+                            <i class="move-item-icon fa fa-bars" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-1 col-xs-2">
+                            {{ experience.startYear }}
+                        </div>
+                        <div class="col-sm-1 col-xs-2">
+                            {{ experience.endYear }}
+                        </div>
+                        <div class="col-sm-7 col-xs-4">
+                            {{ experience.description }}
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <button class="btn btn-sm btn-warning" (click)="onEditExperience($event, experience)">Edit</button>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>

@@ -48,8 +48,8 @@ namespace DamkorkiWebApi.Controllers {
             if(!ModelState.IsValid) 
                 return BadRequest(ModelState); 
 
-            try { 
-
+            try 
+            { 
                 Skill skill = _unitOfWork.Skills.Find(s => s.Name == vmSkill.Name).SingleOrDefault();
                 if(skill == null) { 
                     // Create new Skill entity 
@@ -72,5 +72,55 @@ namespace DamkorkiWebApi.Controllers {
                 return new ObjectResult(new { error = e.Message }); 
             }
         }
+
+        // DELETE: /skills/{skillId}
+        [Authorize]
+        [HttpDelete("{skillId}")]
+        public async Task<IActionResult> DeleteSkill(int skillId, [FromQuery(Name = "by-tutor")] int tutorId) { 
+
+            if(tutorId > 0)
+                return await DeleteSkillByTutor(skillId, tutorId); 
+
+            Skill toDeleteSkill = await _unitOfWork.Skills.GetAsync(skillId); 
+            _unitOfWork.Skills.Remove(toDeleteSkill);
+            _unitOfWork.Complete(); 
+
+            return NoContent(); 
+        }
+
+        // DELETE: //skills/{skillId}?by-tutor={tutorId}
+        private async Task<IActionResult> DeleteSkillByTutor(int skillId, int tutorId) { 
+
+            Skill toDeleteSkill = await _unitOfWork.Skills.GetEagerlyAsync(skillId);
+            if(toDeleteSkill == null) { 
+                return NotFound("Could not find Skill for given id."); 
+            }
+
+            int countSkillRefs = toDeleteSkill.TutorSkills.Count(ts => ts.TutorId != tutorId); 
+            if(countSkillRefs > 0) { 
+                // there are other Tutor's referencing to this Skill 
+                // it cannot be safely deleted 
+
+                // delete only Tutor - Skill relationship 
+                try { 
+                    TutorSkill toDeleteTutorSkill = await _unitOfWork.TutorsSkills.GetAsync( (tutorId, skillId) ); 
+                    _unitOfWork.TutorsSkills.Remove(toDeleteTutorSkill); 
+                    _unitOfWork.Complete();
+
+                    return NoContent(); 
+                } catch(Exception e) { 
+                    return BadRequest(new { error = e.Message });
+                } 
+            } else {
+                // can safely delete Skill for given Tutor
+                // no one else has references to this Skill
+
+                _unitOfWork.Skills.Remove(toDeleteSkill); 
+                _unitOfWork.Complete(); 
+
+                return NoContent(); 
+            } 
+        }
+    
     }
 }

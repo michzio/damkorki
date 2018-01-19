@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { OffersType } from '../lesson-offers-grid/offers-type.enumeration'; 
+import { OffersType } from '../../modules/lesson-offers/components/lesson-offers-grid/offers-type.enumeration'; 
 
 @Component({
     selector: 'home',

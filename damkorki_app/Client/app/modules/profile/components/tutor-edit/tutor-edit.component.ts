@@ -43,5 +43,9 @@ export class TutorEditComponent {
                     });
     }
 
+    onStatusChange(event) {  
+        console.log(event); 
+    }
+
     get isProfileCreated() { return this.person != null; }
 }

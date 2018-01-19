@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { GridCardComponent } from '../grid-card/grid-card.component'; 
+import { ILessonOffer } from '../../../../models/lesson-offer.model';
+import { LessonType } from '../../../../models/enums/lesson-type.enum';
+import { LevelType } from '../../../../models/enums/level-type.enum';
 
 @Component({
     selector: 'lesson-offer-grid-card', 
@@ -9,13 +12,17 @@ import { GridCardComponent } from '../grid-card/grid-card.component';
 })
 export class LessonOfferGridCardComponent extends GridCardComponent implements OnInit { 
 
-    @Input() content : any;  // <- TODO: we refactor it into specific type of Lesson Offer to be displayed later
+    @Input() content : ILessonOffer;
+
+    // export lesson offer's enums
+    public lessonTypes = LessonType; 
+    public levels = LevelType; 
 
     constructor() { 
        super(); 
     }
 
     ngOnInit() { 
-        console.log(this.content)
+        console.log(this.content)        
     }
 }

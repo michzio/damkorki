@@ -16,6 +16,7 @@ namespace DamkorkiWebApi.Repositories
 		ITutorsRepository Tutors { get; }
 		IExperiencesRepository Experiences { get; }
 		ISkillsRepository Skills { get; }
+		ITutorsSkillsRepository TutorsSkills { get; }
 
 		int Complete();
 

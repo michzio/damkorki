@@ -4,29 +4,30 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
 
 import {ILessonOffer} from "../models/lesson-offer.model";
+import { WEB_API_URL } from '../shared/constants/webapi.constants';
 
+export const LESSON_OFFER_WEB_API_URL = WEB_API_URL + "/lesson-offers"; 
 
 @Injectable()
 export class LessonOfferService { 
 
-    private static lessonOfferUrl = "http://localhost:5050/lesson-offers";
+    private lessonOfferUrl = LESSON_OFFER_WEB_API_URL;
 
     constructor(private httpClient: HttpClient) { }
 
-    getLessonOffers() : Observable<ILessonOffer> { 
-        return this.httpClient.get<ILessonOffer>(LessonOfferService.lessonOfferUrl); 
+    getLessonOffers() : Observable<ILessonOffer[]> { 
+        return this.httpClient.get<ILessonOffer[]>(this.lessonOfferUrl); 
     }
 
-    getLessonOffersEagerly() : Observable<ILessonOffer> { 
-        return this.httpClient.get<ILessonOffer>(LessonOfferService.lessonOfferUrl + "/eagerly"); 
+    getLessonOffersEagerly() : Observable<ILessonOffer[]> { 
+        return this.httpClient.get<ILessonOffer[]>(this.lessonOfferUrl + "/eagerly"); 
     }
 
-    createLessonOffer(lessonOffer: ILessonOffer) : Observable<any> {
-
-        return this.httpClient.post(LessonOfferService.lessonOfferUrl, lessonOffer, {
+    createLessonOffer(lessonOffer: ILessonOffer) : Observable<ILessonOffer> {
+        return this.httpClient.post<ILessonOffer>(this.lessonOfferUrl, lessonOffer, {
             headers: new HttpHeaders()
                     .set('Content-Type', 'application/json')
-        }).catch(this.handleError);
+        });
     }
 
     handleError(err, caught) : any { 

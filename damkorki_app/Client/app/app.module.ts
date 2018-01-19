@@ -38,33 +38,26 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ResetPasswordPageComponent } from './components/reset-password-page/reset-password-page.component';
 import { RegisterComponent } from './components/register/register.component'; 
 import { RegisterPageComponent } from './components/register-page/register-page.component'; 
-import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { IfRoutesDirective } from './directives/if-routes.directive';
 import { HeaderBarComponent } from './components/header-bar/header-bar.component'; 
-import { GridComponent } from './components/grid/grid.component'; 
-import { LessonOffersGridComponent } from './components/lesson-offers-grid/lesson-offers-grid.component';
-import { GridCardComponent } from './components/grid-card/grid-card.component'; 
-import { LessonOfferGridCardComponent } from './components/lesson-offer-grid-card/lesson-offer-grid-card.component'; 
-import { LessonOffersMapComponent } from './components/lesson-offers-map/lesson-offers-map.component';
-import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
-import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
-import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { ProfileDropdownComponent } from './components/profile-dropdown/profile-dropdown.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 // services 
 import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service"; 
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 // guards
 import { AuthGuard } from './services/auth-guard.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 
 // feature modules 
+import { CoreModule } from './modules/core/core.module';
 import { ProfileModule } from "./modules/profile/profile.module";
 import { AdminModule } from "./modules/admin/admin.module";
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { LessonOffersModule } from './modules/lesson-offers/lesson-offers.module';
 
 //import { JwtModule } from '@auth0/angular-jwt';
 
@@ -87,19 +80,10 @@ export function createTranslateLoader(httpClient: HttpClient, baseHref) {
         ResetPasswordComponent,
         ResetPasswordPageComponent, 
         RegisterComponent, 
-        RegisterPageComponent, 
-        LessonOffersComponent,
+        RegisterPageComponent,
         SearchBoxComponent,
         IfRoutesDirective,
         HeaderBarComponent,
-        GridComponent,
-        LessonOffersGridComponent,
-        GridCardComponent,
-        LessonOfferGridCardComponent,
-        LessonOffersMapComponent,
-        LeafletMapComponent,
-        FooterBarComponent,
-        LanguageSwitcherComponent,
         ProfileDropdownComponent,
         PageNotFoundComponent,
     ],
@@ -128,8 +112,10 @@ export function createTranslateLoader(httpClient: HttpClient, baseHref) {
         }),
 
         // feature modules 
+        CoreModule, 
         ProfileModule,
-        AdminModule, 
+        AdminModule,
+        LessonOffersModule, 
 
         // Application Routing 
         AppRoutingModule,

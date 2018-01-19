@@ -23,6 +23,7 @@ namespace DamkorkiWebApi.Repositories
 			Tutors = new TutorsRepository(_context);
 			Experiences = new ExperiencesRepository(_context);
 			Skills = new SkillsRepository(_context); 
+			TutorsSkills = new TutorsSkillsRepository(_context); 
 		}
 
 		public IPeopleRepository People { get; private set; }
@@ -38,6 +39,7 @@ namespace DamkorkiWebApi.Repositories
 		public ITutorsRepository Tutors { get; private set; }
 		public IExperiencesRepository Experiences { get; private set; }
 		public ISkillsRepository Skills { get; private set; }
+		public ITutorsSkillsRepository TutorsSkills { get; private set; }
 
 		public int Complete()
 		{

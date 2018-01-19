@@ -2,7 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
-import { LegacyLibrariesService } from '../../services/legacy-libraries.service'; 
+import { LegacyLibrariesService } from '../../../../services/legacy-libraries.service'; 
 
 @Component({
     selector: 'leaflet-map',

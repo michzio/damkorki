@@ -1,0 +1,47 @@
+<div class="experience-edit-container">
+    <h3> {{ isExperience ? 'Edit' : 'Add'}}  Experience</h3>
+    <div class="alert alert-danger" role="alert" *ngIf="updateFailed && experienceForm.errors?.update">
+        {{ experienceForm.errors.update }}
+    </div>
+
+    <form class="form-experience" [formGroup]="experienceForm"
+        (submit)="onSubmit($event)">
+        <div class="form-fields">
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="startYear">Start Year</label> 
+            </div>
+            <div class="col-sm-3">
+                <input id="startYear" formControlName="startYear" name="startYear" class="form-control"
+                    [ngClass]="{'invalid' : updateFailed && startYear.invalid}"
+                    type="text" placeholder="2015" required />
+            </div>
+            <div class="col-sm-3">
+                <label for="endYear">End Year</label>
+            </div>
+            <div class="col-sm-3">
+                <input id="endYear" formControlName="endYear" name="endYear" class="form-control"
+                    [ngClass]="{'invalid' : updateFailed && endYear.invalid}"
+                    type="text" placeholder="2016" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="experienceDescription">
+                        Description
+                </label>
+            </div>
+            <div class="col-sm-9">
+                <input id="experienceDescription" formControlName="experienceDescription" name="experienceDescription" 
+                    class="form-control" [ngClass]="{'invalid' : updateFailed && experienceDescription.invalid}"
+                    type="text" placeholder="type something about your experience..." required />
+            </div>
+        </div>
+        </div>
+        <div class="dialog-controls">
+            <button class="button-as-link cancel-dialog" mat-dialog-close="{ status: 'no'}">Cancel</button>
+            <button class="btn btn-md btn-primary pull-right" type="submit">Save</button>
+            <button *ngIf="isExperience" class="btn btn-md btn-danger pull-right" (click)="onDelete($event)">Delete</button>
+        </div>
+    </form>
+</div>

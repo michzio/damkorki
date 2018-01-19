@@ -31,6 +31,9 @@ import { ProfilePhotoService } from "../../services/profile-photo.service";
 import { FileService } from "../../services/file.service";
 import { AddressService } from "../../services/address.service"; 
 import { TutorService } from "../../services/tutor.service"; 
+import { SkillService } from "../../services/skill.service";
+import { TutorSkillService } from "../../services/tutor-skill.service";
+import { ExperienceService } from "../../services/experience.service";
 
 // import pipes
 import { EnumMembersPipe } from "../../pipes/enum-members.pipe";
@@ -83,6 +86,9 @@ import { ProfileRoutingModule } from "./profile-routing.module";
        FileService, 
        AddressService, 
        TutorService,
+       SkillService, 
+       TutorSkillService,
+       ExperienceService, 
        // custom pipes
        EnumMembersPipe, 
        ObjectKeysPipe, 

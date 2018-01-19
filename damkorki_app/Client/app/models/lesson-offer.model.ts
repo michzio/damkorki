@@ -1,17 +1,26 @@
+import { LessonType } from "./enums/lesson-type.enum";
 import { ITutor } from "./tutor.model";
+import { LevelType } from "./enums/level-type.enum";
+import { ISubject } from "./subject.model";
+import { IReservation } from "./reservation.model";
+import { ITerm } from "./term.model";
 
 export interface ILessonOffer { 
     
     lessonOfferId?: number;
     title: string; 
-    description: string; 
+    description?: string; 
     cost: number; 
-    type: number;   // TODO <- refactor into enumeration type 
+    type: LessonType; 
     location: string; 
-    level: number;  // TOTO <- refactor into enumeration type 
+    level: LevelType; 
     subjectId: number; 
     tutorId: number; 
 
-    subject?: Object;   //ISubject 
-    tutor?: ITutor;     //ITutor     
+    subject?: ISubject;  
+    tutor?: ITutor;
+
+    terms?: Array<ITerm>
+    reservations?: Array<IReservation>
+
 }

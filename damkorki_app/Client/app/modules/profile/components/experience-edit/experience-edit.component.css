@@ -1,0 +1,60 @@
+.button-as-link { 
+    display: inline; 
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: #0364a8;
+    text-decoration: none
+}
+.button-as-link:hover { 
+    color: #286090;
+    text-decoration: underline; 
+}
+.cancel-dialog { 
+    cursor: pointer; 
+    font-size: 1.4em;
+    margin-top: 5px;
+}
+.invalid[type="text"] {
+    border-color: #ffb400;
+    background-color: #fff8e5;
+}
+.btn-primary { 
+    color: #fff;
+    background-color: #0364a8;
+    border-color: #2e6da4;
+    border-radius: 3px;
+}
+
+.btn-primary:hover { 
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.alert-danger { 
+    background-color: rgba(255, 90, 95, 0.05);
+    color: #ff5a5f;
+    border-color: #ff5a5f;
+}
+
+div.form-fields { 
+    margin-top: 48px; 
+    margin-bottom: 48px; 
+}
+
+@media (min-width:480px){
+    div.form-fields {  
+        margin-right: 24px; 
+        margin-left: 24px; 
+    }
+}
+
+div.form-fields  div.row { 
+    margin-bottom: 16px; 
+}
+
+.btn-danger { 
+    margin-right: 20px;
+}

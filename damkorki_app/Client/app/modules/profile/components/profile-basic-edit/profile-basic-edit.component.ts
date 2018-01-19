@@ -5,7 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonService } from "../../../../services/person.service"; 
 import { AuthService } from '../../../../services/auth.service'; 
-import { IPerson, Gender, Month } from '../../../../models/person.model';
+import { IPerson } from '../../../../models/person.model';
+import { Gender }  from '../../../../models/enums/gender.enum';
+import { Month }  from '../../../../models/enums/month.enum';
 import { DateValidators } from '../../../../shared/validators/date.validators';
 import { CountryDialingCodes } from '../../../../shared/country-dialing-codes';
 

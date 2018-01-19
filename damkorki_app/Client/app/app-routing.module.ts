@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { LessonOffersComponent } from './components/lesson-offers/lesson-offers.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
@@ -61,11 +60,6 @@ const appRoutes : Routes = [
         path: 'signup', 
         redirectTo: 'register', 
         pathMatch: 'full'
-    }, 
-    {
-        path: 'lesson-offers', 
-        component: LessonOffersComponent,
-        data: { title: 'Przeglądaj Oferty Lekcji' }
     },
     // Otherwise - page not found!
     { 

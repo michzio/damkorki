@@ -1,16 +1,6 @@
 import { IUser } from "./user.model";
 import { IAddress } from "./address.model";
-
-export enum Gender { 
-    male, 
-    female, 
-    other
-}
-
-export enum Month { 
-    January, February, March, April, May, June, 
-    July, August, September, October, November, December
-}
+import { Gender } from "./enums/gender.enum";
 
 export interface IPerson {
 

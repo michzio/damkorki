@@ -44,8 +44,9 @@ namespace DamkorkiWebApi.Controllers {
             return Ok(vmLessonOffer); 
         }
 
-        // POST: /lesson-offers 
-        [HttpPost()]
+        // POST: /lesson-offers
+        [Authorize] 
+        [HttpPost]
         public async Task<IActionResult> CreateLessonOffer([FromBody] LessonOfferViewModel vmLessonOffer) { 
 
            if(vmLessonOffer == null)
@@ -54,9 +55,9 @@ namespace DamkorkiWebApi.Controllers {
                 return BadRequest(ModelState); 
                 
             try { 
-
                 // create new Lesson Offer entity with data given in view model
-                var newLessonOffer = new LessonOffer { 
+                var newLessonOffer = new LessonOffer 
+                { 
                     Title = vmLessonOffer.Title, 
                     Description = vmLessonOffer.Description, 
                     Cost = vmLessonOffer.Cost, 
@@ -77,7 +78,7 @@ namespace DamkorkiWebApi.Controllers {
 
             } catch(Exception e) { 
 
-                return new ObjectResult(new { error = e.Message }); 
+                return BadRequest(new { error = e.Message }); 
             }
         }
 
