@@ -111,10 +111,18 @@ namespace DamkorkiWebApi
                 });
 
             // Add Database Context 
-            services.AddDbContext<DatabaseContext>(options => 
-                    //options.UseSqlServer(Configuration.GetConnectionString("WindowsLocalSQLServerDatabase")) );
-                    //options.UseSqlServer(Configuration.GetConnectionString("MacOsSQLServerDatabase")) );
+            // Use Azure SQL Database if in Azure, otherwise local MS SQL 
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production") {
+                services.AddDbContext<DatabaseContext>(options => 
                     options.UseSqlServer(Configuration.GetConnectionString("AzureSQLServerDatabase")) );
+            } else { 
+                 services.AddDbContext<DatabaseContext>(options => 
+                    //options.UseSqlServer(Configuration.GetConnectionString("WindowsLocalSQLServerDatabase")) );
+                    options.UseSqlServer(Configuration.GetConnectionString("MacOsSQLServerDatabase")) );
+            }
+
+            // Automatically perform database migration (useful when on Azure)
+            services.BuildServiceProvider().GetService<DatabaseContext>().Database.Migrate();
 
             services.AddMvc()
                     .AddXmlDataContractSerializerFormatters()
@@ -155,7 +163,7 @@ namespace DamkorkiWebApi
                 loggerFactory.AddConsole();
 		        loggerFactory.AddDebug();
 
-		        if (true) //env.IsDevelopment()
+		        if (env.IsDevelopment())
 		        {
 		            app.UseDeveloperExceptionPage();
                     app.UseDatabaseErrorPage(); 
