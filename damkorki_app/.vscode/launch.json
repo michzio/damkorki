@@ -37,7 +37,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/Asp2017.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/DamkorkiApp.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

@@ -155,9 +155,10 @@ namespace DamkorkiWebApi
                 loggerFactory.AddConsole();
 		        loggerFactory.AddDebug();
 
-		        if (env.IsDevelopment())
+		        if (true) //env.IsDevelopment()
 		        {
 		            app.UseDeveloperExceptionPage();
+                    app.UseDatabaseErrorPage(); 
 		        } 
                 else 
                 { 
