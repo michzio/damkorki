@@ -112,7 +112,9 @@ namespace DamkorkiWebApi
 
             // Add Database Context 
             services.AddDbContext<DatabaseContext>(options => 
-                    options.UseSqlServer(Configuration.GetConnectionString("MacOsSQLServerDatabase")) );
+                    //options.UseSqlServer(Configuration.GetConnectionString("WindowsLocalSQLServerDatabase")) );
+                    //options.UseSqlServer(Configuration.GetConnectionString("MacOsSQLServerDatabase")) );
+                    options.UseSqlServer(Configuration.GetConnectionString("AzureSQLServerDatabase")) );
 
             services.AddMvc()
                     .AddXmlDataContractSerializerFormatters()
