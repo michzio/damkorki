@@ -132,7 +132,9 @@ namespace DamkorkiWebApi
             services.AddCors(
                 options => options.AddPolicy("AllowClientOrigin", 
                                    builder => { 
-                                               builder.WithOrigins("http://localhost:5000", "http://0.0.0.0:5000")
+                                               builder.WithOrigins("http://localhost:5000", 
+                                                                   "http://0.0.0.0:5000",
+                                                                   "https://damkorki.azurewebsites.net")
                                                     //.AllowAnyOrigin()
                                                       .AllowAnyMethod()
                                                     // .WithHeaders("accept", "content-type", "origin", "x-custom-header");

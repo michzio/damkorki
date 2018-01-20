@@ -1,0 +1,5 @@
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api
+--output-path=obj/Debug/netcoreapp2.0/
+--application-name=damkorki_web_api
+--content-root=/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api
+--file=/Users/iwona_wojciechowska/Developer/damkorki/damkorki_web_api/damkorki_web_api/Views/Home/Index.cshtml
