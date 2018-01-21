@@ -1,0 +1,9 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/iwona_wojciechowska/.dotnet/store/|arch|/|tfm|",
+      "/Users/iwona_wojciechowska/.nuget/packages",
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+    ]
+  }
+}

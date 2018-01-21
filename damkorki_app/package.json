@@ -7,7 +7,7 @@
     "url": "git://github.com/iwona-wojciechowska/damkorki.git"
   },
   "engines": {
-    "node": "8.9.4",
+    "node": "8.9.3",
     "npm": "5.6.0"
   },
   "scripts": {

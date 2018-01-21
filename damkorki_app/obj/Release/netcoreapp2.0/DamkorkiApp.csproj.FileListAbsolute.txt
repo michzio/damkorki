@@ -1,0 +1,10 @@
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/bin/Release/netcoreapp2.0/DamkorkiApp.deps.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/bin/Release/netcoreapp2.0/DamkorkiApp.runtimeconfig.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/bin/Release/netcoreapp2.0/DamkorkiApp.runtimeconfig.dev.json
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/bin/Release/netcoreapp2.0/DamkorkiApp.dll
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/bin/Release/netcoreapp2.0/DamkorkiApp.pdb
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/obj/Release/netcoreapp2.0/DamkorkiApp.csproj.CoreCompileInputs.cache
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/obj/Release/netcoreapp2.0/DamkorkiApp.AssemblyInfoInputs.cache
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/obj/Release/netcoreapp2.0/DamkorkiApp.AssemblyInfo.cs
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/obj/Release/netcoreapp2.0/DamkorkiApp.dll
+/Users/iwona_wojciechowska/Developer/damkorki/damkorki_app/obj/Release/netcoreapp2.0/DamkorkiApp.pdb

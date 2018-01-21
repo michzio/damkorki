@@ -69,7 +69,7 @@ module.exports = (env) => {
         ] : [
             // new BundleAnalyzerPlugin(),
             // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin(),
+            //new webpack.optimize.UglifyJsPlugin(),
             //new AotPlugin({
             new AngularCompilerPlugin({
                 tsConfigPath: './tsconfig.json',
@@ -94,10 +94,10 @@ module.exports = (env) => {
                 name: './vendor'
             })
         ].concat(isDevBuild ? [] : [
-            new webpack.optimize.UglifyJsPlugin({
-              compress: false,
-              mangle: false
-            }),
+            //new webpack.optimize.UglifyJsPlugin({
+            //  compress: false,
+            //  mangle: false
+            //}),
             // Plugins that apply in production builds only
             //new AotPlugin({
             new AngularCompilerPlugin({
