@@ -142,7 +142,8 @@ namespace DamkorkiWebApi
                                    builder => { 
                                                builder.WithOrigins("http://localhost:5000", 
                                                                    "http://0.0.0.0:5000",
-                                                                   "https://damkorki.azurewebsites.net")
+                                                                   "https://damkorki.azurewebsites.net", 
+                                                                   "http://wojciechowska-001-site1.itempurl.com")
                                                     //.AllowAnyOrigin()
                                                       .AllowAnyMethod()
                                                     // .WithHeaders("accept", "content-type", "origin", "x-custom-header");
