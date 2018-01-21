@@ -6,6 +6,10 @@
     "type": "git",
     "url": "git://github.com/iwona-wojciechowska/damkorki.git"
   },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "5.6.0"
+  },
   "scripts": {
     "lint": "tslint -p tsconfig.json",
     "test": "npm run build:vendor && karma start Client/test/karma.conf.js",
