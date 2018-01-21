@@ -3,23 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
-
 import { ORIGIN_URL, REQUEST } from '@nguniversal/aspnetcore-engine';
 import { AppModule } from './app.module';
 import { AppComponent } from './components/app/app.component';
 import { BrowserTransferStateModule } from '../modules/transfer-state/browser-transfer-state.module';
-
-export function createConfig(): SignalRConfiguration {
-    const signalRConfig = new SignalRConfiguration();
-
-    signalRConfig.hubName = 'Ng2SignalRHub';
-    signalRConfig.qs = { user: 'donald' };
-    signalRConfig.url = 'http://ng2-signalr-backend.azurewebsites.net/';
-    signalRConfig.logging = true;
-
-    return signalRConfig;
-}
 
 export function getOriginUrl() {
   return window.location.origin;
@@ -41,8 +28,6 @@ export function getRequest() {
 
         // Our Common AppModule
         AppModule,
-
-        SignalRModule.forRoot(createConfig)
     ],
     providers: [
         {

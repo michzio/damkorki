@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <base href="/" />
+        <base href="@(Url.Content("~/"))" />
         <!-- Title will be the one you set in your Angular application -->
         <title>@ViewData["Title"]</title>
 
@@ -19,6 +19,7 @@
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
    integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
    crossorigin=""></script>
+
         @Html.Raw(ViewData["Links"]) <!-- <link /> tags  goes here --> 
         
         @Html.Raw(ViewData["Styles"]) <!-- <styles /> tags goes here -->
@@ -37,6 +38,7 @@
 
         <!-- Here we're passing down any data to be used by grabbed and parsed by Angular --> 
         @Html.Raw(ViewData["TransferData"])
+        @Html.Raw(ViewData["Scripts"])
         
         @RenderSection("scripts", required: false)
     </body>

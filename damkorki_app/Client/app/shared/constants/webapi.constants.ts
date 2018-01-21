@@ -1,1 +1,1 @@
-export const WEB_API_URL = "http://localhost:5050";
+export const WEB_API_URL = "https://damkorki-web-api.azurewebsites.net";

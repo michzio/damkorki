@@ -8,6 +8,9 @@ import { JwtHelperService } from '@auth0/angular-jwt'
 import { IAuthObject } from "../models/auth-object.model";
 import { IAccessToken } from "../models/access-token.model";
 import { CookieHelper } from "../shared/cookie";
+import { WEB_API_URL } from "../shared/constants/webapi.constants"; 
+
+export const AUTH_WEB_API_URL = WEB_API_URL + "/auth"; 
 
 @Injectable() 
 export class AuthService { 
@@ -16,8 +19,8 @@ export class AuthService {
     clientId: string = "DamkorkiApp"; 
 
     // JwtProvider's path
-    private authTokenUrl = "http://localhost:5050/auth/token";
-    private authLogoutUrl = "http://localhost:5050/auth/logout"; 
+    private authTokenUrl = AUTH_WEB_API_URL + "/token";
+    private authLogoutUrl =  AUTH_WEB_API_URL + "/logout"; 
 
     private jwtHelper =  new JwtHelperService({}); 
     

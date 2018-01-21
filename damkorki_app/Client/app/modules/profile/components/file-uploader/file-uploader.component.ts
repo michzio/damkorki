@@ -141,31 +141,31 @@ export class FileUploaderComponent implements OnInit {
         return true; 
     }
 
-    @HostListener('dragover', ['$event'])
+    //@HostListener('dragover', ['$event'])
     onDragOver(event : Event) { 
         event.preventDefault(); 
         this.uploadAreaClass = "drop-area"
     }
 
-    @HostListener('dragenter', ['$event'])
+    //@HostListener('dragenter', ['$event'])
     onDragEnter(event : Event) { 
         event.preventDefault(); 
         this.uploadAreaClass = "drop-area"; 
     }
 
-    @HostListener('dragend', ['$event'])
+    //@HostListener('dragend', ['$event'])
     onDragEnd(event : Event) { 
         event.preventDefault(); 
         this.uploadAreaClass = "drag-area"; 
     }
 
-    @HostListener('dragleave', ['$event'])
+    //@HostListener('dragleave', ['$event'])
     onDragLeave(event : Event) { 
         event.preventDefault(); 
         this.uploadAreaClass = "drag-area"; 
     }
 
-    @HostListener('drop', ['$event'])
+    //@HostListener('drop', ['$event'])
     onDrop(event : any) { 
         event.preventDefault(); 
         this.uploadAreaClass = "drag-area"; 

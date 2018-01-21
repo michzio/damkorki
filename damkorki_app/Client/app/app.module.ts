@@ -24,7 +24,6 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthRefreshInterceptor } from './shared/auth-refresh.interceptor'; 
 
 import { LinkService } from './shared/link.service'; 
-import { ConnectionResolver } from './shared/route.resolver';
 import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine';
 import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module'; 
 

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DamkorkiWebApi.Controllers { 
 
-    [Authorize]
     [Route("lesson-offers")]
     public class LessonOffersController : Controller { 
 
@@ -83,6 +82,7 @@ namespace DamkorkiWebApi.Controllers {
         }
 
         // PUT: /lesson-offers/{lessonOfferId}
+        [Authorize]
         [HttpPut("{lessonOfferId}")]
         public async Task<IActionResult> UpdateLessonOffer(int lessonOfferId, [FromBody] LessonOfferViewModel vmLessonOffer) { 
 

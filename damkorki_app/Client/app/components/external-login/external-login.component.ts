@@ -2,8 +2,9 @@ import { Component, NgZone, PLATFORM_ID, OnInit, Inject } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common"; 
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http"; 
-import { AuthService } from "../../services/auth.service"; 
+import { AuthService, AUTH_WEB_API_URL } from "../../services/auth.service"; 
 import { IAuthObject } from "../../models/auth-object.model";
+import { WEB_API_URL } from "../../shared/constants/webapi.constants";
 
 // global window object
 declare var window : any; 
@@ -14,7 +15,7 @@ declare var window : any;
 })
 export class ExternalLoginComponent implements OnInit { 
 
-    private static authUrl = "http://localhost:5050/auth/";
+    private static authUrl = AUTH_WEB_API_URL;
 
     externalLoginWindow : any; 
 
@@ -36,7 +37,7 @@ export class ExternalLoginComponent implements OnInit {
         // define externalLoginCallback function for 'message' event from popup window
         var self = this; 
         function externalLoginCallback(event) { 
-            if(event.origin == 'http://localhost:5050') {            
+            if(event.origin == WEB_API_URL) {            
                 console.log("External login succeded with access token: " + (<IAuthObject>event.data).access_token);
             
                 self.localZone.run(() => {
@@ -69,7 +70,7 @@ export class ExternalLoginComponent implements OnInit {
            return; 
        }
 
-       var url = ExternalLoginComponent.authUrl + providerName;   
+       var url = ExternalLoginComponent.authUrl + "/" + providerName;   
 
        // window size calculation 
        var width = (screen.width >= 1000) ? 1000 : screen.width;

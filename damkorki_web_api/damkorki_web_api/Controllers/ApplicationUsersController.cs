@@ -90,7 +90,7 @@ namespace DamkorkiWebApi.Controllers {
                 await _userManager.AddToRoleAsync(user, "User"); 
 
                 // Remove Lockout and Email confirmation 
-                user.EmailConfirmed = false; 
+                user.EmailConfirmed = true; // flase - to switch email confiramtion 
                 user.LockoutEnabled = false; 
 
                 // persist the changes into the Database

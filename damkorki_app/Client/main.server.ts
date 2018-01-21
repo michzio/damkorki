@@ -1,21 +1,11 @@
-// Polyfills
 import 'zone.js/dist/zone-node';
 import './polyfills/server.polyfills'; 
-// from angular 2 universal not compatible with angular 4
-// import 'angular2-universal-polyfills';
-// import 'angular2-universal-patch';
-// import 'es6-promise';
-// import 'es6-shim'; 
-// import 'reflect-metadata';
 import { enableProdMode } from '@angular/core';
 import { INITIAL_CONFIG } from '@angular/platform-server';
 import { APP_BASE_HREF } from '@angular/common'; 
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
+
 import { ORIGIN_URL } from './app/shared/constants/baseurl.constants'
-// from angular 2 universal not compatible with angular 4
-// import { platformNodeDynamic } from 'angular2-universal';
-// import { AppModule } from './app/app.module';
-// Note: instead we have ./app/browser-app.module && ./app/server-app.module
 import { ServerAppModule } from './app/server-app.module';
 // ASP.NET Core Angular Engine - available on npm!
 import { ngAspnetCoreEngine, IEngineOptions, createTransferScript } from '@nguniversal/aspnetcore-engine';

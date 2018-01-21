@@ -1,6 +1,9 @@
-<div draggable="true" class="text-center" ngClass="{{uploadAreaClass}}">
+<div draggable="true" class="text-center" ngClass="{{uploadAreaClass}}"
+    (dragover)="onDragOver($event)" (dragenter)="onDragEnter($event)"
+    (dragend)="onDragEnd($event)" (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)">
     
-    <input #file type="file" [multiple]="maxFiles > 1"
+    <input #file type="file" [multiple]="maxFilesCount > 1"
         (change)="onFileChange($event)" style="display:none" />
 
     <a href="javascript:void(0)" (click)="file.click()">

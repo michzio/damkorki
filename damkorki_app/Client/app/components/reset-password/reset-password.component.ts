@@ -135,6 +135,8 @@ export class ResetPasswordComponent {
         }
     }
 
+    get isResetToken() { return this.resetToken != null; }
+
     get emailOrUsername() { return this.resetPasswordForm.get('emailOrUsername'); }
     get newPassword() { return this.resetPasswordForm.get('newPassword'); }
     get confirmPassword() { return this.resetPasswordForm.get('confirmPassword'); }

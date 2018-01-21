@@ -29,7 +29,7 @@ export class TutorExperiencesEditComponent {
 
         if(!this.experiences) { 
             this.experiences = tutor && tutor.experiences;
-            this.experiences = this.experiences.sort( (a, b) => {
+            this.experiences = this.experiences && this.experiences.sort( (a, b) => {
                 if(a.startYear < b.startYear) return 1; 
                 if(a.startYear > b.startYear) return -1; 
                 return b.endYear - a.endYear;

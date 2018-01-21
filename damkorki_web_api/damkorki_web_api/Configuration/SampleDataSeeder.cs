@@ -109,8 +109,8 @@ namespace DamkorkiWebApi.Configuration
             // create other users  
             var user1 = new ApplicationUser() { 
                 //Id = Guid.NewGuid().ToString(), 
-                UserName = "michzio", 
-                Email = "michzio@hotmail.com", 
+                UserName = "mszpak", 
+                Email = "mszpak@hotmail.com", 
                 RegistrationDate = DateTime.Now, 
                 EmailConfirmed = true, 
                 LockoutEnabled = false
@@ -189,12 +189,12 @@ namespace DamkorkiWebApi.Configuration
             _unitOfWork.People.Add(moderatorPerson);
 
             // create users presons
-            var user1Id = _unitOfWork.Users.Find(u => u.UserName == "michzio")
+            var user1Id = _unitOfWork.Users.Find(u => u.UserName == "mszpak")
                             .FirstOrDefault().Id; 
 
             var user1Person = new Person() { 
                 FirstName = "Michał", 
-                LastName = "Ziobro", 
+                LastName = "Szpak", 
                 Gender = Person.GenderType.Male,
                 UserId = user1Id, 
                 Birthdate = new DateTime(1988, 10, 03, 00, 00, 00)

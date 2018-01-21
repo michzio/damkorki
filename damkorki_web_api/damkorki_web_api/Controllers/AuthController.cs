@@ -211,7 +211,7 @@ namespace DamkorkiWebApi.Controllers {
                 //"window.opener.externalLoginCallback(" + 
                 "window.opener.postMessage(" +
                     serializedResponse + 
-                ", 'http://localhost:5000/');" + 
+                ", 'https://damkorki.azurewebsites.net/');" + 
                 "window.close();" + 
                 "</script>", 
                 "text/html"
