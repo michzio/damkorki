@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"type="text"/"css" href="./damkorki_main.css">
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<div id="main-photo"><img src="background.png" alt="korepetycje w stu miastach Polski"/></div>
+<header>
+	<img id="logo" src="logo.png" alt="logo";>
+    <div id="menu-box">
+	<ul>
+		<li><a href="http://www.elector.pl">Zaloguj</a></li>
+		<li><a href="http://www.elector.pl">Zarejestruj</a></li>
+		<img src= "user.png" alt="user" style= "width:35px; height:35px"/>
+	</ul>
+	</div>
+</header>
+<section id="background-section">
+<div id="motto">TEACH ME TO CREATE MY FUTURE</div>
+</section>
+<main>
+<div id="search-box">
+
+	<form>
+	<input id="search-input" type="text" placeholder="matematyka Kraków" autocomplete="off" name="subject">
+	<input id="search-button" type="submit" value="SZUKAJ">
+    </form>
+    
+</div>
+</main>
+<section id="map-section">
+<div id="googleMap" style="width:1346px; height:300px"></div>
+
+</section>
+
+
+<section id="third">
+<div id="similar-offers">
+	
+    <h4>Przykładowe oferty:</h4><br>
+     <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> fizyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Kraków</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+     <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+   
+    
+     <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> fizyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Kraków</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+     <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+    <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> matematyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Warszawa</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+        
+        <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+     
+  
+</section>
+<footer>
+
+<label>Copyright © damkorki.pl<label>
+</footer>
+</body>
+</html>

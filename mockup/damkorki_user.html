@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text"/"css" href="./damkorki_user.css">
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+
+<body>
+<header>
+	<img id="logo" src="logo.png" alt="logo" />
+
+<div id="menu-box">
+    <ul>
+    <li><a href="http://www.elector.pl">Zaloguj</a></li>
+    <li><a href="http://www.elector.pl">Zarejestruj</a></li>
+    <img src= "./user.png" alt="user" style= "width:35px; height:35px"/>
+    </ul>
+</div>
+
+<div id="search-box">
+	<form>
+	<input id="search-input" type="text" placeholder="matematyka Kraków" autocomplete="off" name="subject">
+	<input id="search-button" type="submit" value="SZUKAJ">
+ </form>
+</div>
+
+</header>
+
+<section id="first"><center>
+	<img src="go.jpg" border="0" width="750" height="100" alt="go" class="img_ad"></center>
+</section>
+
+<aside>
+   <div id="contact-panel">
+	<div class="offer-price">50-100zł</div>
+    <button type="button">Kontakt</button>
+   </div>
+   <table>
+<tr>
+	<th><img src="up.png" alt="up"</th>	</th>	
+    <th>Pn</th>	
+    <th>Wt</th>
+    <th>Śr</th>	
+    <th>Cz</th>	
+    <th>Pt</th>
+    <th>So</th>	
+    <th>Nd</th>
+</tr>
+<tr>
+	<th>15</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th></th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th>16</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th></th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th>17</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th></th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th>18</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td class="active-cell"></td>
+    <td></td>	
+    <td></td>
+</tr>
+<tr>
+	<th></th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td class="active-cell"></td>	
+    <td></td>
+</tr>
+<tr>
+	<th>19</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td class="active-cell"></td>	
+    <td></td>
+</tr>
+<tr>
+	<th></th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td class="active-cell"></td>	
+    <td></td>
+</tr>
+<tr>
+	<th>20</th>	
+    <td></td>	
+    <td></td>
+    <td></td>	
+    <td></td>
+    <td></td>
+    <td class="active-cell"></td>	
+    <td></td>
+</tr>
+
+<tr>
+	<th><img src="down.png" alt="down"</th>	
+    <th colspan="7"></th>
+</tr>
+
+</table>
+</aside>
+
+<main>
+<article>
+	<div id="user-card">
+    	<div id="user-picside">
+			<div class= "img-round">
+		   		<img src="tutor.jpg" alt="Tutor photo">
+		   </div>
+         <h4>Anna Nowak</h4>
+        </div>
+        
+		<div id="motto"> KOREPETYCJE Z MATEMATYKI SZYBKO I ZROZUMIALE</div><br>   
+		<span id="place">Kraków, Śródmieście</span>   
+	</div>	      
+ <hr />
+ 
+    <div id="lessons-data">
+    	<label>Przedmiot:</label><span> matematyka</span><br>
+   		<label>Poziom:</label><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+    	<label>Miejsce:</label><span> u nauczyciela</span><br>
+    </div>
+<hr />
+
+	<div id="contact">
+		<span class="contact-icons"><img id="tel" src="tel.png" alt="telephone"></span><span id="valuefirst"> 			888***888</span><br>
+		<span class="contact-icons"><img id="skype" src="skype_icon.png" alt="skype"></span><span id="valuesecond"> anna.nowak</span>
+	</div>
+<hr/>
+
+	<div id="experience">
+		<h4>Doświadczenie:</h4>
+		<label>2003-obecnie</label><span>  Korepetytor</span><br>
+		<label>2005-2009</label><span>  Nauczyciel w szkole średniej</span><br>
+		<label>2009-obecnie</label><span>  Wykładowca na Uniwersytecie</span><br>
+	</div>
+   <hr /> 
+	<div id="description">
+		<h4>Opis:<h4>
+		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 	industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+	</div>
+
+
+</article>
+
+</main>
+
+<section id="second">
+	<div class="prev-opinions"><img src="prev.png" alt="previous"></div>
+    <div class="next-opinions"><img src="next.png" alt="next"></div>
+ 	<div id="user-opinions">
+          <div class="user-opinion">
+        	<div class= "img-round">
+        	<img src="tutor.jpg" alt="Tutor photo">
+        	</div>
+            <h5>Anna Nowak</h5>
+      		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          	</div>
+    
+		<div class="user-opinion">
+    		<div class= "img-round">
+        	<img src="tutor.jpg" alt="Tutor photo">
+        	</div>
+            <h5>Anna Nowak</h5>
+      		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+          	</div>
+            
+      <div class="user-opinion">
+          <div class= "img-round">
+          <img src="tutor.jpg" alt="Tutor photo">
+          </div>
+        	<h5>Anna Nowak</h5>
+      		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+      </div>
+      
+      <div class="user-opinion">
+     	  <div class= "img-round">
+          <img src="tutor.jpg" alt="Tutor photo">
+          </div>
+          <h5>Anna Nowak</h5>
+      		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+       </div> 
+</div>
+</section>
+<section id="map-section">
+<div id="googleMap" style="width:1346px; height:300px"></div>
+
+</section>
+
+
+<section id="third">
+<div id="similar-offers">
+	<div class="prev-opinions"><img src="prev.png" alt="previous"></div>
+    <div class="next-opinions"><img src="next.png" alt="next"></div>
+    <h4>Podobne oferty:</h4><br>
+     <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> fizyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Kraków</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+     <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+   
+    
+     <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> fizyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Kraków</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+     <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+    <div class="similar-offer">
+        <div class="offer-price">50-100zł</div>
+        <h5>Anna Nowak</h5><br>
+        <span class="offer-label">Przedmiot:</span><span> matematyka</span><br>
+        <span class="offer-label">Miasto:</span><span> Warszawa</span><br>
+        <span class="offer-label">Miejsce lekcji:</span><span> u korepetytora</span><br>
+        <span class="offer-label">Poziom:</span><span> szkoła podstawowa, gimnazjum, szkoła średnia</span><br>
+        
+        <div class= "img-round">
+        <img src="tutor.jpg" alt="Tutor photo">
+        </div>
+    </div>
+    
+     
+  
+</section>
+
+<section id=fourth">
+</section>
+
+
+<footer>
+<label>Copyright © damkorki.pl<label>
+
+</footer>
+
+</body>
+</html>
