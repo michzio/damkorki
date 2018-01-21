@@ -1,4 +1,5 @@
 
 {
-    "vsicons.presets.angular": true
+    "vsicons.presets.angular": true,
+    "git.ignoreLimitWarning": true
 }
