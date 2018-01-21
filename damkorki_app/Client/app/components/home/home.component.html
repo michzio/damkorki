@@ -12,14 +12,16 @@
             </div>
              <div class="col-md-2 hidden-sm hidden-xs"></div>
         </div>
-       
-        <div class="row">
+       <div class="row">
+        <h4>Local Lesson Offers</h4>
+        <div class="local-lesson-offers">
                <lesson-offers-map></lesson-offers-map> 
                <!-- <lesson-offers-map [longitude]="50.00000000" [latitude]="20.00000000" [distance]="2000"></lesson-offers-map> -->
         </div> 
+        </div>
         <div class="row">
                <lesson-offers-grid title="{{ 'RECOMMANDED_LOCAL_OFFERS' | translate }}" 
-                        [max-cols]="10" [max-rows]="4" [min-card-width]="350"
+                        [max-cols]="3" [max-rows]="1" [min-card-width]="350"
                         [type]="offersType.Recommanded + offersType.Local" 
                         [lessonOfferIds]="[1,2,3,4,5]">
                 </lesson-offers-grid>

@@ -47,7 +47,7 @@ export class LessonOffersGridComponent extends GridComponent implements OnInit {
 
     getLessonOffers() { 
        
-        this.lessonOfferService.getLessonOffers().subscribe(
+        this.lessonOfferService.getLessonOffersEagerly().subscribe(
             (lessonOffers) => { 
                 this.contentObjects = lessonOffers; 
             });

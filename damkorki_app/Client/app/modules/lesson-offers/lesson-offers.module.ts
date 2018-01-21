@@ -16,6 +16,7 @@ import { LessonOffersGridComponent } from './components/lesson-offers-grid/lesso
 import { LessonOfferGridCardComponent } from './components/lesson-offer-grid-card/lesson-offer-grid-card.component'; 
 import { LessonOffersMapComponent } from './components/lesson-offers-map/lesson-offers-map.component';
 import { AddLessonOfferComponent } from "./components/add-lesson-offer/add-lesson-offer.component";
+import { FilterLessonOffersComponent } from "./components/filter-lesson-offers/filter-lesson-offers.component";
 
 // import services 
 import { LessonOfferService } from "../../services/lesson-offer.service";
@@ -24,9 +25,13 @@ import { LegacyLibrariesService } from "../../services/legacy-libraries.service"
 // import routing module 
 import { LessonOffersRoutingModule } from "./lesson-offers-routing.module";
 
+// import n2-nouislider 
+import { NouisliderModule } from 'ng2-nouislider';
+
 // import custom module 
 import { CoreModule } from "../core/core.module";
 import { SubjectService } from "../../services/subject.service";
+
 
 @NgModule({
     imports: [
@@ -36,7 +41,8 @@ import { SubjectService } from "../../services/subject.service";
         // material design 
         MatSliderModule,
         MatSelectModule,
-
+        // n2-nouislider 
+        NouisliderModule,
         // routing modules
         LessonOffersRoutingModule,
         // custom modules
@@ -51,6 +57,7 @@ import { SubjectService } from "../../services/subject.service";
         LessonOfferGridCardComponent,
         LessonOffersMapComponent,
         AddLessonOfferComponent,
+        FilterLessonOffersComponent,
     ], 
     providers: [
         // custom services

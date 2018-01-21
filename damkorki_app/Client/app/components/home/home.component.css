@@ -52,3 +52,12 @@ search-box >>> .input-group input, search-box >>> #search-button {
 search-box >>> #layout-buttons .glyphicon { 
     font-size: 40px !important; 
 }
+
+.local-lesson-offers 
+{
+    position: relative;
+    height: 250px;
+    margin-left: -15px;
+    margin-right: -15px;
+    background-color: blue;
+}

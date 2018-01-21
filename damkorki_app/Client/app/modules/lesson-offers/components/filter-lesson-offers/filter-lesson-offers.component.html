@@ -1,0 +1,38 @@
+<section id="filter-lesson-offers">
+    <form>
+    <div class="row">
+        <div id="left-filter-section" class="col-md-2 col-xs-8">
+            <button type="button" class="btn btn-default btn-md filter-button">Filtruj</button>
+        </div>
+
+        <div id="center-filter-section"  class="col-md-6 col-xs-8">
+            <p>Zakres cenowy</p>
+            <div class="row">
+            <span class="col-xs-2 text-center"> {{lowerPrice}} zł</span>
+            <nouislider class="col-xs-8"
+                id="price"
+                name="price"
+                [config]="sliderConfig"
+                [min]="10" 
+                [max]="500" 
+                [step]="1" 
+                [(ngModel)]="priceRange">
+            </nouislider>
+            <span class="col-xs-2 text-center">{{upperPrice}} zł</span>
+            </div>
+        </div>
+
+        <div id="right-filter-section" class="col-md-4 col-xs-8"> 
+                <input type="checkbox" name="telephone_checkbox" value="telephone">
+                <label for="telephone_checkbox">Telefon</label>
+                <input type="checkbox" name="with_drive_to_client" value="with_drive_to_client">
+                <label for="with_drive_to_client">Z dojazdem</label>
+                <input type="checkbox" name="via_skype" value="via_skype">
+                <label for="via_skype">Przez Skype</label>
+        </div> 
+    </div>
+    </form>
+</section>
+
+    
+    
